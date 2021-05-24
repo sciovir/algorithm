@@ -1,5 +1,5 @@
 # Data Structures and Algorithms
-This repository is a collection of personal implementation of a variety of algorithms. You may find more than one implementation for these problems but using a different algorithm strategies, optimizations or even different programming languages.
+This repository is a collection of personal implementation of a variety of algorithms using C++. You may find more than one implementation for these problems but using a different algorithm strategies, optimizations or even different programming languages.
 
 NOTE: All implementations assume that input always satisfies the requirement.
 
@@ -16,9 +16,8 @@ $ cd algorithms
 
 ## Build and run C++
 Using CMake:
-1. Create __build__ directory inside __algorithms/cc__ folder:
+1. Create __build__ directory at project root:
 ```shell script
-$ cd cc
 $ mkdir build
 $ cd build
 ```
