@@ -10,8 +10,8 @@ CMake is optional, it helps you build and run project easier, but you could manu
 
 Clone repository by `git clone` to your local computer:
 ```shell script
-$ git clone https://github.com/knguyenc/algorithms.git
-$ cd algorithms
+$ git clone git@github.com:larrng/algorithm.git
+$ cd algorithm
 ```
 
 ## Build and run C++
@@ -29,7 +29,7 @@ $ make
 If you are on Windows use `MSBuild` instead of `make`:
 ```powershell
 cmake ..
-MSBuild.exe .\algorithms.sln
+MSBuild.exe .\algorithm.sln
 ```
 3. All binary files are located inside __build/bin/__ directory.
 
