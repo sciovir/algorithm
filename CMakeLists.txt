@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.13)
-project(algorithms)
+project(algorithm)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
@@ -8,26 +8,26 @@ INCLUDE_DIRECTORIES("${CMAKE_SOURCE_DIR}")
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/)
 
-add_executable(singly_linked_list data_structures/linked_lists/singly_linked_list.cc)
-add_executable(doubly_linked_list data_structures/linked_lists/doubly_linked_list.cc)
-add_executable(circularly_linked_list data_structures/linked_lists/circularly_linked_list.cc)
+add_executable(singly_linked_list data_structure/linked_list/singly_linked_list.cc)
+add_executable(doubly_linked_list data_structure/linked_list/doubly_linked_list.cc)
+add_executable(circularly_linked_list data_structure/linked_list/circularly_linked_list.cc)
 
-add_executable(stack data_structures/stacks/stack.cc)
+add_executable(stack data_structure/stack/stack.cc)
 
-add_executable(queue data_structures/queues/queue.cc)
-add_executable(max_priority_queue data_structures/queues/max_priority_queue.cc)
-add_executable(min_priority_queue data_structures/queues/min_priority_queue.cc)
+add_executable(queue data_structure/queue/queue.cc)
+add_executable(max_priority_queue data_structure/queue/max_priority_queue.cc)
+add_executable(min_priority_queue data_structure/queue/min_priority_queue.cc)
 
-add_executable(max_heap data_structures/heaps/max_heap.cc)
-add_executable(min_heap data_structures/heaps/min_heap.cc)
+add_executable(max_heap data_structure/heap/max_heap.cc)
+add_executable(min_heap data_structure/heap/min_heap.cc)
 
-add_executable(binary_tree data_structures/trees/binary_tree.cc)
-add_executable(binary_search_tree data_structures/trees/binary_search_tree.cc)
+add_executable(binary_tree data_structure/tree/binary_tree.cc)
+add_executable(binary_search_tree data_structure/tree/binary_search_tree.cc)
 
-add_executable(hash_table_separate_chaining data_structures/hashing/hash_table_separate_chaining.cc)
-add_executable(hash_table_open_addressing data_structures/hashing/hash_table_open_addressing.cc)
+add_executable(hash_table_separate_chaining data_structure/hashing/hash_table_separate_chaining.cc)
+add_executable(hash_table_open_addressing data_structure/hashing/hash_table_open_addressing.cc)
 
-add_executable(adjacency_list_graph data_structures/graphs/adjacency_list_graph.cc)
+add_executable(adjacency_list_graph data_structure/graph/adjacency_list_graph.cc)
 
 add_executable(insertion_sort sorting/insertion_sort.cc)
 add_executable(bubble_sort sorting/bubble_sort.cc)
