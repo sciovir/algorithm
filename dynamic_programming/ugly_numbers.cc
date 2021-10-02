@@ -1,6 +1,6 @@
 #include <iostream>
 
-namespace algorithms {
+namespace algorithm {
 namespace dynamic_programming {
 
 unsigned int UglyNumber(unsigned int n) {
@@ -29,12 +29,12 @@ unsigned int UglyNumber(unsigned int n) {
 }
 
 }  // namespace dynamic_programming
-}  // namespace algorithms
+}  // namespace algorithm
 
 int main() {
   int n = 190;
   std::cout << "The " << n << "th ugly number is: ";
-  std::cout << algorithms::dynamic_programming::UglyNumber(n);
+  std::cout << algorithm::dynamic_programming::UglyNumber(n);
   std::cout << std::endl;
   return 0;
 }

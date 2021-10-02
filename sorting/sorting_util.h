@@ -1,9 +1,9 @@
-#ifndef ALGORITHMS_SORTING_SORTING_UTIL_H_
-#define ALGORITHMS_SORTING_SORTING_UTIL_H_
+#ifndef ALGORITHM_SORTING_SORTING_UTIL_H_
+#define ALGORITHM_SORTING_SORTING_UTIL_H_
 
 #include <iostream>
 
-namespace algorithms {
+namespace algorithm {
 namespace sorting {
 
 template <class T, size_t N>
@@ -13,6 +13,6 @@ void PrintArray(const T (&array)[N]) {
 }
 
 }  // namespace sorting
-}  // namespace algorithms
+}  // namespace algorithm
 
-#endif  // ALGORITHMS_SORTING_SORTING_UTIL_H_
+#endif  // ALGORITHM_SORTING_SORTING_UTIL_H_

@@ -2,7 +2,7 @@
 
 #include "sorting_util.h"
 
-namespace algorithms {
+namespace algorithm {
 namespace sorting {
 
 template <class T, size_t N>
@@ -30,21 +30,21 @@ void CountingSort(T (&array)[N], T key) {
 }
 
 }  // namespace sorting
-}  // namespace algorithms
+}  // namespace algorithm
 
 int main() {
   unsigned int integers[11] = {6, 8, 10, 26, 9, 2, 40, 22, 5, 32, 3};
   unsigned char chars[8] = {'d', 'g', 'a', 'b', 'j', 'y', 'h', 'k'};
 
-  algorithms::sorting::CountingSort(
+  algorithm::sorting::CountingSort(
       integers, *(std::max_element(integers, integers + 11)));
   std::cout << "Sorted integer array: ";
-  algorithms::sorting::PrintArray(integers);  // 2 3 5 6 8 9 10 22 26 32 40
+  algorithm::sorting::PrintArray(integers);  // 2 3 5 6 8 9 10 22 26 32 40
 
-  algorithms::sorting::CountingSort(chars,
+  algorithm::sorting::CountingSort(chars,
                                     *(std::max_element(chars, chars + 8)));
   std::cout << "Sorted character array: ";
-  algorithms::sorting::PrintArray(chars);  // a b d g h j k y
+  algorithm::sorting::PrintArray(chars);  // a b d g h j k y
 
   return 0;
 }

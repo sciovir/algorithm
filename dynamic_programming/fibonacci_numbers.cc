@@ -1,6 +1,6 @@
 #include <iostream>
 
-namespace algorithms {
+namespace algorithm {
 namespace dynamic_programming {
 
 unsigned int FibonacciNumber(const unsigned int n) {
@@ -15,12 +15,12 @@ unsigned int FibonacciNumber(const unsigned int n) {
 }
 
 }  // namespace dynamic_programming
-}  // namespace algorithms
+}  // namespace algorithm
 
 int main() {
   const unsigned int n = 6;
   std::cout << "The " << n << "th fibonacci number is: ";
-  std::cout << algorithms::dynamic_programming::FibonacciNumber(n);
+  std::cout << algorithm::dynamic_programming::FibonacciNumber(n);
   std::cout << std::endl;
   return 0;
 }

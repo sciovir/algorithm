@@ -1,6 +1,6 @@
 #include <iostream>
 
-namespace algorithms {
+namespace algorithm {
 namespace pattern_searching {
 
 template <size_t N, size_t M>
@@ -18,11 +18,11 @@ void NaivePatternSearching(const char (&text)[N], const char (&pattern)[M]) {
 }
 
 }  // namespace pattern_searching
-}  // namespace algorithms
+}  // namespace algorithm
 
 int main() {
   char text[] = "AABAACAADAABAAABAA";
   char pattern[] = "AABA";
-  algorithms::pattern_searching::NaivePatternSearching(text, pattern);
+  algorithm::pattern_searching::NaivePatternSearching(text, pattern);
   return 0;
 }

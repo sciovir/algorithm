@@ -2,7 +2,7 @@
 
 #include "sorting_util.h"
 
-namespace algorithms {
+namespace algorithm {
 namespace sorting {
 
 template <size_t N>
@@ -32,14 +32,14 @@ void RadixSort(unsigned int (&array)[N]) {
 }
 
 }  // namespace sorting
-}  // namespace algorithms
+}  // namespace algorithm
 
 int main() {
   unsigned int integers[11] = {6, 8, 10, 26, 9, 2, 40, 22, 5, 32, 3};
 
-  algorithms::sorting::RadixSort(integers);
+  algorithm::sorting::RadixSort(integers);
   std::cout << "Sorted integer array: ";
-  algorithms::sorting::PrintArray(integers);  // 2 3 5 6 8 9 10 22 26 32 40
+  algorithm::sorting::PrintArray(integers);  // 2 3 5 6 8 9 10 22 26 32 40
 
   return 0;
 }

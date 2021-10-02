@@ -3,7 +3,7 @@
 #include <iostream>
 #include <tuple>
 
-namespace algorithms {
+namespace algorithm {
 namespace divide_conquer {
 
 std::tuple<int, int, int> MaxCrossingSubarray(const int *array, int low,
@@ -57,12 +57,12 @@ std::tuple<int, int, int> MaximumSubarray(const int *array, int low, int high) {
 }
 
 }  // namespace divide_conquer
-}  // namespace algorithms
+}  // namespace algorithm
 
 int main() {
   int arr[16] = {12, -2, -23, 18, -1,  -14, -21, 16,
                  19, -5, 10,  -3, -20, 13,  -4,  -7};
-  std::tuple<int, int, int> ret = algorithms::divide_conquer::MaximumSubarray(
+  std::tuple<int, int, int> ret = algorithm::divide_conquer::MaximumSubarray(
       arr, 0, sizeof(arr) / sizeof(*arr) - 1);
 
   std::cout << "Start: " << std::get<0>(ret) << std::endl;  // 7

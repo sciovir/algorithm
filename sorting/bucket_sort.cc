@@ -4,7 +4,7 @@
 
 #include "sorting_util.h"
 
-namespace algorithms {
+namespace algorithm {
 namespace sorting {
 
 /**
@@ -63,20 +63,20 @@ void BucketSort(T (&array)[N]) {
 }
 
 }  // namespace sorting
-}  // namespace algorithms
+}  // namespace algorithm
 
 int main() {
   float floats[8] = {0.52f, 0.44f, 0.68f, 0.95f, 0.1f, 0.12f, 0.32f, 0.59f};
   double doubles[8] = {0.52, 0.44, 0.68, 0.95, 0.1, 0.12, 0.32, 0.59};
 
-  algorithms::sorting::BucketSort(floats);
+  algorithm::sorting::BucketSort(floats);
   std::cout << "Sorted float array: ";
-  algorithms::sorting::PrintArray(
+  algorithm::sorting::PrintArray(
       floats);  // 0.1 0.12 0.32 0.44 0.52 0.59 0.68 0.95
 
-  algorithms::sorting::BucketSort(doubles);
+  algorithm::sorting::BucketSort(doubles);
   std::cout << "Sorted double array: ";
-  algorithms::sorting::PrintArray(
+  algorithm::sorting::PrintArray(
       doubles);  // 0.1 0.12 0.32 0.44 0.52 0.59 0.68 0.95
 
   return 0;

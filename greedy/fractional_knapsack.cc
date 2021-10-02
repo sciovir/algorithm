@@ -2,8 +2,8 @@
 #include <iostream>
 #include <tuple>
 
-namespace algorithms {
-namespace dynamic_programming {
+namespace algorithm {
+namespace greedy {
 
 bool FractionalKnapsackItemComparator(
     const std::tuple<unsigned int, unsigned int> a,
@@ -29,16 +29,14 @@ unsigned int FractionalKnapsack(
   return maxValue;
 }
 
-}  // namespace dynamic_programming
-}  // namespace algorithms
+}  // namespace greedy
+}  // namespace algorithm
 
 int main() {
   std::tuple<unsigned int, unsigned int> items[] = {std::make_tuple(10, 60),
                                                     std::make_tuple(30, 120),
                                                     std::make_tuple(20, 100)};
   unsigned int weight = 50;
-  std::cout << algorithms::dynamic_programming::FractionalKnapsack(items,
-                                                                   weight)
-            << std::endl;
+  std::cout << algorithm::greedy::FractionalKnapsack(items, weight) << std::endl;
   return 0;
 }

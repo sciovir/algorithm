@@ -1,6 +1,6 @@
 #include <iostream>
 
-namespace algorithms {
+namespace algorithm {
 namespace mathematics {
 
 int Factorial(int n) {
@@ -9,11 +9,11 @@ int Factorial(int n) {
 }
 
 }  // namespace mathematics
-}  // namespace algorithms
+}  // namespace algorithm
 
 int main() {
   std::cout << "Factorial: ";
-  std::cout << algorithms::mathematics::Factorial(6) << std::endl;  // 720
+  std::cout << algorithm::mathematics::Factorial(6) << std::endl;  // 720
 
   return 0;
 }

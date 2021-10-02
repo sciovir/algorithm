@@ -1,7 +1,7 @@
 #include <iostream>
 #include <tuple>
 
-namespace algorithms {
+namespace algorithm {
 namespace mathematics {
 
 unsigned int BinaryFibonacci(unsigned int n) {
@@ -16,14 +16,14 @@ std::tuple<unsigned int, unsigned int> LinearFibonacci(unsigned int n) {
 }
 
 }  // namespace mathematics
-}  // namespace algorithms
+}  // namespace algorithm
 
 int main() {
   std::cout << "Binary fibonacci: ";
-  std::cout << algorithms::mathematics::BinaryFibonacci(6) << std::endl;  // 8
+  std::cout << algorithm::mathematics::BinaryFibonacci(6) << std::endl;  // 8
 
   std::cout << "Linear fibonacci: ";
-  std::cout << std::get<0>(algorithms::mathematics::LinearFibonacci(6))
+  std::cout << std::get<0>(algorithm::mathematics::LinearFibonacci(6))
             << std::endl;  // 8
 
   return 0;

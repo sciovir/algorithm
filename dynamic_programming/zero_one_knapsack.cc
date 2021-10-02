@@ -2,7 +2,7 @@
 #include <iostream>
 #include <tuple>
 
-namespace algorithms {
+namespace algorithm {
 namespace dynamic_programming {
 
 bool ZeroOneKnapsackItemComparator(
@@ -35,14 +35,14 @@ unsigned int ZeroOneKnapsack(std::tuple<unsigned int, unsigned int> (&items)[N],
 }
 
 }  // namespace dynamic_programming
-}  // namespace algorithms
+}  // namespace algorithm
 
 int main() {
   std::tuple<unsigned int, unsigned int> items[] = {
       std::make_tuple(1, 1), std::make_tuple(4, 5), std::make_tuple(3, 4),
       std::make_tuple(5, 7)};
   unsigned int weight = 7;
-  std::cout << algorithms::dynamic_programming::ZeroOneKnapsack(items, weight)
+  std::cout << algorithm::dynamic_programming::ZeroOneKnapsack(items, weight)
             << std::endl;
   return 0;
 }

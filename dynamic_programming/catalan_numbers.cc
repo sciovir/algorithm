@@ -1,6 +1,6 @@
 #include <iostream>
 
-namespace algorithms {
+namespace algorithm {
 namespace dynamic_programming {
 
 unsigned int CatalanNumber(const unsigned int n) {
@@ -17,12 +17,12 @@ unsigned int CatalanNumber(const unsigned int n) {
 }
 
 }  // namespace dynamic_programming
-}  // namespace algorithms
+}  // namespace algorithm
 
 int main() {
   const unsigned int n = 9;
   std::cout << "The " << n << "th catalan number is: ";
-  std::cout << algorithms::dynamic_programming::CatalanNumber(n);
+  std::cout << algorithm::dynamic_programming::CatalanNumber(n);
   std::cout << std::endl;
   return 0;
 }

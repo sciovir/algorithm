@@ -1,6 +1,6 @@
 #include <iostream>
 
-namespace algorithms {
+namespace algorithm {
 namespace mathematics {
 
 unsigned int Catalan(unsigned int n) {
@@ -11,10 +11,10 @@ unsigned int Catalan(unsigned int n) {
 }
 
 }  // namespace mathematics
-}  // namespace algorithms
+}  // namespace algorithm
 
 int main() {
   std::cout << "Catalan: ";
-  std::cout << algorithms::mathematics::Catalan(9) << std::endl;  // 4862
+  std::cout << algorithm::mathematics::Catalan(9) << std::endl;  // 4862
   return 0;
 }
