@@ -23,7 +23,7 @@ namespace sorting {
  *  - After all the loops, array is now sorted.
  */
 template <class T, size_t N>
-void BubbleSort(T (&array)[N]) {
+inline void BubbleSort(T (&array)[N]) {
   for (unsigned int i = 0; i < N - 1; i++)
     for (unsigned int j = i + 1; j < N; j++)
       if (array[i] > array[j]) std::swap(array[i], array[j]);

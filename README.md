@@ -59,4 +59,5 @@ TBA
 
 ## References
 [C++ Documentation](https://isocpp.org/) \
-[CMake Documentation](https://cmake.org/documentation/)
+[CMake](https://cmake.org/documentation/) \
+[GoogleTest](https://google.github.io/googletest/)

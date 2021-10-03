@@ -1,9 +1,12 @@
+#ifndef ALGORITHM_MATHEMATICS_FACTORIAL_H_
+#define ALGORITHM_MATHEMATICS_FACTORIAL_H_
+
 #include <iostream>
 
 namespace algorithm {
 namespace mathematics {
 
-int Factorial(int n) {
+inline int Factorial(int n) {
   if (n == 0) return 1;
   return n * Factorial(n - 1);
 }
@@ -11,9 +14,4 @@ int Factorial(int n) {
 }  // namespace mathematics
 }  // namespace algorithm
 
-int main() {
-  std::cout << "Factorial: ";
-  std::cout << algorithm::mathematics::Factorial(6) << std::endl;  // 720
-
-  return 0;
-}
+#endif  // ALGORITHM_MATHEMATICS_FACTORIAL_H_

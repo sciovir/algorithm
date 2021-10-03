@@ -7,7 +7,7 @@ namespace algorithm {
 namespace sorting {
 
 template <class T, size_t N>
-void PrintArray(const T (&array)[N]) {
+inline void PrintArray(const T (&array)[N]) {
   for (T item : array) std::cout << item << " ";
   std::cout << std::endl;
 }

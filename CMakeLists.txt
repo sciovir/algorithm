@@ -1,12 +1,24 @@
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.14)
 project(algorithm)
 
 set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 
 INCLUDE_DIRECTORIES("${CMAKE_SOURCE_DIR}")
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/)
+
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip
+)
+
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
+enable_testing()
 
 add_executable(singly_linked_list data_structure/linked_list/singly_linked_list.cc)
 add_executable(doubly_linked_list data_structure/linked_list/doubly_linked_list.cc)
@@ -30,7 +42,7 @@ add_executable(hash_table_open_addressing data_structure/hashing/hash_table_open
 add_executable(adjacency_list_graph data_structure/graph/adjacency_list_graph.cc)
 
 add_executable(insertion_sort sorting/insertion_sort.cc)
-add_executable(bubble_sort sorting/bubble_sort.cc)
+# add_executable(bubble_sort sorting/bubble_sort.cc)
 add_executable(merge_sort sorting/merge_sort.cc)
 add_executable(heap_sort sorting/heap_sort.cc)
 add_executable(quick_sort sorting/quick_sort.cc)
@@ -41,8 +53,22 @@ add_executable(bucket_sort sorting/bucket_sort.cc)
 add_executable(linear_search searching/linear_search.cc)
 add_executable(binary_search searching/binary_search.cc)
 
-add_executable(fibonacci mathematics/fibonacci.cc)
-add_executable(factorial mathematics/factorial.cc)
+add_executable(
+  fibonacci_test
+  mathematics/fibonacci_test.cc
+)
+target_link_libraries(
+  fibonacci_test
+  gtest_main
+)
+add_executable(
+  factorial_test
+  mathematics/factorial_test.cc
+)
+target_link_libraries(
+  factorial_test
+  gtest_main
+)
 add_executable(catalan mathematics/catalan.cc)
 
 add_executable(maximum_subarray divide_conquer/maximum_subarray.cc)
@@ -60,3 +86,7 @@ add_executable(naive_pattern_searching pattern_searching/naive_pattern_searching
 add_executable(kmp_pattern_searching pattern_searching/kmp_pattern_searching.cc)
 
 add_executable(fractional_knapsack greedy/fractional_knapsack.cc)
+
+include(GoogleTest)
+gtest_discover_tests(factorial_test)
+gtest_discover_tests(fibonacci_test)
