@@ -3,6 +3,8 @@ project(algorithm CXX)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
+set(CMAKE_VERBOSE_MAKEFILE OFF)
+set(CMAKE_BUILD_TYPE Debug)
 
 include_directories("${CMAKE_SOURCE_DIR}")
 
@@ -54,8 +56,7 @@ add_executable(linear_search searching/linear_search.cc)
 add_executable(binary_search searching/binary_search.cc)
 
 # Factorial
-set(FACTORIAL_LIB_SRC mathematics/factorial.cc)
-add_library(factorial ${FACTORIAL_LIB_SRC})
+add_library(factorial mathematics/factorial.cc)
 add_executable(
   factorial_test
   mathematics/factorial_test.cc
@@ -66,8 +67,7 @@ target_link_libraries(
   gtest_main
 )
 # Fibonacci
-set(FIBONACCI_LIB_SRC mathematics/fibonacci.cc)
-add_library(fibonacci ${FIBONACCI_LIB_SRC})
+add_library(fibonacci mathematics/fibonacci.cc)
 add_executable(
   fibonacci_test
   mathematics/fibonacci_test.cc
@@ -78,8 +78,7 @@ target_link_libraries(
   gtest_main
 )
 # Catalan
-set(CATALAN_LIB_SRC mathematics/catalan.cc)
-add_library(catalan ${CATALAN_LIB_SRC})
+add_library(catalan mathematics/catalan.cc)
 add_executable(
   catalan_test
   mathematics/catalan_test.cc
@@ -102,7 +101,15 @@ add_executable(catalan_numbers dynamic_programming/catalan_numbers.cc)
 add_executable(zero_one_knapsack dynamic_programming/zero_one_knapsack.cc)
 
 add_executable(naive_pattern_searching pattern_searching/naive_pattern_searching.cc)
-add_executable(kmp_pattern_searching pattern_searching/kmp_pattern_searching.cc)
+# KMP pattern searching
+add_executable(
+  kmp_pattern_searching_test
+  pattern_searching/kmp_pattern_searching_test.cc
+)
+target_link_libraries(
+  kmp_pattern_searching_test
+  gtest_main
+)
 
 add_executable(fractional_knapsack greedy/fractional_knapsack.cc)
 
@@ -111,3 +118,5 @@ include(GoogleTest)
 gtest_discover_tests(factorial_test)
 gtest_discover_tests(fibonacci_test)
 gtest_discover_tests(catalan_test)
+
+gtest_discover_tests(kmp_pattern_searching_test)
