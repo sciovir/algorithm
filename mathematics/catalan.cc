@@ -1,4 +1,4 @@
-#include <iostream>
+#include "catalan.h"
 
 namespace algorithm {
 namespace mathematics {
@@ -12,9 +12,3 @@ unsigned int Catalan(unsigned int n) {
 
 }  // namespace mathematics
 }  // namespace algorithm
-
-int main() {
-  std::cout << "Catalan: ";
-  std::cout << algorithm::mathematics::Catalan(9) << std::endl;  // 4862
-  return 0;
-}

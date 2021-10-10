@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.14)
-project(algorithm)
+project(algorithm CXX)
 
 set(CMAKE_CXX_STANDARD 14)
-# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
 
-INCLUDE_DIRECTORIES("${CMAKE_SOURCE_DIR}")
+include_directories("${CMAKE_SOURCE_DIR}")
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/)
 
@@ -53,23 +53,42 @@ add_executable(bucket_sort sorting/bucket_sort.cc)
 add_executable(linear_search searching/linear_search.cc)
 add_executable(binary_search searching/binary_search.cc)
 
-add_executable(
-  fibonacci_test
-  mathematics/fibonacci_test.cc
-)
-target_link_libraries(
-  fibonacci_test
-  gtest_main
-)
+# Factorial
+set(FACTORIAL_LIB_SRC mathematics/factorial.cc)
+add_library(factorial ${FACTORIAL_LIB_SRC})
 add_executable(
   factorial_test
   mathematics/factorial_test.cc
 )
 target_link_libraries(
   factorial_test
+  factorial
   gtest_main
 )
-add_executable(catalan mathematics/catalan.cc)
+# Fibonacci
+set(FIBONACCI_LIB_SRC mathematics/fibonacci.cc)
+add_library(fibonacci ${FIBONACCI_LIB_SRC})
+add_executable(
+  fibonacci_test
+  mathematics/fibonacci_test.cc
+)
+target_link_libraries(
+  fibonacci_test
+  fibonacci
+  gtest_main
+)
+# Catalan
+set(CATALAN_LIB_SRC mathematics/catalan.cc)
+add_library(catalan ${CATALAN_LIB_SRC})
+add_executable(
+  catalan_test
+  mathematics/catalan_test.cc
+)
+target_link_libraries(
+  catalan_test
+  catalan
+  gtest_main
+)
 
 add_executable(maximum_subarray divide_conquer/maximum_subarray.cc)
 
@@ -88,5 +107,7 @@ add_executable(kmp_pattern_searching pattern_searching/kmp_pattern_searching.cc)
 add_executable(fractional_knapsack greedy/fractional_knapsack.cc)
 
 include(GoogleTest)
+
 gtest_discover_tests(factorial_test)
 gtest_discover_tests(fibonacci_test)
+gtest_discover_tests(catalan_test)

@@ -6,10 +6,7 @@
 namespace algorithm {
 namespace mathematics {
 
-inline int Factorial(int n) {
-  if (n == 0) return 1;
-  return n * Factorial(n - 1);
-}
+int Factorial(int n);
 
 }  // namespace mathematics
 }  // namespace algorithm
