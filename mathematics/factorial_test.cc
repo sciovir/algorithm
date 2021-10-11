@@ -3,6 +3,7 @@
 #include <gtest/gtest.h>
 
 namespace algorithm {
+namespace {
 
 TEST(FactorialTest, HandlesZeroInput) {
   EXPECT_EQ(mathematics::Factorial(0), 1);
@@ -22,4 +23,5 @@ TEST(FactorialTest, HandlesNegativeInput) {
   EXPECT_DEATH(mathematics::Factorial(-10), "");
 }
 
+}  // namespace
 }  // namespace algorithm

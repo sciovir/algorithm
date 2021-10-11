@@ -3,6 +3,7 @@
 #include <gtest/gtest.h>
 
 namespace algorithm {
+namespace {
 
 TEST(FibonacciTest, HandlesZeroInput) {
   EXPECT_EQ(mathematics::BinaryFibonacci(0), 0);
@@ -29,4 +30,5 @@ TEST(FibonacciTest, HandlesNegativeInput) {
   EXPECT_DEATH(mathematics::LinearFibonacci(-100), "");
 }
 
+}  // namespace
 }  // namespace algorithm

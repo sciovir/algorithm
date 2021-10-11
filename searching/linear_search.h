@@ -1,8 +1,6 @@
 #ifndef ALGORITHM_SEARCHING_LINEAR_SEARCH_H_
 #define ALGORITHM_SEARCHING_LINEAR_SEARCH_H_
 
-#include <iostream>
-
 namespace algorithm {
 namespace searching {
 

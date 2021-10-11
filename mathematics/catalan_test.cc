@@ -3,10 +3,9 @@
 #include <gtest/gtest.h>
 
 namespace algorithm {
+namespace {
 
-TEST(CatalanTest, HandlesZeroInput) {
-  EXPECT_EQ(mathematics::Catalan(0), 1);
-}
+TEST(CatalanTest, HandlesZeroInput) { EXPECT_EQ(mathematics::Catalan(0), 1); }
 
 TEST(CatalanTest, HandlesPositiveInput) {
   EXPECT_EQ(mathematics::Catalan(1), 1);
@@ -23,4 +22,5 @@ TEST(CatalanTest, HandlesNegativeInput) {
   EXPECT_DEATH(mathematics::Catalan(-10), "");
 }
 
+}  // namespace
 }  // namespace algorithm

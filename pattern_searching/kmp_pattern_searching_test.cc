@@ -3,6 +3,7 @@
 #include <gtest/gtest.h>
 
 namespace algorithm {
+namespace {
 
 TEST(KMPPatternSearchingTest, HandlesMultiplePatternInput) {
   std::vector<int> ret =
@@ -35,4 +36,5 @@ TEST(KMPPatternSearchingTest, HandlesInvalidInput) {
   EXPECT_EQ(pattern_searching::KMPPatternSearching("AA", "DEF").size(), 0);
 }
 
+}  // namespace
 }  // namespace algorithm

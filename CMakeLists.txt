@@ -113,9 +113,42 @@ gtest_discover_tests(catalan_test)
 
 add_executable(maximum_subarray divide_conquer/maximum_subarray.cc)
 
-add_executable(knight_tour backtracking/knight_tour.cc)
-add_executable(rat_in_maze backtracking/rat_in_maze.cc)
-add_executable(n_queen backtracking/n_queen.cc)
+# Knight tour
+add_library(knight_tour backtracking/knight_tour.cc)
+add_executable(
+  knight_tour_test
+  backtracking/knight_tour_test.cc
+)
+target_link_libraries(
+  knight_tour_test
+  knight_tour
+  gtest_main
+)
+gtest_discover_tests(knight_tour_test)
+# Rat in maze
+add_library(rat_in_maze backtracking/rat_in_maze.cc)
+add_executable(
+  rat_in_maze_test
+  backtracking/rat_in_maze_test.cc
+)
+target_link_libraries(
+  rat_in_maze_test
+  rat_in_maze
+  gtest_main
+)
+gtest_discover_tests(rat_in_maze_test)
+# N queen
+add_library(n_queen backtracking/n_queen.cc)
+add_executable(
+  n_queen_test
+  backtracking/n_queen_test.cc
+)
+target_link_libraries(
+  n_queen_test
+  n_queen
+  gtest_main
+)
+gtest_discover_tests(n_queen_test)
 
 add_executable(ugly_numbers dynamic_programming/ugly_numbers.cc)
 add_executable(fibonacci_numbers dynamic_programming/fibonacci_numbers.cc)
@@ -143,4 +176,13 @@ target_link_libraries(
 )
 gtest_discover_tests(kmp_pattern_searching_test)
 
-add_executable(fractional_knapsack greedy/fractional_knapsack.cc)
+# Fractional knapsack
+add_executable(
+  fractional_knapsack_test
+  greedy/fractional_knapsack_test.cc
+)
+target_link_libraries(
+  fractional_knapsack_test
+  gtest_main
+)
+gtest_discover_tests(fractional_knapsack_test)

@@ -1,7 +1,6 @@
 #ifndef ALGORITHM_MATHEMATICS_FIBONACCI_H_
 #define ALGORITHM_MATHEMATICS_FIBONACCI_H_
 
-#include <iostream>
 #include <tuple>
 
 namespace algorithm {

@@ -1,6 +1,6 @@
+#include "fractional_knapsack.h"
+
 #include <algorithm>
-#include <iostream>
-#include <tuple>
 
 namespace algorithm {
 namespace greedy {
@@ -17,7 +17,9 @@ unsigned int FractionalKnapsack(
   std::sort(items, items + N, FractionalKnapsackItemComparator);
   unsigned int maxValue = 0;
   for (std::tuple<unsigned int, unsigned int> item : items) {
-    if (weight <= 0) break;
+    if (weight <= 0) {
+      break;
+    }
     if (weight < std::get<0>(item)) {
       maxValue += weight * std::get<1>(item) / std::get<0>(item);
       weight = 0;
@@ -31,12 +33,3 @@ unsigned int FractionalKnapsack(
 
 }  // namespace greedy
 }  // namespace algorithm
-
-int main() {
-  std::tuple<unsigned int, unsigned int> items[] = {std::make_tuple(10, 60),
-                                                    std::make_tuple(30, 120),
-                                                    std::make_tuple(20, 100)};
-  unsigned int weight = 50;
-  std::cout << algorithm::greedy::FractionalKnapsack(items, weight) << std::endl;
-  return 0;
-}

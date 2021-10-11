@@ -1,7 +1,6 @@
 #ifndef ALGORITHM_PATTERN_SEARCHING_KMP_H_
 #define ALGORITHM_PATTERN_SEARCHING_KMP_H_
 
-#include <iostream>
 #include <vector>
 
 namespace algorithm {
