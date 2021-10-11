@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.14)
 project(algorithm CXX)
 
 set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
 set(CMAKE_VERBOSE_MAKEFILE OFF)
 set(CMAKE_BUILD_TYPE Debug)
 
@@ -20,6 +20,7 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
+include(GoogleTest)
 enable_testing()
 
 add_executable(singly_linked_list data_structure/linked_list/singly_linked_list.cc)
@@ -52,8 +53,26 @@ add_executable(counting_sort sorting/counting_sort.cc)
 add_executable(radix_sort sorting/radix_sort.cc)
 add_executable(bucket_sort sorting/bucket_sort.cc)
 
-add_executable(linear_search searching/linear_search.cc)
-add_executable(binary_search searching/binary_search.cc)
+# Linear search
+add_executable(
+  linear_search_test
+  searching/linear_search_test.cc
+)
+target_link_libraries(
+  linear_search_test
+  gtest_main
+)
+gtest_discover_tests(linear_search_test)
+# Binary search
+add_executable(
+  binary_search_test
+  searching/binary_search_test.cc
+)
+target_link_libraries(
+  binary_search_test
+  gtest_main
+)
+gtest_discover_tests(binary_search_test)
 
 # Factorial
 add_library(factorial mathematics/factorial.cc)
@@ -66,6 +85,7 @@ target_link_libraries(
   factorial
   gtest_main
 )
+gtest_discover_tests(factorial_test)
 # Fibonacci
 add_library(fibonacci mathematics/fibonacci.cc)
 add_executable(
@@ -77,6 +97,7 @@ target_link_libraries(
   fibonacci
   gtest_main
 )
+gtest_discover_tests(fibonacci_test)
 # Catalan
 add_library(catalan mathematics/catalan.cc)
 add_executable(
@@ -88,6 +109,7 @@ target_link_libraries(
   catalan
   gtest_main
 )
+gtest_discover_tests(catalan_test)
 
 add_executable(maximum_subarray divide_conquer/maximum_subarray.cc)
 
@@ -100,7 +122,16 @@ add_executable(fibonacci_numbers dynamic_programming/fibonacci_numbers.cc)
 add_executable(catalan_numbers dynamic_programming/catalan_numbers.cc)
 add_executable(zero_one_knapsack dynamic_programming/zero_one_knapsack.cc)
 
-add_executable(naive_pattern_searching pattern_searching/naive_pattern_searching.cc)
+# Naive pattern searching
+add_executable(
+  naive_pattern_searching_test
+  pattern_searching/naive_pattern_searching_test.cc
+)
+target_link_libraries(
+  naive_pattern_searching_test
+  gtest_main
+)
+gtest_discover_tests(naive_pattern_searching_test)
 # KMP pattern searching
 add_executable(
   kmp_pattern_searching_test
@@ -110,13 +141,6 @@ target_link_libraries(
   kmp_pattern_searching_test
   gtest_main
 )
+gtest_discover_tests(kmp_pattern_searching_test)
 
 add_executable(fractional_knapsack greedy/fractional_knapsack.cc)
-
-include(GoogleTest)
-
-gtest_discover_tests(factorial_test)
-gtest_discover_tests(fibonacci_test)
-gtest_discover_tests(catalan_test)
-
-gtest_discover_tests(kmp_pattern_searching_test)

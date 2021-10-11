@@ -6,12 +6,16 @@ namespace pattern_searching {
 template <size_t N, size_t M>
 std::vector<int> KMPPatternSearching(const char (&text)[N],
                                      const char (&pattern)[M]) {
+  if (N < 2 || M < 2 || N < M) {
+    return std::vector<int>();
+  }
+
   unsigned int lps[M];
   unsigned int i = 1, j = 0;
   std::vector<int> ret;
 
   lps[0] = 0;
-  while (i < M) {
+  while (i < M - 1) {
     if (pattern[i] == pattern[j])
       lps[i++] = ++j;
     else if (j > 0)
@@ -21,7 +25,7 @@ std::vector<int> KMPPatternSearching(const char (&text)[N],
   }
 
   i = 0, j = 0;
-  while (i < N) {
+  while (i < N - 1) {
     if (text[i] == pattern[j]) {
       i++;
       j++;
@@ -29,7 +33,7 @@ std::vector<int> KMPPatternSearching(const char (&text)[N],
     if (j == M - 1) {
       ret.push_back(i - j);
       j = lps[j - 1];
-    } else if (i < N && pattern[j] != text[i]) {
+    } else if (i < N - 1 && pattern[j] != text[i]) {
       if (j != 0) {
         j = lps[j - 1];
       } else {
