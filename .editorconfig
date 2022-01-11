@@ -7,16 +7,7 @@ charset = utf-8
 indent_style = space
 end_of_line = lf
 
-[BUILD]
-indent_size = 4
-
-[CMakeLists.*]
-indent_size = 4
-
-[*.h, *.cc]
-indent_size = 2
-
-[*.java, *.xml]
+[*.py]
 indent_size = 4
 
 [*.md]

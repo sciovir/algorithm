@@ -1,7 +1,8 @@
 # OSX system
 .DS_Store
 
-# Visual Studio
+# IDE
+.idea/
 .vs/
 .vscode/
 
@@ -10,10 +11,5 @@ build/
 out/
 target/
 
-# GNU Global
-GPATH
-GRTAGS
-GTAGS
-
-# CTAGS
-tags
+# Log and test
+_trial_temp/
