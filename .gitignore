@@ -3,13 +3,6 @@
 
 # IDE
 .idea/
-.vs/
-.vscode/
-
-# Output dir
-build/
-out/
-target/
 
 # Log and test
 _trial_temp/
