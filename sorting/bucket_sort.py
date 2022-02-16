@@ -26,21 +26,22 @@ element and buckets' slots. Each bucket is a linked list. [0.52, 0.12, 0.86,
 - Concatenating all non-empty buckets, array is now sorted.
 """
 import unittest
-from typing import TypeVar, Final
-
-T = TypeVar('T')
+from typing import Final
 
 
-def bucket_sort(array: list[T]):
-    SLOTS: Final = 10
-    buckets: list[list[T]] = [[] for _ in range(SLOTS)]
+def bucket_sort(array: list[float]):
+    if not all(0 <= element < 1 for element in array):
+        raise ValueError('Only accept non-negative floating point number array in range [0, 1)')
+
+    slots: Final = 10
+    buckets: list[list[float]] = [[] for _ in range(slots)]
 
     for i in range(len(array)):
-        bucket_index = int(SLOTS * array[i])
+        bucket_index = int(slots * array[i])
         buckets[bucket_index].append(array[i])
 
     index = 0
-    for i in range(SLOTS):
+    for i in range(slots):
         buckets[i].sort()
         for j in range(len(buckets[i])):
             array[index] = buckets[i][j]
@@ -53,9 +54,13 @@ class TestBubbleSort(unittest.TestCase):
         super(TestBubbleSort, self).__init__(*args, **kwargs)
         self.floats = [0.52, 0.44, 0.68, 0.95, 0.1, 0.12, 0.32, 0.59]
 
-    def test_handles_float_array_input(self):
+    def test_handles_valid_input(self):
         bucket_sort(self.floats)
         self.assertListEqual(self.floats, [0.1, 0.12, 0.32, 0.44, 0.52, 0.59, 0.68, 0.95])
+
+    def test_invalid_input(self):
+        with self.assertRaises(ValueError):
+            bucket_sort([0.52, 0.44, 0.68, 0.95, 1.1, 0.12, 0.32, 0.59])
 
 
 if __name__ == '__main__':

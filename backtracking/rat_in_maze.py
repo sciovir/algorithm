@@ -19,7 +19,7 @@ def rat_in_maze_recursive(board: list[list[int]], out: list[list[int]],
             return True
 
         if rat_in_maze_recursive(board, out, x + 1, y, dx, dy) or \
-            rat_in_maze_recursive(board, out, x, y + 1, dx, dy):
+           rat_in_maze_recursive(board, out, x, y + 1, dx, dy):
             return True
         out[x][y] = 0
 

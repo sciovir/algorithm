@@ -6,7 +6,7 @@ import unittest
 
 def n_queen(board_size: int) -> list[list[int]]:
     if board_size < 1:
-        raise ValueError("board size must be positive")
+        raise ValueError('board size must be positive')
 
     board: list[list[int]] = [[0 for _ in range(board_size)] for _ in range(board_size)]
     if n_queen_recursive(board, 0):

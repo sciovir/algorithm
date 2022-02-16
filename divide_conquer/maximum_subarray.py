@@ -32,7 +32,7 @@ def max_crossing_subarray(array: list[int], lo: int, mi: int, hi: int) -> tuple[
 
 def maximum_subarray(array: list[int], lo: int, hi: int) -> tuple[int, int, int]:
     if lo > hi:
-        raise ValueError("Low index must be less than or equal high index")
+        raise ValueError('Low index must be less than or equal high index')
 
     if lo == hi:
         return lo, hi, array[lo]

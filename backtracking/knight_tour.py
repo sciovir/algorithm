@@ -6,7 +6,7 @@ import unittest
 
 def knight_tour(board_size: int, x: int, y: int) -> list[list[int]]:
     if x < 0 or y < 0:
-        raise ValueError("x and y must be positive")
+        raise ValueError('x and y must be positive')
 
     board: list[list[int]] = [[-1 for _ in range(board_size)] for _ in range(board_size)]
     x_mv: list[int] = [2, 1, -1, -2, -2, -1, 2, 1]

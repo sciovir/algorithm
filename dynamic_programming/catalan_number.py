@@ -6,7 +6,7 @@ import unittest
 
 def catalan_number(n: int) -> int:
     if n < 0:
-        raise ValueError("n must be positive")
+        raise ValueError('n must be positive')
 
     catalan: list[int] = [0] * (n + 1)
     catalan[0] = catalan[1] = 1

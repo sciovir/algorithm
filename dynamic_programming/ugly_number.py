@@ -6,7 +6,7 @@ import unittest
 
 def ugly_number(n: int) -> int:
     if n < 0:
-        raise ValueError("n must be positive")
+        raise ValueError('n must be positive')
 
     ugly_numbers: list[int] = [0] * n
     i2 = i3 = i5 = 0
