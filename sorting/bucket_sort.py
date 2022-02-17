@@ -48,10 +48,10 @@ def bucket_sort(array: list[float]):
             index += 1
 
 
-class TestBubbleSort(unittest.TestCase):
+class TestBucketSort(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
-        super(TestBubbleSort, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.floats = [0.52, 0.44, 0.68, 0.95, 0.1, 0.12, 0.32, 0.59]
 
     def test_handles_valid_input(self):

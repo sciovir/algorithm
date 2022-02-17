@@ -29,7 +29,7 @@ def bubble_sort(array: list[T]):
 class TestBubbleSort(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
-        super(TestBubbleSort, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.integers = [6, 8, 10, 26, 9, 2, 40, 22, 5, 32, 3]
         self.strings = ['c', 'java', 'cpp', 'python', 'go', 'swift', 'sql']
         self.floats = [5.2, 4.4, 6.8, 9.5, 0.7, 1.2, 3.2, 5.9]

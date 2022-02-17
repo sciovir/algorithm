@@ -22,7 +22,7 @@ def binary_search(sorted_array: list[T], key: T, lo: int, hi: int) -> int:
 class TestBinarySearch(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
-        super(TestBinarySearch, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.integers = [2, 3, 5, 6, 8, 9, 10, 22, 26, 32, 40]
         self.strings = ['c', 'cpp', 'go', 'java', 'python', 'sql', 'swift']
         self.floats = [0.7, 1.2, 3.2, 4.4, 5.2, 5.9, 6.8, 9.5]

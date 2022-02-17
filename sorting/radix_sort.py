@@ -28,10 +28,10 @@ def digit_counting_sort(array: list[int], position: int):
         auxiliary[(copy[i] // position) % 10] -= 1
 
 
-class TestCountingSort(unittest.TestCase):
+class TestRadixSort(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
-        super(TestCountingSort, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.integers = [6, 8, 10, 26, 9, 2, 40, 22, 5, 32, 3]
 
     def test_handles_valid_input(self):

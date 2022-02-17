@@ -52,7 +52,7 @@ def maximum_subarray(array: list[int], lo: int, hi: int) -> tuple[int, int, int]
 class TestMaximumSubarray(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
-        super(TestMaximumSubarray, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.array: list[int] = [12, -2, -23, 18, -1, -14, -21, 16, 19, -5, 10, -3, -20, 13, -4, -7]
 
     def test_valid_arguments(self):
