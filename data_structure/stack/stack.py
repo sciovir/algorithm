@@ -20,7 +20,7 @@ class Stack(Generic[T]):
                 yield self._data[i]
 
     def __repr__(self) -> str:
-        return ','.join([element for element in self])
+        return ','.join([e for e in self])
 
     @property
     def size(self) -> int:
@@ -69,7 +69,7 @@ class TestStack(unittest.TestCase):
         stack.push(22)
 
         self.assertFalse(stack.is_empty())
-        self.assertListEqual([element for element in stack],
+        self.assertListEqual([e for e in stack],
                              [8, 6, 26, 29, 2, 9, 7, 22])
 
         with self.assertRaises(RuntimeError):
@@ -87,13 +87,13 @@ class TestStack(unittest.TestCase):
         self.assertEqual(stack.pop(), 29)
         self.assertEqual(stack.pop(), 26)
 
-        self.assertListEqual([element for element in stack], [8, 6])
+        self.assertListEqual([e for e in stack], [8, 6])
 
         self.assertEqual(stack.pop(), 6)
         self.assertEqual(stack.pop(), 8)
 
         with self.assertRaises(RuntimeError):
-            self.assertEqual(stack.pop(), 8)
+            stack.pop()
 
 
 if __name__ == '__main__':

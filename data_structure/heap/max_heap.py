@@ -2,14 +2,14 @@
 Max Heap
 """
 import unittest
-from typing import TypeVar, Generic
+from typing import TypeVar
 
 from data_structure.heap.abstract_heap import AbstractHeap
 
 T = TypeVar('T')
 
 
-class MaxHeap(AbstractHeap, Generic[T]):
+class MaxHeap(AbstractHeap[T]):
 
     def __init__(self, array: list[T], cap: int = 10):
         if array:
