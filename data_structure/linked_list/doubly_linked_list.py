@@ -1,6 +1,8 @@
 """
 Doubly Linked List
 """
+from __future__ import annotations
+
 import unittest
 from typing import TypeVar, Generic, Generator, Any
 
@@ -9,7 +11,7 @@ T = TypeVar('T')
 
 class DoublyLinkedList(Generic[T]):
     class Node:
-        def __init__(self, data: T, prv: 'Node' = None, nxt: 'Node' = None):
+        def __init__(self, data: T, prv: Node = None, nxt: Node = None):
             self._data = data
             self._prv = prv
             self._nxt = nxt
@@ -32,7 +34,7 @@ class DoublyLinkedList(Generic[T]):
             self._data = data
 
         @property
-        def prv(self) -> 'Node':
+        def prv(self) -> Node:
             return self._prv
 
         @prv.setter
@@ -40,7 +42,7 @@ class DoublyLinkedList(Generic[T]):
             self._prv = prv
 
         @property
-        def nxt(self) -> 'Node':
+        def nxt(self) -> Node:
             return self._nxt
 
         @nxt.setter

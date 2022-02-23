@@ -1,9 +1,11 @@
 """
 Binary Tree
 """
+from __future__ import annotations
+
 import enum
 import unittest
-from typing import TypeVar, Generic, Generator, Any, Optional
+from typing import TypeVar, Generic, Generator, Any
 
 from data_structure.queue.queue_q import Queue
 from data_structure.stack.stack import Stack
@@ -13,8 +15,8 @@ T = TypeVar('T')
 
 class BinaryTree(Generic[T]):
     class Node:
-        def __init__(self, data: T, parent: 'Node' = None,
-                     left: 'Node' = None, right: 'Node' = None):
+        def __init__(self, data: T, parent: Node = None,
+                     left: Node = None, right: Node = None) -> None:
             self._data = data
             self._parent = parent
             self._left = left
@@ -28,31 +30,31 @@ class BinaryTree(Generic[T]):
             return self._data
 
         @data.setter
-        def data(self, data):
+        def data(self, data) -> None:
             self._data = data
 
         @property
-        def parent(self) -> 'Node':
+        def parent(self) -> Node:
             return self._parent
 
         @parent.setter
-        def parent(self, parent):
+        def parent(self, parent) -> None:
             self._parent = parent
 
         @property
-        def left(self) -> 'Node':
+        def left(self) -> Node:
             return self._left
 
         @left.setter
-        def left(self, left):
+        def left(self, left) -> None:
             self._left = left
 
         @property
-        def right(self) -> 'Node':
+        def right(self) -> Node:
             return self._right
 
         @right.setter
-        def right(self, right):
+        def right(self, right) -> None:
             self._right = right
 
     class TreeTraversal(enum.Enum):
@@ -62,7 +64,7 @@ class BinaryTree(Generic[T]):
         LEVEL_ORDER = 3
 
     def __init__(self, root: Node = None, size: int = 0,
-                 traversal: TreeTraversal = TreeTraversal.IN_ORDER):
+                 traversal: TreeTraversal = TreeTraversal.IN_ORDER) -> None:
         self._root = root
         self._size = size
         self._traversal = traversal
@@ -82,11 +84,11 @@ class BinaryTree(Generic[T]):
         return ', '.join([str(node) for node in self])
 
     @property
-    def traversal(self):
+    def traversal(self) -> TreeTraversal:
         return self._traversal
 
     @traversal.setter
-    def traversal(self, traversal: TreeTraversal):
+    def traversal(self, traversal: TreeTraversal) -> None:
         self._traversal = traversal
 
     @property
@@ -99,7 +101,7 @@ class BinaryTree(Generic[T]):
     def search(self, data: T) -> Node:
         return self._search(self._root, data)
 
-    def _search(self, node: Node, data: T):
+    def _search(self, node: Node, data: T) -> Node | None:
         if node is None or node.data == data:
             return node
 
@@ -109,7 +111,7 @@ class BinaryTree(Generic[T]):
 
         return self._search(node.right, data)
 
-    def insert(self, data: T):
+    def insert(self, data: T) -> None:
         node = BinaryTree.Node(data)
         if self.is_empty():
             self._root = node
@@ -139,7 +141,8 @@ class BinaryTree(Generic[T]):
         if self.is_empty():
             raise RuntimeError('Tree is empty, can not remove')
 
-        removed, node = None, None
+        removed: BinaryTree.Node | None = None
+        node: BinaryTree.Node | None = None
         queue: Queue[BinaryTree.Node] = Queue(self._size + 1)
         queue.enqueue(self._root)
         while not queue.is_empty():
@@ -162,7 +165,7 @@ class BinaryTree(Generic[T]):
         self._size -= 1
         return removed_data
 
-    def _transplant(self, node: Node, child: Optional[Node]):
+    def _transplant(self, node: Node, child: Node | None) -> None:
         if node.parent is None:
             self._root = child
         elif node is node.parent.left:
@@ -240,8 +243,7 @@ class BinaryTree(Generic[T]):
                     tmp = tmp.left
 
                 tmp = stack.pop()
-                if not stack.is_empty() and tmp.right and \
-                    stack.top_value() is tmp.right:
+                if not stack.is_empty() and tmp.right and stack.top_value() is tmp.right:
                     stack.pop()
                     stack.push(tmp)
                     tmp = tmp.right

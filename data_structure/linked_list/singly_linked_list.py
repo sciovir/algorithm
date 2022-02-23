@@ -9,6 +9,8 @@ Each node of a singly linked list contains 2 parts:
       HEAD
     [data1|-]->[data2|-]->[data3|-]->[data4|-]->[data5|-]->NULL
 """
+from __future__ import annotations
+
 import unittest
 from typing import TypeVar, Generic, Generator, Any
 
@@ -17,7 +19,7 @@ T = TypeVar('T')
 
 class SinglyLinkedList(Generic[T]):
     class Node:
-        def __init__(self, data: T, nxt: 'Node' = None):
+        def __init__(self, data: T, nxt: Node = None):
             self._data = data
             self._nxt = nxt
 
@@ -33,7 +35,7 @@ class SinglyLinkedList(Generic[T]):
             self._data = data
 
         @property
-        def nxt(self) -> 'Node':
+        def nxt(self) -> Node:
             return self._nxt
 
         @nxt.setter
