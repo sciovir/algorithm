@@ -8,7 +8,7 @@ In able to compile and run project, make sure `python3.9` or above is installed.
 
 Clone repository by `git clone` to your local computer:
 ```shell script
-$ git clone git@github.com:khoarx/algorithm.git
+$ git clone git@github.com:knasync/algorithm.git
 $ cd algorithm
 ```
 
