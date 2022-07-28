@@ -6,7 +6,7 @@ import unittest
 
 def radix_sort(array: list[int]):
     if not all(element >= 0 for element in array):
-        raise ValueError('Only accept non-negative integer array')
+        raise ValueError("Only accept non-negative integer array")
 
     max_element, position = max(array), 1
     while max_element // position > 0:
@@ -29,7 +29,6 @@ def digit_counting_sort(array: list[int], position: int):
 
 
 class TestRadixSort(unittest.TestCase):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.integers = [6, 8, 10, 26, 9, 2, 40, 22, 5, 32, 3]
@@ -44,5 +43,5 @@ class TestRadixSort(unittest.TestCase):
             radix_sort(mixed_integers)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

@@ -7,7 +7,7 @@ import enum
 import unittest
 from typing import TypeVar, Generic, Generator, Any
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 class Graph(Generic[T]):
@@ -34,7 +34,7 @@ class Graph(Generic[T]):
         def insert_adjacent_vertex(self, dst: Graph.Vertex) -> None:
             for v in self._adjacent_vertices:
                 if v._data == dst._data:
-                    raise RuntimeError('The edge is already exist')
+                    raise RuntimeError("The edge is already exist")
             self._adjacent_vertices.append(dst)
 
         def remove_adjacent_vertex(self, dst_data: T) -> T:
@@ -42,7 +42,7 @@ class Graph(Generic[T]):
                 if self._adjacent_vertices[i]._data == dst_data:
                     del self._adjacent_vertices[i]
                     return dst_data
-            raise RuntimeError('The edge is not exist')
+            raise RuntimeError("The edge is not exist")
 
     class GraphTraversal(enum.Enum):
         BREADTH_FIRST = 0
@@ -60,7 +60,7 @@ class Graph(Generic[T]):
                 return self._depth_first_iter()
 
     def __repr__(self) -> str:
-        return ', '.join([str(vertex) for vertex in self])
+        return ", ".join([str(vertex) for vertex in self])
 
     @property
     def size(self) -> int:
@@ -103,7 +103,7 @@ class Graph(Generic[T]):
         for i in range(len(self._vertices)):
             if self._vertices[i].data == src:
                 return self._vertices[i].remove_adjacent_vertex(dst)
-        raise RuntimeError('The edge is not exist')
+        raise RuntimeError("The edge is not exist")
 
     def _breadth_first_iter(self) -> Generator[Vertex, Any, None]:
         visited: list[T] = []
@@ -123,7 +123,9 @@ class Graph(Generic[T]):
             for i in range(len(self._vertices)):
                 yield from self._depth_first_recursive_iter(self._vertices[i], visited)
 
-    def _depth_first_recursive_iter(self, v: Vertex, visited: list[T]) -> Generator[Vertex, Any, None]:
+    def _depth_first_recursive_iter(
+        self, v: Vertex, visited: list[T]
+    ) -> Generator[Vertex, Any, None]:
         if v.data not in visited:
             visited.append(v.data)
             yield v
@@ -134,7 +136,6 @@ class Graph(Generic[T]):
 
 
 class TestAdjacencyGraph(unittest.TestCase):
-
     def test_integer_graph(self):
         graph: Graph[int] = Graph()
 
@@ -171,5 +172,5 @@ class TestAdjacencyGraph(unittest.TestCase):
             graph.remove_edge(6, 5)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

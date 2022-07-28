@@ -14,7 +14,7 @@ from __future__ import annotations
 import unittest
 from typing import TypeVar, Generic, Generator, Any
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 class SinglyLinkedList(Generic[T]):
@@ -24,7 +24,7 @@ class SinglyLinkedList(Generic[T]):
             self._nxt = nxt
 
         def __repr__(self) -> str:
-            return f'[{self._data}]->[]' if self._nxt is None else f'[{self._data}]->'
+            return f"[{self._data}]->[]" if self._nxt is None else f"[{self._data}]->"
 
         @property
         def data(self) -> T:
@@ -53,7 +53,7 @@ class SinglyLinkedList(Generic[T]):
             tmp = tmp.nxt
 
     def __repr__(self) -> str:
-        return ''.join([str(node) for node in self])
+        return "".join([str(node) for node in self])
 
     @property
     def size(self) -> int:
@@ -83,7 +83,7 @@ class SinglyLinkedList(Generic[T]):
 
     def remove(self, data: T) -> T:
         if self.is_empty():
-            raise RuntimeError('List is empty, can not remove')
+            raise RuntimeError("List is empty, can not remove")
 
         old, prev = self._head, None
         while old and old.data != data:
@@ -91,7 +91,7 @@ class SinglyLinkedList(Generic[T]):
             old = old.nxt
 
         if not old:
-            raise RuntimeError('Node is not exist in this list')
+            raise RuntimeError("Node is not exist in this list")
 
         removed = old.data
         if old is self._head:
@@ -104,7 +104,6 @@ class SinglyLinkedList(Generic[T]):
 
 
 class TestSinglyLinkedList(unittest.TestCase):
-
     def test_integer_linked_list(self):
         linked_list: SinglyLinkedList[int] = SinglyLinkedList()
 
@@ -139,5 +138,5 @@ class TestSinglyLinkedList(unittest.TestCase):
             linked_list.remove(9)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

@@ -6,7 +6,7 @@ from __future__ import annotations
 import unittest
 from typing import TypeVar, Generic, Generator, Any
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 class CircularlyLinkedList(Generic[T]):
@@ -16,7 +16,7 @@ class CircularlyLinkedList(Generic[T]):
             self._nxt = nxt
 
         def __repr__(self) -> str:
-            return f'[{self._data}]->'
+            return f"[{self._data}]->"
 
         @property
         def data(self) -> T:
@@ -49,7 +49,7 @@ class CircularlyLinkedList(Generic[T]):
                     break
 
     def __repr__(self) -> str:
-        return ''.join([str(node) for node in self])
+        return "".join([str(node) for node in self])
 
     @property
     def size(self) -> int:
@@ -89,7 +89,7 @@ class CircularlyLinkedList(Generic[T]):
 
     def remove(self, data: T) -> T:
         if self.is_empty():
-            raise RuntimeError('List is empty, can not remove')
+            raise RuntimeError("List is empty, can not remove")
 
         old: CircularlyLinkedList.Node = self._tail.nxt
         prev: CircularlyLinkedList.Node
@@ -101,7 +101,7 @@ class CircularlyLinkedList(Generic[T]):
                 break
 
         if not old or old.data != data:
-            raise RuntimeError('Node is not exist in this list')
+            raise RuntimeError("Node is not exist in this list")
 
         removed = old.data
         if self._tail.nxt is self._tail:
@@ -117,7 +117,6 @@ class CircularlyLinkedList(Generic[T]):
 
 
 class TestCircularlyLinkedList(unittest.TestCase):
-
     def test_integer_linked_list(self):
         linked_list: CircularlyLinkedList[int] = CircularlyLinkedList()
 
@@ -152,5 +151,5 @@ class TestCircularlyLinkedList(unittest.TestCase):
             linked_list.remove(9)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

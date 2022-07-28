@@ -6,7 +6,7 @@ import unittest
 
 def counting_sort(array: list[int], key: int):
     if not all(element >= 0 for element in array):
-        raise ValueError('Only accept non-negative integer array')
+        raise ValueError("Only accept non-negative integer array")
 
     copy = array.copy()
     auxiliary = [0] * (key + 1)
@@ -22,7 +22,6 @@ def counting_sort(array: list[int], key: int):
 
 
 class TestCountingSort(unittest.TestCase):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.integers = [6, 8, 10, 26, 9, 2, 40, 22, 5, 32, 3]
@@ -37,5 +36,5 @@ class TestCountingSort(unittest.TestCase):
             counting_sort(mixed_integers, max(mixed_integers))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

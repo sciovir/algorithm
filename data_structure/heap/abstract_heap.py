@@ -4,11 +4,10 @@ Heap
 from abc import ABC, abstractmethod
 from typing import TypeVar, Generic, Generator, Any
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 class AbstractHeap(ABC, Generic[T]):
-
     def __init__(self, cap: int = 100):
         self._data: list[T] = [None] * cap
         self._cap = cap
@@ -27,14 +26,14 @@ class AbstractHeap(ABC, Generic[T]):
                     yield self._data[self._right(i)]
 
     def __repr__(self) -> str:
-        break_line, ret = 0, ''
+        break_line, ret = 0, ""
         for i, v in enumerate(self):
-            ret += f'[{v}]({i})'
+            ret += f"[{v}]({i})"
             if i == break_line:
-                ret += '\n'
+                ret += "\n"
                 break_line = 2 * break_line + 2
             else:
-                ret += ' '
+                ret += " "
         return ret
 
     @property
@@ -59,10 +58,10 @@ class AbstractHeap(ABC, Generic[T]):
 
     def remove(self, index: int) -> T:
         if self.is_empty():
-            raise RuntimeError('Heap underflow')
+            raise RuntimeError("Heap underflow")
 
         if index >= self._size:
-            raise RuntimeError('Invalid index')
+            raise RuntimeError("Invalid index")
 
         removed = self._data[index]
         self._size -= 1

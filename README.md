@@ -4,7 +4,7 @@ This repository is a collection of personal implementation of a variety of algor
 NOTE: All implementations assume that input always satisfies the requirement.
 
 ## Requirements
-In able to compile and run project, make sure `python3.9` or above is installed.
+In able to compile and run project, make sure `python3.10` or above is installed.
 
 Clone repository by `git clone` to your local computer:
 ```shell script
@@ -15,11 +15,11 @@ $ cd algorithm
 ## Build and run Python unit test
 Execute your desired unittest by `python` command
 ```shell script
-$ python ${FILE_NAME}.py
+$ python [FILE_NAME].py
 ```
 or run all unittests in a directory
 ```shell script
-$ python -m unittest discover -s ${DIRECTORY_NAME} -p '*.py'
+$ python -m unittest discover -s [DIRECTORY_NAME] -p '*.py'
 ```
 
 

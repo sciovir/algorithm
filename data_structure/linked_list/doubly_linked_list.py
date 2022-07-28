@@ -6,7 +6,7 @@ from __future__ import annotations
 import unittest
 from typing import TypeVar, Generic, Generator, Any
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 class DoublyLinkedList(Generic[T]):
@@ -18,12 +18,12 @@ class DoublyLinkedList(Generic[T]):
 
         def __repr__(self) -> str:
             if not self._prv and not self._nxt:
-                return f'[]<-[{self._data}]->[]'
+                return f"[]<-[{self._data}]->[]"
             elif not self._prv:
-                return f'[]<-[{self._data}]->'
+                return f"[]<-[{self._data}]->"
             elif not self._nxt:
-                return f'<-[{self._data}]->[]'
-            return f'<-[{self._data}]->'
+                return f"<-[{self._data}]->[]"
+            return f"<-[{self._data}]->"
 
         @property
         def data(self) -> T:
@@ -60,7 +60,7 @@ class DoublyLinkedList(Generic[T]):
             tmp = tmp.nxt
 
     def __repr__(self) -> str:
-        return ''.join([str(node) for node in self])
+        return "".join([str(node) for node in self])
 
     @property
     def size(self) -> int:
@@ -91,14 +91,14 @@ class DoublyLinkedList(Generic[T]):
 
     def remove(self, data: T) -> T:
         if self.is_empty():
-            raise RuntimeError('List is empty, can not remove')
+            raise RuntimeError("List is empty, can not remove")
 
         old = self._head
         while old and old.data != data:
             old = old.nxt
 
         if not old:
-            raise RuntimeError('Node is not exist in this list')
+            raise RuntimeError("Node is not exist in this list")
 
         removed = old.data
         if old is self._head:
@@ -118,7 +118,6 @@ class DoublyLinkedList(Generic[T]):
 
 
 class TestDoublyLinkedList(unittest.TestCase):
-
     def test_integer_linked_list(self):
         linked_list: DoublyLinkedList[int] = DoublyLinkedList()
 
@@ -153,5 +152,5 @@ class TestDoublyLinkedList(unittest.TestCase):
             linked_list.remove(9)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

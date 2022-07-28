@@ -4,12 +4,11 @@ Hash Table Open Addressing
 import unittest
 from typing import TypeVar, Generic, Generator, Any
 
-K = TypeVar('K')
-V = TypeVar('V')
+K = TypeVar("K")
+V = TypeVar("V")
 
 
 class HashTable(Generic[K, V]):
-
     def __init__(self, cap: int = 10):
         self._keys: list[K] = [None] * cap
         self._values: list[V] = [None] * cap
@@ -23,7 +22,7 @@ class HashTable(Generic[K, V]):
                     yield self._keys[i], self._values[i],
 
     def __repr__(self) -> str:
-        return ', '.join([f'[{k}: {v}]' for k, v in self])
+        return ", ".join([f"[{k}: {v}]" for k, v in self])
 
     @property
     def size(self) -> int:
@@ -46,7 +45,7 @@ class HashTable(Generic[K, V]):
         for i in range(self._cap):
             if self._keys[i] is None:
                 return i
-        raise RuntimeError('Hash table is full')
+        raise RuntimeError("Hash table is full")
 
     def get(self, key: K) -> V:
         index = 0
@@ -56,13 +55,13 @@ class HashTable(Generic[K, V]):
             index += 1
 
         if index >= self._cap:
-            raise RuntimeError('Key is not exist in this hash table')
+            raise RuntimeError("Key is not exist in this hash table")
         return self._values[index]
 
     def insert(self, key: K, value: V) -> None:
         for i in range(self._cap):
             if self._keys[i] and self._keys[i] == key:
-                raise RuntimeError('Key is already exist')
+                raise RuntimeError("Key is already exist")
 
         hash_key = self._hashing(key)
         if self._keys[hash_key]:
@@ -79,7 +78,7 @@ class HashTable(Generic[K, V]):
                 break
             index += 1
         if index >= self._cap:
-            raise RuntimeError('Key is not exist')
+            raise RuntimeError("Key is not exist")
 
         removed = self._values[index]
         self._keys[index] = None
@@ -90,45 +89,51 @@ class HashTable(Generic[K, V]):
 
 
 class TestHashTableOpenAddressing(unittest.TestCase):
-
     def test_integer_string_hash_table(self):
         hash_table: HashTable[int, str] = HashTable()
 
         self.assertTrue(hash_table.is_empty())
         self.assertEqual(hash_table.size, 0)
 
-        hash_table.insert(18, 'Cat')
-        hash_table.insert(60, 'Dog')
-        hash_table.insert(20, 'Dolphin')
-        hash_table.insert(96, 'Mouse')
-        hash_table.insert(71, 'Rabbit')
-        hash_table.insert(22, 'Snake')
+        hash_table.insert(18, "Cat")
+        hash_table.insert(60, "Dog")
+        hash_table.insert(20, "Dolphin")
+        hash_table.insert(96, "Mouse")
+        hash_table.insert(71, "Rabbit")
+        hash_table.insert(22, "Snake")
 
         self.assertFalse(hash_table.is_empty())
         self.assertListEqual([k for k, _ in hash_table], [60, 20, 71, 22, 96, 18])
-        self.assertListEqual([v for _, v in hash_table], ['Dog', 'Dolphin', 'Rabbit', 'Snake', 'Mouse', 'Cat'])
+        self.assertListEqual(
+            [v for _, v in hash_table],
+            ["Dog", "Dolphin", "Rabbit", "Snake", "Mouse", "Cat"],
+        )
 
-        self.assertEqual(hash_table.get(60), 'Dog')
-        self.assertEqual(hash_table.get(96), 'Mouse')
+        self.assertEqual(hash_table.get(60), "Dog")
+        self.assertEqual(hash_table.get(96), "Mouse")
 
-        self.assertEqual(hash_table.remove(18), 'Cat')
+        self.assertEqual(hash_table.remove(18), "Cat")
         self.assertListEqual([k for k, _ in hash_table], [60, 20, 71, 22, 96])
-        self.assertListEqual([v for _, v in hash_table], ['Dog', 'Dolphin', 'Rabbit', 'Snake', 'Mouse'])
-        self.assertEqual(hash_table.remove(22), 'Snake')
+        self.assertListEqual(
+            [v for _, v in hash_table], ["Dog", "Dolphin", "Rabbit", "Snake", "Mouse"]
+        )
+        self.assertEqual(hash_table.remove(22), "Snake")
         self.assertListEqual([k for k, _ in hash_table], [60, 20, 71, 96])
-        self.assertListEqual([v for _, v in hash_table], ['Dog', 'Dolphin', 'Rabbit', 'Mouse'])
+        self.assertListEqual(
+            [v for _, v in hash_table], ["Dog", "Dolphin", "Rabbit", "Mouse"]
+        )
 
         with self.assertRaises(RuntimeError):
             hash_table.remove(99)
 
-        self.assertEqual(hash_table.remove(20), 'Dolphin')
-        self.assertEqual(hash_table.remove(71), 'Rabbit')
-        self.assertEqual(hash_table.remove(60), 'Dog')
-        self.assertEqual(hash_table.remove(96), 'Mouse')
+        self.assertEqual(hash_table.remove(20), "Dolphin")
+        self.assertEqual(hash_table.remove(71), "Rabbit")
+        self.assertEqual(hash_table.remove(60), "Dog")
+        self.assertEqual(hash_table.remove(96), "Mouse")
 
         with self.assertRaises(RuntimeError):
             hash_table.remove(80)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

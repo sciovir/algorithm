@@ -6,11 +6,10 @@ from typing import TypeVar
 
 from data_structure.heap.abstract_heap import AbstractHeap
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 class MaxHeap(AbstractHeap[T]):
-
     def __init__(self, array: list[T], cap: int = 10):
         if array:
             super().__init__(max(len(array), cap))
@@ -23,7 +22,11 @@ class MaxHeap(AbstractHeap[T]):
 
     def heapify(self, index: int):
         left, right = self._left(index), self._right(index)
-        largest = left if left < self._size and self._data[left] > self._data[index] else index
+        largest = (
+            left
+            if left < self._size and self._data[left] > self._data[index]
+            else index
+        )
 
         if right < self._size and self._data[right] > self._data[largest]:
             largest = right
@@ -34,7 +37,7 @@ class MaxHeap(AbstractHeap[T]):
 
     def insert(self, value: T):
         if self.is_full():
-            raise RuntimeError('Heap overflow')
+            raise RuntimeError("Heap overflow")
 
         self._data[self._size] = value
         cur = self._size
@@ -46,7 +49,6 @@ class MaxHeap(AbstractHeap[T]):
 
 
 class TestMaxHeap(unittest.TestCase):
-
     def test_integer_heap(self):
         heap: MaxHeap[int] = MaxHeap([6, 8, 10, 26, 9, 2, 40, 22, 5, 32, 3], 13)
 
@@ -57,8 +59,9 @@ class TestMaxHeap(unittest.TestCase):
         heap.insert(6)
 
         self.assertEqual(heap.size, 13)
-        self.assertListEqual([element for element in heap],
-                             [40, 32, 18, 26, 9, 10, 6, 22, 5, 8, 3, 2, 6])
+        self.assertListEqual(
+            [element for element in heap], [40, 32, 18, 26, 9, 10, 6, 22, 5, 8, 3, 2, 6]
+        )
 
         with self.assertRaises(RuntimeError):
             heap.insert(19)
@@ -81,5 +84,5 @@ class TestMaxHeap(unittest.TestCase):
             heap.remove(0)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

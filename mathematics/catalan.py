@@ -9,7 +9,6 @@ def catalan(n: int) -> int:
 
 
 class TestCatalanNumber(unittest.TestCase):
-
     def test_multiple_valid_input(self):
         self.assertEqual(catalan(2), 2)
         self.assertEqual(catalan(3), 5)
@@ -18,5 +17,5 @@ class TestCatalanNumber(unittest.TestCase):
         self.assertEqual(catalan(9), 4862)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

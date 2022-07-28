@@ -9,7 +9,6 @@ def factorial(n: int) -> int:
 
 
 class TestCatalanNumber(unittest.TestCase):
-
     def test_multiple_valid_input(self):
         self.assertEqual(factorial(1), 1)
         self.assertEqual(factorial(2), 2)
@@ -18,5 +17,5 @@ class TestCatalanNumber(unittest.TestCase):
         self.assertEqual(factorial(8), 40320)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

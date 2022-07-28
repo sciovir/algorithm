@@ -6,7 +6,7 @@ import unittest
 
 def n_queen(board_size: int) -> list[list[int]]:
     if board_size < 1:
-        raise ValueError('board size must be positive')
+        raise ValueError("board size must be positive")
 
     board: list[list[int]] = [[0 for _ in range(board_size)] for _ in range(board_size)]
     if n_queen_recursive(board, 0):
@@ -66,13 +66,12 @@ def possible_place(board: list[list[int]], x: int, y: int) -> bool:
 
 
 class TestNQueen(unittest.TestCase):
-
     def test_handles_variety_amount_of_queens(self):
         answer: list[list[int]] = [
             [0, 0, 1, 0],
             [1, 0, 0, 0],
             [0, 0, 0, 1],
-            [0, 1, 0, 0]
+            [0, 1, 0, 0],
         ]
         result: list[list[int]] = n_queen(4)
         for i in range(len(result)):
@@ -84,7 +83,7 @@ class TestNQueen(unittest.TestCase):
             [0, 0, 0, 1, 0],
             [0, 1, 0, 0, 0],
             [0, 0, 0, 0, 1],
-            [0, 0, 1, 0, 0]
+            [0, 0, 1, 0, 0],
         ]
 
         result = n_queen(5)
@@ -93,5 +92,5 @@ class TestNQueen(unittest.TestCase):
             self.assertListEqual(result[i], answer[i])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

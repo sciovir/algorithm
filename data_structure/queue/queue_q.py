@@ -4,11 +4,10 @@ Queue
 import unittest
 from typing import TypeVar, Generic, Generator, Any
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 class Queue(Generic[T]):
-
     def __init__(self, cap: int = 100):
         self._data: list[T] = [None] * cap
         self._cap = cap
@@ -28,7 +27,7 @@ class Queue(Generic[T]):
                 index = (index + 1) % self._cap
 
     def __repr__(self) -> str:
-        return ','.join([str(e) for e in self])
+        return ",".join([str(e) for e in self])
 
     @property
     def size(self) -> int:
@@ -42,19 +41,19 @@ class Queue(Generic[T]):
 
     def front_value(self) -> T:
         if self.is_empty():
-            raise RuntimeError('Queue underflow, can not get front')
+            raise RuntimeError("Queue underflow, can not get front")
         return self._data[self._front]
 
     def enqueue(self, value: T):
         if self.is_full():
-            raise RuntimeError('Queue overflow, can not enqueue')
+            raise RuntimeError("Queue overflow, can not enqueue")
         self._rear = (self._rear + 1) % self._cap
         self._data[self._rear] = value
         self._size += 1
 
     def dequeue(self) -> T:
         if self.is_empty():
-            raise RuntimeError('Queue underflow, can not dequeue')
+            raise RuntimeError("Queue underflow, can not dequeue")
         removed = self._data[self._front]
         self._front = (self._front + 1) % self._cap
         self._size -= 1
@@ -62,7 +61,6 @@ class Queue(Generic[T]):
 
 
 class TestQueue(unittest.TestCase):
-
     def test_integer_queue(self):
         queue: Queue[int] = Queue(8)
 
@@ -79,8 +77,7 @@ class TestQueue(unittest.TestCase):
         queue.enqueue(22)
 
         self.assertFalse(queue.is_empty())
-        self.assertListEqual([e for e in queue],
-                             [8, 6, 26, 29, 2, 9, 7, 22])
+        self.assertListEqual([e for e in queue], [8, 6, 26, 29, 2, 9, 7, 22])
 
         with self.assertRaises(RuntimeError):
             queue.enqueue(19)
@@ -106,5 +103,5 @@ class TestQueue(unittest.TestCase):
             queue.dequeue()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

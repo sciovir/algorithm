@@ -4,11 +4,10 @@ Stack
 import unittest
 from typing import TypeVar, Generic, Generator, Any
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 class Stack(Generic[T]):
-
     def __init__(self, cap: int = 100):
         self._data: list[T] = [None] * cap
         self._cap = cap
@@ -20,7 +19,7 @@ class Stack(Generic[T]):
                 yield self._data[i]
 
     def __repr__(self) -> str:
-        return ','.join([e for e in self])
+        return ",".join([e for e in self])
 
     @property
     def size(self) -> int:
@@ -34,25 +33,24 @@ class Stack(Generic[T]):
 
     def top_value(self) -> T:
         if self.is_empty():
-            raise RuntimeError('Stack underflow, can not get top')
+            raise RuntimeError("Stack underflow, can not get top")
         return self._data[self._top]
 
     def push(self, value: T):
         if self.is_full():
-            raise RuntimeError('Stack overflow, can not push')
+            raise RuntimeError("Stack overflow, can not push")
         self._top += 1
         self._data[self._top] = value
 
     def pop(self) -> T:
         if self.is_empty():
-            raise RuntimeError('Stack underflow, can not pop')
+            raise RuntimeError("Stack underflow, can not pop")
         removed = self._data[self._top]
         self._top -= 1
         return removed
 
 
 class TestStack(unittest.TestCase):
-
     def test_integer_stack(self):
         stack: Stack[int] = Stack(8)
 
@@ -69,8 +67,7 @@ class TestStack(unittest.TestCase):
         stack.push(22)
 
         self.assertFalse(stack.is_empty())
-        self.assertListEqual([e for e in stack],
-                             [8, 6, 26, 29, 2, 9, 7, 22])
+        self.assertListEqual([e for e in stack], [8, 6, 26, 29, 2, 9, 7, 22])
 
         with self.assertRaises(RuntimeError):
             stack.push(19)
@@ -96,5 +93,5 @@ class TestStack(unittest.TestCase):
             stack.pop()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

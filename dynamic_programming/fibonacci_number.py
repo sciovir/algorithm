@@ -6,7 +6,7 @@ import unittest
 
 def fibonacci_number(n: int) -> int:
     if n < 0:
-        raise ValueError('n must be positive')
+        raise ValueError("n must be positive")
 
     fibonacci: list[int] = [0] * (n + 1)
     fibonacci[0] = 0
@@ -19,7 +19,6 @@ def fibonacci_number(n: int) -> int:
 
 
 class TestFibonacciNumber(unittest.TestCase):
-
     def test_multiple_valid_input(self):
         self.assertEqual(fibonacci_number(2), 1)
         self.assertEqual(fibonacci_number(3), 2)
@@ -32,5 +31,5 @@ class TestFibonacciNumber(unittest.TestCase):
             fibonacci_number(-1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

@@ -6,8 +6,8 @@ from __future__ import annotations
 import unittest
 from typing import TypeVar, Generic, Generator, Any
 
-K = TypeVar('K')
-V = TypeVar('V')
+K = TypeVar("K")
+V = TypeVar("V")
 
 
 class HashTable(Generic[K, V]):
@@ -18,7 +18,7 @@ class HashTable(Generic[K, V]):
             self._nxt = nxt
 
         def __repr__(self) -> str:
-            return f'[{self._key}: {self._value}]'
+            return f"[{self._key}: {self._value}]"
 
         @property
         def key(self) -> K:
@@ -56,7 +56,7 @@ class HashTable(Generic[K, V]):
                 yield key, self.get(key),
 
     def __repr__(self) -> str:
-        return ', '.join([f'[{k}: {v}]' for k, v in self])
+        return ", ".join([f"[{k}: {v}]" for k, v in self])
 
     @property
     def size(self) -> int:
@@ -82,7 +82,7 @@ class HashTable(Generic[K, V]):
             node = node.nxt
 
         if node is None:
-            raise RuntimeError('Key is not exist in hash table')
+            raise RuntimeError("Key is not exist in hash table")
         return node.value
 
     def insert(self, key: K, value: V) -> None:
@@ -94,10 +94,10 @@ class HashTable(Generic[K, V]):
         else:
             tmp = self._buckets[hash_key]
             if tmp.key == key:
-                raise RuntimeError('Key is already exist')
+                raise RuntimeError("Key is already exist")
             while tmp.nxt:
                 if tmp.key == key:
-                    raise RuntimeError('Key is already exist')
+                    raise RuntimeError("Key is already exist")
                 tmp = tmp.nxt
             tmp.nxt = node
 
@@ -114,7 +114,7 @@ class HashTable(Generic[K, V]):
             node = node.nxt
 
         if node is None:
-            raise RuntimeError('Key is not exist in this hash table')
+            raise RuntimeError("Key is not exist in this hash table")
 
         removed = node.value
         if node is self._buckets[hash_key]:
@@ -131,45 +131,51 @@ class HashTable(Generic[K, V]):
 
 
 class TestHashTableSeparateChaining(unittest.TestCase):
-
     def test_integer_string_hash_table(self):
         hash_table: HashTable[int, str] = HashTable()
 
         self.assertTrue(hash_table.is_empty())
         self.assertEqual(hash_table.size, 0)
 
-        hash_table.insert(18, 'Cat')
-        hash_table.insert(60, 'Dog')
-        hash_table.insert(20, 'Dolphin')
-        hash_table.insert(96, 'Mouse')
-        hash_table.insert(71, 'Rabbit')
-        hash_table.insert(22, 'Snake')
+        hash_table.insert(18, "Cat")
+        hash_table.insert(60, "Dog")
+        hash_table.insert(20, "Dolphin")
+        hash_table.insert(96, "Mouse")
+        hash_table.insert(71, "Rabbit")
+        hash_table.insert(22, "Snake")
 
         self.assertFalse(hash_table.is_empty())
         self.assertListEqual([k for k, _ in hash_table], [18, 60, 20, 96, 71, 22])
-        self.assertListEqual([v for _, v in hash_table], ['Cat', 'Dog', 'Dolphin', 'Mouse', 'Rabbit', 'Snake'])
+        self.assertListEqual(
+            [v for _, v in hash_table],
+            ["Cat", "Dog", "Dolphin", "Mouse", "Rabbit", "Snake"],
+        )
 
-        self.assertEqual(hash_table.get(60), 'Dog')
-        self.assertEqual(hash_table.get(96), 'Mouse')
+        self.assertEqual(hash_table.get(60), "Dog")
+        self.assertEqual(hash_table.get(96), "Mouse")
 
-        self.assertEqual(hash_table.remove(18), 'Cat')
+        self.assertEqual(hash_table.remove(18), "Cat")
         self.assertListEqual([k for k, _ in hash_table], [60, 20, 96, 71, 22])
-        self.assertListEqual([v for _, v in hash_table], ['Dog', 'Dolphin', 'Mouse', 'Rabbit', 'Snake'])
-        self.assertEqual(hash_table.remove(22), 'Snake')
+        self.assertListEqual(
+            [v for _, v in hash_table], ["Dog", "Dolphin", "Mouse", "Rabbit", "Snake"]
+        )
+        self.assertEqual(hash_table.remove(22), "Snake")
         self.assertListEqual([k for k, _ in hash_table], [60, 20, 96, 71])
-        self.assertListEqual([v for _, v in hash_table], ['Dog', 'Dolphin', 'Mouse', 'Rabbit'])
+        self.assertListEqual(
+            [v for _, v in hash_table], ["Dog", "Dolphin", "Mouse", "Rabbit"]
+        )
 
         with self.assertRaises(RuntimeError):
             hash_table.remove(99)
 
-        self.assertEqual(hash_table.remove(20), 'Dolphin')
-        self.assertEqual(hash_table.remove(71), 'Rabbit')
-        self.assertEqual(hash_table.remove(60), 'Dog')
-        self.assertEqual(hash_table.remove(96), 'Mouse')
+        self.assertEqual(hash_table.remove(20), "Dolphin")
+        self.assertEqual(hash_table.remove(71), "Rabbit")
+        self.assertEqual(hash_table.remove(60), "Dog")
+        self.assertEqual(hash_table.remove(96), "Mouse")
 
         with self.assertRaises(RuntimeError):
             hash_table.remove(80)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

@@ -6,9 +6,11 @@ import unittest
 
 def knight_tour(board_size: int, x: int, y: int) -> list[list[int]]:
     if x < 0 or y < 0:
-        raise ValueError('x and y must be positive')
+        raise ValueError("x and y must be positive")
 
-    board: list[list[int]] = [[-1 for _ in range(board_size)] for _ in range(board_size)]
+    board: list[list[int]] = [
+        [-1 for _ in range(board_size)] for _ in range(board_size)
+    ]
     x_mv: list[int] = [2, 1, -1, -2, -2, -1, 2, 1]
     y_mv: list[int] = [1, 2, 2, 1, -1, -2, -1, -2]
 
@@ -19,8 +21,9 @@ def knight_tour(board_size: int, x: int, y: int) -> list[list[int]]:
     return []
 
 
-def knight_tour_recursive(board: list[list[int]], x_mv: list[int],
-                          y_mv: list[int], mv: int, x: int, y: int) -> bool:
+def knight_tour_recursive(
+    board: list[list[int]], x_mv: list[int], y_mv: list[int], mv: int, x: int, y: int
+) -> bool:
     if mv == len(board) * len(board):
         return True
 
@@ -42,7 +45,6 @@ def possible_move(board: list[list[int]], x: int, y: int) -> bool:
 
 
 class TestKnightTour(unittest.TestCase):
-
     def test_knight_start_from_top_left(self):
         answer: list[list[int]] = [
             [0, 33, 42, 63, 12, 25, 8, 21],
@@ -52,7 +54,7 @@ class TestKnightTour(unittest.TestCase):
             [52, 47, 2, 35, 14, 27, 6, 19],
             [39, 60, 37, 50, 55, 30, 17, 28],
             [48, 53, 58, 3, 36, 15, 56, 5],
-            [59, 38, 49, 54, 57, 4, 29, 16]
+            [59, 38, 49, 54, 57, 4, 29, 16],
         ]
         result: list[list[int]] = knight_tour(len(answer), 0, 0)
         for i in range(len(result)):
@@ -60,5 +62,5 @@ class TestKnightTour(unittest.TestCase):
             self.assertListEqual(result[i], answer[i])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

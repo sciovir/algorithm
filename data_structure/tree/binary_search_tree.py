@@ -7,21 +7,27 @@ import unittest
 from typing import TypeVar
 from data_structure.tree.binary_tree import BinaryTree
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 class BinarySearchTree(BinaryTree[T]):
-
-    def __init__(self, root: BinaryTree.Node = None, size: int = 0,
-                 traversal: BinaryTree.TreeTraversal = BinaryTree.TreeTraversal.IN_ORDER) -> None:
+    def __init__(
+        self,
+        root: BinaryTree.Node = None,
+        size: int = 0,
+        traversal: BinaryTree.TreeTraversal = BinaryTree.TreeTraversal.IN_ORDER,
+    ) -> None:
         super().__init__(root, size, traversal)
 
     def _search(self, node: BinaryTree.Node, data: T) -> BinaryTree.Node | None:
         if node is None or node.data == data:
             return node
 
-        return self._search(node.left, data) if data < node.data \
+        return (
+            self._search(node.left, data)
+            if data < node.data
             else self._search(node.right, data)
+        )
 
     def insert(self, data: T) -> None:
         node: BinaryTree.Node = BinaryTree.Node(data)
@@ -44,11 +50,11 @@ class BinarySearchTree(BinaryTree[T]):
 
     def remove(self, data: T) -> T:
         if self.is_empty():
-            raise RuntimeError('Tree is empty, can not remove')
+            raise RuntimeError("Tree is empty, can not remove")
 
         removed = self._search(self._root, data)
         if removed is None:
-            raise RuntimeError('Node is not exist in this tree')
+            raise RuntimeError("Node is not exist in this tree")
 
         removed_data = removed.data
         if removed.left is None:
@@ -71,7 +77,7 @@ class BinarySearchTree(BinaryTree[T]):
 
     def maximum(self) -> BinaryTree.Node | None:
         if self.is_empty():
-            raise RuntimeError('Tree is empty, can not get maximum')
+            raise RuntimeError("Tree is empty, can not get maximum")
         return self._maximum(self._root)
 
     def _maximum(self, node: BinaryTree.Node) -> BinaryTree.Node | None:
@@ -83,7 +89,7 @@ class BinarySearchTree(BinaryTree[T]):
 
     def minimum(self) -> BinaryTree.Node | None:
         if self.is_empty():
-            raise RuntimeError('Tree is empty, can not get minimum')
+            raise RuntimeError("Tree is empty, can not get minimum")
         return self._minimum(self._root)
 
     def _minimum(self, node: BinaryTree.Node) -> BinaryTree.Node | None:
@@ -95,7 +101,6 @@ class BinarySearchTree(BinaryTree[T]):
 
 
 class TestBinarySearchTree(unittest.TestCase):
-
     def test_integer_binary_search_tree(self):
         tree: BinarySearchTree[int] = BinarySearchTree()
 
@@ -151,5 +156,5 @@ class TestBinarySearchTree(unittest.TestCase):
             tree.remove(9)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

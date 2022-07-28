@@ -1,8 +1,11 @@
 # OSX system
 .DS_Store
 
-# IDE
-.idea/
-
-# Log and test
+# log and test
 _trial_temp/
+
+# venv
+.venv/
+
+# cache
+__pycache__/
