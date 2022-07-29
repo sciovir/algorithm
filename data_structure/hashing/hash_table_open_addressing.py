@@ -2,20 +2,17 @@
 Hash Table Open Addressing
 """
 import unittest
-from typing import TypeVar, Generic, Generator, Any
-
-K = TypeVar("K")
-V = TypeVar("V")
+from typing import Generator, Any
 
 
-class HashTable(Generic[K, V]):
+class HashTable:
     def __init__(self, cap: int = 10):
-        self._keys: list[K] = [None] * cap
-        self._values: list[V] = [None] * cap
+        self._keys: list = [None] * cap
+        self._values: list = [None] * cap
         self._cap = cap
         self._size = 0
 
-    def __iter__(self) -> Generator[tuple[K, V], Any, None]:
+    def __iter__(self) -> Generator[tuple[Any, Any], Any, None]:
         if not self.is_empty():
             for i in range(len(self._keys)):
                 if self._keys[i]:
@@ -32,10 +29,10 @@ class HashTable(Generic[K, V]):
         return self._size == 0
 
     @property
-    def keys(self) -> list[K]:
+    def keys(self) -> list[Any]:
         return [k for k, _ in self]
 
-    def _hashing(self, key: K) -> int:
+    def _hashing(self, key: Any) -> int:
         hash_key = int(key) % self._cap
         if hash_key < 0:
             hash_key += self._cap
@@ -47,7 +44,7 @@ class HashTable(Generic[K, V]):
                 return i
         raise RuntimeError("Hash table is full")
 
-    def get(self, key: K) -> V:
+    def get(self, key: Any) -> Any:
         index = 0
         while index < self._cap:
             if self._keys[index] and self._keys[index] == key:
@@ -58,7 +55,7 @@ class HashTable(Generic[K, V]):
             raise RuntimeError("Key is not exist in this hash table")
         return self._values[index]
 
-    def insert(self, key: K, value: V) -> None:
+    def insert(self, key: Any, value: Any) -> None:
         for i in range(self._cap):
             if self._keys[i] and self._keys[i] == key:
                 raise RuntimeError("Key is already exist")
@@ -71,7 +68,7 @@ class HashTable(Generic[K, V]):
         self._values[hash_key] = value
         self._size += 1
 
-    def remove(self, key: K) -> V:
+    def remove(self, key: Any) -> Any:
         index = 0
         while index < self._cap:
             if self._keys[index] and self._keys[index] == key:
@@ -90,7 +87,7 @@ class HashTable(Generic[K, V]):
 
 class TestHashTableOpenAddressing(unittest.TestCase):
     def test_integer_string_hash_table(self):
-        hash_table: HashTable[int, str] = HashTable()
+        hash_table: HashTable = HashTable()
 
         self.assertTrue(hash_table.is_empty())
         self.assertEqual(hash_table.size, 0)

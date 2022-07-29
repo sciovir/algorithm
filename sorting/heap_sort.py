@@ -2,22 +2,19 @@
 Heap Sort
 """
 import unittest
-from typing import TypeVar
 
 from data_structure.heap.max_heap import MaxHeap
 
-T = TypeVar("T")
 
-
-def heap_sort(array: list[T]):
-    max_heap: MaxHeap[T] = MaxHeap(array, len(array))
+def heap_sort(array: list):
+    max_heap: MaxHeap = MaxHeap(array, len(array))
     for i in range(len(array) - 1, 0, -1):
         max_heap.swap(0, i)
         max_heap.size = max_heap.size - 1
         max_heap.heapify(0)
 
     max_heap.size = len(array)
-    out: list[T] = [element for element in max_heap]
+    out: list = [element for element in max_heap]
     for i in range(len(array)):
         array[i] = out[i]
 

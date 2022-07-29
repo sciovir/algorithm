@@ -14,12 +14,9 @@ swap 2 and 1 i        j [1, 5, 3, 2, 4] don't swap i           j
 - After all the loops, array is now sorted.
 """
 import unittest
-from typing import TypeVar
-
-T = TypeVar("T")
 
 
-def bubble_sort(array: list[T]):
+def bubble_sort(array: list):
     for i in range(len(array)):
         for j in range(i + 1, len(array)):
             if array[i] > array[j]:

@@ -5,18 +5,20 @@ from __future__ import annotations
 
 import enum
 import unittest
-from typing import TypeVar, Generic, Generator, Any
+from typing import Generator, Any
 
 from data_structure.queue.queue_q import Queue
 from data_structure.stack.stack import Stack
 
-T = TypeVar("T")
 
-
-class BinaryTree(Generic[T]):
+class BinaryTree:
     class Node:
         def __init__(
-            self, data: T, parent: Node = None, left: Node = None, right: Node = None
+            self,
+            data: Any,
+            parent: BinaryTree.Node | None = None,
+            left: BinaryTree.Node | None = None,
+            right: BinaryTree.Node | None = None,
         ) -> None:
             self._data = data
             self._parent = parent
@@ -27,7 +29,7 @@ class BinaryTree(Generic[T]):
             return str(self._data)
 
         @property
-        def data(self) -> T:
+        def data(self) -> Any:
             return self._data
 
         @data.setter
@@ -35,7 +37,7 @@ class BinaryTree(Generic[T]):
             self._data = data
 
         @property
-        def parent(self) -> Node:
+        def parent(self) -> BinaryTree.Node | None:
             return self._parent
 
         @parent.setter
@@ -43,7 +45,7 @@ class BinaryTree(Generic[T]):
             self._parent = parent
 
         @property
-        def left(self) -> Node:
+        def left(self) -> BinaryTree.Node | None:
             return self._left
 
         @left.setter
@@ -51,7 +53,7 @@ class BinaryTree(Generic[T]):
             self._left = left
 
         @property
-        def right(self) -> Node:
+        def right(self) -> BinaryTree.Node | None:
             return self._right
 
         @right.setter
@@ -66,7 +68,7 @@ class BinaryTree(Generic[T]):
 
     def __init__(
         self,
-        root: Node = None,
+        root: Node | None = None,
         size: int = 0,
         traversal: TreeTraversal = TreeTraversal.IN_ORDER,
     ) -> None:
@@ -77,13 +79,13 @@ class BinaryTree(Generic[T]):
     def __iter__(self) -> Generator[Node, Any, None]:
         if not self.is_empty():
             if self._traversal == BinaryTree.TreeTraversal.PRE_ORDER:
-                return self._pre_order_iter(self._root, True)
+                yield from self._pre_order_iter(self._root, True)
             elif self._traversal == BinaryTree.TreeTraversal.IN_ORDER:
-                return self._in_order_iter(self._root, True)
+                yield from self._in_order_iter(self._root, True)
             elif self._traversal == BinaryTree.TreeTraversal.POST_ORDER:
-                return self._post_order_iter(self._root, True)
+                yield from self._post_order_iter(self._root, True)
             elif self._traversal == BinaryTree.TreeTraversal.LEVEL_ORDER:
-                return self._level_order_iter(True)
+                yield from self._level_order_iter(True)
 
     def __repr__(self) -> str:
         return ", ".join([str(node) for node in self])
@@ -103,25 +105,25 @@ class BinaryTree(Generic[T]):
     def is_empty(self) -> bool:
         return self._root is None
 
-    def search(self, data: T) -> Node:
+    def search(self, data: Any) -> Node | None:
         return self._search(self._root, data)
 
-    def _search(self, node: Node, data: T) -> Node | None:
+    def _search(self, node: Node | None, data: Any) -> Node | None:
         if node is None or node.data == data:
             return node
 
-        left_search: BinaryTree.Node = self._search(node.left, data)
+        left_search: BinaryTree.Node | None = self._search(node.left, data)
         if left_search:
             return left_search
 
         return self._search(node.right, data)
 
-    def insert(self, data: T) -> None:
+    def insert(self, data: Any) -> None:
         node = BinaryTree.Node(data)
         if self.is_empty():
             self._root = node
         else:
-            queue: Queue[BinaryTree.Node] = Queue(self._size + 1)
+            queue: Queue = Queue(self._size + 1)
             queue.enqueue(self._root)
             while not queue.is_empty():
                 tmp: BinaryTree.Node = queue.dequeue()
@@ -142,13 +144,13 @@ class BinaryTree(Generic[T]):
 
         self._size += 1
 
-    def remove(self, data: T) -> T:
+    def remove(self, data: Any) -> Any:
         if self.is_empty():
             raise RuntimeError("Tree is empty, can not remove")
 
         removed: BinaryTree.Node | None = None
         node: BinaryTree.Node | None = None
-        queue: Queue[BinaryTree.Node] = Queue(self._size + 1)
+        queue: Queue = Queue(self._size + 1)
         queue.enqueue(self._root)
         while not queue.is_empty():
             node = queue.dequeue()
@@ -182,14 +184,14 @@ class BinaryTree(Generic[T]):
             child.parent = node.parent
         node.parent = None
 
-    def _height(self, node: Node) -> int:
+    def _height(self, node: Node | None) -> int:
         if node is None:
             return 0
         else:
             return 1 + max(self._height(node.left), self._height(node.right))
 
     def _pre_order_iter(
-        self, node: Node, recursive: bool
+        self, node: Node | None, recursive: bool
     ) -> Generator[Node, Any, None]:
         if recursive:
             if node:
@@ -198,7 +200,7 @@ class BinaryTree(Generic[T]):
                 yield from self._pre_order_iter(node.right, recursive)
         else:
             tmp = self._root
-            stack: Stack[BinaryTree.Node] = Stack(self._size)
+            stack: Stack = Stack(self._size)
 
             while True:
                 if tmp:
@@ -211,7 +213,9 @@ class BinaryTree(Generic[T]):
                 else:
                     break
 
-    def _in_order_iter(self, node: Node, recursive: bool) -> Generator[Node, Any, None]:
+    def _in_order_iter(
+        self, node: Node | None, recursive: bool
+    ) -> Generator[Node, Any, None]:
         if recursive:
             if node:
                 yield from self._in_order_iter(node.left, recursive)
@@ -219,7 +223,7 @@ class BinaryTree(Generic[T]):
                 yield from self._in_order_iter(node.right, recursive)
         else:
             tmp = self._root
-            stack: Stack[BinaryTree.Node] = Stack(self._size)
+            stack: Stack = Stack(self._size)
 
             while True:
                 if tmp:
@@ -233,7 +237,7 @@ class BinaryTree(Generic[T]):
                     break
 
     def _post_order_iter(
-        self, node: Node, recursive: bool
+        self, node: Node | None, recursive: bool
     ) -> Generator[Node, Any, None]:
         if recursive:
             if node:
@@ -242,7 +246,7 @@ class BinaryTree(Generic[T]):
                 yield node
         else:
             tmp = self._root
-            stack: Stack[BinaryTree.Node] = Stack(self._size)
+            stack: Stack = Stack(self._size)
 
             while True:
                 while tmp:
@@ -273,7 +277,7 @@ class BinaryTree(Generic[T]):
                 yield from self._level_iter(self._root, i)
         else:
             if not self.is_empty():
-                queue: Queue[BinaryTree.Node] = Queue(self._size)
+                queue: Queue = Queue(self._size)
                 queue.enqueue(self._root)
 
                 while not queue.is_empty():
@@ -284,7 +288,7 @@ class BinaryTree(Generic[T]):
                     if tmp.right:
                         queue.enqueue(tmp.right)
 
-    def _level_iter(self, node: Node, level: int) -> Generator[Node, Any, None]:
+    def _level_iter(self, node: Node | None, level: int) -> Generator[Node, Any, None]:
         if node:
             if level == 1:
                 yield node
@@ -295,7 +299,7 @@ class BinaryTree(Generic[T]):
 
 class TestBinaryTree(unittest.TestCase):
     def test_integer_binary_tree(self):
-        tree: BinaryTree[int] = BinaryTree()
+        tree: BinaryTree = BinaryTree()
 
         self.assertTrue(tree.is_empty())
         self.assertEqual(tree.size, 0)

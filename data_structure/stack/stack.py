@@ -2,18 +2,16 @@
 Stack
 """
 import unittest
-from typing import TypeVar, Generic, Generator, Any
-
-T = TypeVar("T")
+from typing import Generator, Any
 
 
-class Stack(Generic[T]):
+class Stack:
     def __init__(self, cap: int = 100):
-        self._data: list[T] = [None] * cap
+        self._data: list = [None] * cap
         self._cap = cap
         self._top = -1
 
-    def __iter__(self) -> Generator[T, Any, None]:
+    def __iter__(self) -> Generator[Any, Any, None]:
         if not self.is_empty():
             for i in range(self._top + 1):
                 yield self._data[i]
@@ -31,18 +29,18 @@ class Stack(Generic[T]):
     def is_full(self) -> bool:
         return self.size == self._cap
 
-    def top_value(self) -> T:
+    def top_value(self) -> Any:
         if self.is_empty():
             raise RuntimeError("Stack underflow, can not get top")
         return self._data[self._top]
 
-    def push(self, value: T):
+    def push(self, value: Any):
         if self.is_full():
             raise RuntimeError("Stack overflow, can not push")
         self._top += 1
         self._data[self._top] = value
 
-    def pop(self) -> T:
+    def pop(self) -> Any:
         if self.is_empty():
             raise RuntimeError("Stack underflow, can not pop")
         removed = self._data[self._top]
@@ -52,7 +50,7 @@ class Stack(Generic[T]):
 
 class TestStack(unittest.TestCase):
     def test_integer_stack(self):
-        stack: Stack[int] = Stack(8)
+        stack: Stack = Stack(8)
 
         self.assertTrue(stack.is_empty())
         self.assertEqual(stack.size, 0)

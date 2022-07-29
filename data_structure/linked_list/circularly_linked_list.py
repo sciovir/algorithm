@@ -4,14 +4,12 @@ Circularly Linked List
 from __future__ import annotations
 
 import unittest
-from typing import TypeVar, Generic, Generator, Any
-
-T = TypeVar("T")
+from typing import Generator, Any
 
 
-class CircularlyLinkedList(Generic[T]):
+class CircularlyLinkedList:
     class Node:
-        def __init__(self, data: T, nxt: Node = None):
+        def __init__(self, data: Any, nxt: CircularlyLinkedList.Node | None = None):
             self._data = data
             self._nxt = nxt
 
@@ -19,7 +17,7 @@ class CircularlyLinkedList(Generic[T]):
             return f"[{self._data}]->"
 
         @property
-        def data(self) -> T:
+        def data(self) -> Any:
             return self._data
 
         @data.setter
@@ -27,20 +25,20 @@ class CircularlyLinkedList(Generic[T]):
             self._data = data
 
         @property
-        def nxt(self) -> Node:
+        def nxt(self) -> CircularlyLinkedList.Node | None:
             return self._nxt
 
         @nxt.setter
         def nxt(self, nxt):
             self._nxt = nxt
 
-    def __init__(self, tail: Node = None, size: int = 0):
+    def __init__(self, tail: CircularlyLinkedList.Node | None = None, size: int = 0):
         self._tail = tail
         self._size = size
 
-    def __iter__(self) -> Generator[Node, Any, None]:
+    def __iter__(self) -> Generator[Node | None, Any, None]:
         if not self.is_empty():
-            tmp: CircularlyLinkedList.Node = self._tail.nxt
+            tmp: CircularlyLinkedList.Node | None = self._tail.nxt
             while True:
                 yield tmp
                 tmp = tmp.nxt
@@ -61,11 +59,11 @@ class CircularlyLinkedList(Generic[T]):
     def rotate(self):
         self._tail = self._tail.nxt
 
-    def search(self, data: T) -> bool:
+    def search(self, data: Any) -> bool:
         if self.is_empty():
             return False
 
-        tmp: CircularlyLinkedList.Node = self._tail.nxt
+        tmp: CircularlyLinkedList.Node | None = self._tail.nxt
         while True:
             if tmp.data == data:
                 return True
@@ -76,7 +74,7 @@ class CircularlyLinkedList(Generic[T]):
 
         return False
 
-    def insert(self, data: T):
+    def insert(self, data: Any):
         node = CircularlyLinkedList.Node(data)
         if self.is_empty():
             self._tail = node
@@ -87,12 +85,12 @@ class CircularlyLinkedList(Generic[T]):
         self._size += 1
         self.rotate()
 
-    def remove(self, data: T) -> T:
+    def remove(self, data: Any) -> Any:
         if self.is_empty():
             raise RuntimeError("List is empty, can not remove")
 
-        old: CircularlyLinkedList.Node = self._tail.nxt
-        prev: CircularlyLinkedList.Node
+        old: CircularlyLinkedList.Node | None = self._tail.nxt
+        prev: CircularlyLinkedList.Node | None
         while True:
             prev = old
             old = old.nxt
@@ -118,7 +116,7 @@ class CircularlyLinkedList(Generic[T]):
 
 class TestCircularlyLinkedList(unittest.TestCase):
     def test_integer_linked_list(self):
-        linked_list: CircularlyLinkedList[int] = CircularlyLinkedList()
+        linked_list: CircularlyLinkedList = CircularlyLinkedList()
 
         self.assertTrue(linked_list.is_empty())
         self.assertEqual(linked_list.size, 0)
@@ -129,23 +127,25 @@ class TestCircularlyLinkedList(unittest.TestCase):
         linked_list.insert(10)
 
         self.assertFalse(linked_list.is_empty())
-        self.assertListEqual([node.data for node in linked_list], [8, 12, 6, 10])
+        self.assertListEqual(
+            [node.data for node in linked_list if node], [8, 12, 6, 10]
+        )
 
         self.assertTrue(linked_list.search(8))
         self.assertFalse(linked_list.search(9))
 
         linked_list.remove(10)
-        self.assertListEqual([node.data for node in linked_list], [8, 12, 6])
+        self.assertListEqual([node.data for node in linked_list if node], [8, 12, 6])
         linked_list.remove(6)
-        self.assertListEqual([node.data for node in linked_list], [8, 12])
+        self.assertListEqual([node.data for node in linked_list if node], [8, 12])
 
         with self.assertRaises(RuntimeError):
             linked_list.remove(9)
 
         linked_list.remove(8)
-        self.assertListEqual([node.data for node in linked_list], [12])
+        self.assertListEqual([node.data for node in linked_list if node], [12])
         linked_list.remove(12)
-        self.assertListEqual([node.data for node in linked_list], [])
+        self.assertListEqual([node.data for node in linked_list if node], [])
 
         with self.assertRaises(RuntimeError):
             linked_list.remove(9)

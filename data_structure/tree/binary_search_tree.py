@@ -2,24 +2,24 @@
 Binary Search Tree
 """
 from __future__ import annotations
+from typing import Any
 
 import unittest
-from typing import TypeVar
 from data_structure.tree.binary_tree import BinaryTree
 
-T = TypeVar("T")
 
-
-class BinarySearchTree(BinaryTree[T]):
+class BinarySearchTree(BinaryTree):
     def __init__(
         self,
-        root: BinaryTree.Node = None,
+        root: BinaryTree.Node | None = None,
         size: int = 0,
         traversal: BinaryTree.TreeTraversal = BinaryTree.TreeTraversal.IN_ORDER,
     ) -> None:
         super().__init__(root, size, traversal)
 
-    def _search(self, node: BinaryTree.Node, data: T) -> BinaryTree.Node | None:
+    def _search(
+        self, node: BinaryTree.Node | None, data: Any
+    ) -> BinaryTree.Node | None:
         if node is None or node.data == data:
             return node
 
@@ -29,7 +29,7 @@ class BinarySearchTree(BinaryTree[T]):
             else self._search(node.right, data)
         )
 
-    def insert(self, data: T) -> None:
+    def insert(self, data: Any) -> None:
         node: BinaryTree.Node = BinaryTree.Node(data)
         tmp: BinaryTree.Node = self._root
         tmp_parent: BinaryTree.Node | None = None
@@ -48,7 +48,7 @@ class BinarySearchTree(BinaryTree[T]):
         node.parent = tmp_parent
         self._size += 1
 
-    def remove(self, data: T) -> T:
+    def remove(self, data: Any) -> Any:
         if self.is_empty():
             raise RuntimeError("Tree is empty, can not remove")
 
@@ -102,7 +102,7 @@ class BinarySearchTree(BinaryTree[T]):
 
 class TestBinarySearchTree(unittest.TestCase):
     def test_integer_binary_search_tree(self):
-        tree: BinarySearchTree[int] = BinarySearchTree()
+        tree: BinarySearchTree = BinarySearchTree()
 
         self.assertTrue(tree.is_empty())
         self.assertEqual(tree.size, 0)
@@ -130,8 +130,8 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertTrue(tree.search(6))
         self.assertFalse(tree.search(9))
 
-        self.assertEqual(tree.maximum().data, 7)
-        self.assertEqual(tree.minimum().data, 1)
+        self.assertEqual(tree.maximum().data if tree.maximum() else None, 7)
+        self.assertEqual(tree.minimum().data if tree.minimum() else None, 1)
 
         tree.remove(4)
         self.assertListEqual([node.data for node in tree], [5, 2, 6, 1, 3, 7])

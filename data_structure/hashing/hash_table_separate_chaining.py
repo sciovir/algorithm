@@ -4,15 +4,14 @@ Hash Table Separate Chaining
 from __future__ import annotations
 
 import unittest
-from typing import TypeVar, Generic, Generator, Any
-
-K = TypeVar("K")
-V = TypeVar("V")
+from typing import Generator, Any
 
 
-class HashTable(Generic[K, V]):
+class HashTable:
     class Node:
-        def __init__(self, key: K, value: V, nxt: HashTable.Node = None) -> None:
+        def __init__(
+            self, key: Any, value: Any, nxt: HashTable.Node | None = None
+        ) -> None:
             self._key = key
             self._value = value
             self._nxt = nxt
@@ -21,7 +20,7 @@ class HashTable(Generic[K, V]):
             return f"[{self._key}: {self._value}]"
 
         @property
-        def key(self) -> K:
+        def key(self) -> Any:
             return self._key
 
         @key.setter
@@ -29,7 +28,7 @@ class HashTable(Generic[K, V]):
             self._key = key
 
         @property
-        def value(self) -> V:
+        def value(self) -> Any:
             return self._value
 
         @value.setter
@@ -37,7 +36,7 @@ class HashTable(Generic[K, V]):
             self._value = value
 
         @property
-        def nxt(self) -> HashTable.Node:
+        def nxt(self) -> HashTable.Node | None:
             return self._nxt
 
         @nxt.setter
@@ -46,11 +45,11 @@ class HashTable(Generic[K, V]):
 
     def __init__(self, slots: int = 10):
         self._buckets: list[HashTable.Node | None] = [None] * slots
-        self._keys: list[K] = []
+        self._keys: list[Any] = []
         self._slots = slots
         self._size = 0
 
-    def __iter__(self) -> Generator[tuple[K, V], Any, None]:
+    def __iter__(self) -> Generator[tuple[Any, Any], Any, None]:
         if not self.is_empty():
             for key in self._keys:
                 yield key, self.get(key),
@@ -66,16 +65,16 @@ class HashTable(Generic[K, V]):
         return self._size == 0
 
     @property
-    def keys(self) -> list[K]:
+    def keys(self) -> list[Any]:
         return self._keys.copy()
 
-    def _hashing(self, key: K) -> int:
+    def _hashing(self, key: Any) -> int:
         hash_key = int(key) % self._slots
         if hash_key < 0:
             hash_key += self._slots
         return hash_key
 
-    def get(self, key: K) -> V:
+    def get(self, key: Any) -> Any:
         hash_key = self._hashing(key)
         node = self._buckets[hash_key]
         while node and node.key != key:
@@ -85,7 +84,7 @@ class HashTable(Generic[K, V]):
             raise RuntimeError("Key is not exist in hash table")
         return node.value
 
-    def insert(self, key: K, value: V) -> None:
+    def insert(self, key: Any, value: Any) -> None:
         hash_key = self._hashing(key)
         node = HashTable.Node(key, value)
 
@@ -104,7 +103,7 @@ class HashTable(Generic[K, V]):
         self._keys.append(key)
         self._size += 1
 
-    def remove(self, key: K) -> V:
+    def remove(self, key: Any) -> Any:
         hash_key = self._hashing(key)
         node = self._buckets[hash_key]
         prev: HashTable.Node | None = None
@@ -132,7 +131,7 @@ class HashTable(Generic[K, V]):
 
 class TestHashTableSeparateChaining(unittest.TestCase):
     def test_integer_string_hash_table(self):
-        hash_table: HashTable[int, str] = HashTable()
+        hash_table: HashTable = HashTable()
 
         self.assertTrue(hash_table.is_empty())
         self.assertEqual(hash_table.size, 0)

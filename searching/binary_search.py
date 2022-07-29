@@ -1,13 +1,11 @@
 """
 Binary search
 """
+from typing import Any
 import unittest
-from typing import TypeVar
-
-T = TypeVar("T")
 
 
-def binary_search(sorted_array: list[T], key: T, lo: int, hi: int) -> int:
+def binary_search(sorted_array: list, key: Any, lo: int, hi: int) -> int:
     if lo > hi:
         return -1
     mi = (lo + hi) // 2

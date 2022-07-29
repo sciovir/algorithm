@@ -2,12 +2,9 @@
 Insertion Sort
 """
 import unittest
-from typing import TypeVar
-
-T = TypeVar("T")
 
 
-def insertion_sort(array: list[T]):
+def insertion_sort(array: list):
     for j in range(1, len(array)):
         key = array[j]
         i = j - 1

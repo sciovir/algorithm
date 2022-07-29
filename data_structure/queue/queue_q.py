@@ -2,20 +2,18 @@
 Queue
 """
 import unittest
-from typing import TypeVar, Generic, Generator, Any
-
-T = TypeVar("T")
+from typing import Generator, Any
 
 
-class Queue(Generic[T]):
+class Queue:
     def __init__(self, cap: int = 100):
-        self._data: list[T] = [None] * cap
+        self._data: list = [None] * cap
         self._cap = cap
         self._size = 0
         self._front = 0
         self._rear = cap - 1
 
-    def __iter__(self) -> Generator[T, Any, None]:
+    def __iter__(self) -> Generator[Any, Any, None]:
         if not self.is_empty():
             index = self._front
             while True:
@@ -39,19 +37,19 @@ class Queue(Generic[T]):
     def is_full(self) -> bool:
         return self._size == self._cap
 
-    def front_value(self) -> T:
+    def front_value(self) -> Any:
         if self.is_empty():
             raise RuntimeError("Queue underflow, can not get front")
         return self._data[self._front]
 
-    def enqueue(self, value: T):
+    def enqueue(self, value: Any):
         if self.is_full():
             raise RuntimeError("Queue overflow, can not enqueue")
         self._rear = (self._rear + 1) % self._cap
         self._data[self._rear] = value
         self._size += 1
 
-    def dequeue(self) -> T:
+    def dequeue(self) -> Any:
         if self.is_empty():
             raise RuntimeError("Queue underflow, can not dequeue")
         removed = self._data[self._front]
@@ -62,7 +60,7 @@ class Queue(Generic[T]):
 
 class TestQueue(unittest.TestCase):
     def test_integer_queue(self):
-        queue: Queue[int] = Queue(8)
+        queue: Queue = Queue(8)
 
         self.assertTrue(queue.is_empty())
         self.assertEqual(queue.size, 0)

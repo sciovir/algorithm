@@ -5,14 +5,12 @@ from __future__ import annotations
 
 import enum
 import unittest
-from typing import TypeVar, Generic, Generator, Any
-
-T = TypeVar("T")
+from typing import Generator, Any
 
 
-class Graph(Generic[T]):
+class Graph:
     class Vertex:
-        def __init__(self, data: T):
+        def __init__(self, data: Any):
             self._data = data
             self._adjacent_vertices: list[Graph.Vertex] = []
 
@@ -20,7 +18,7 @@ class Graph(Generic[T]):
             return str(self._data)
 
         @property
-        def data(self) -> T:
+        def data(self) -> Any:
             return self._data
 
         @data.setter
@@ -37,7 +35,7 @@ class Graph(Generic[T]):
                     raise RuntimeError("The edge is already exist")
             self._adjacent_vertices.append(dst)
 
-        def remove_adjacent_vertex(self, dst_data: T) -> T:
+        def remove_adjacent_vertex(self, dst_data: Any) -> Any:
             for i in range(len(self._adjacent_vertices)):
                 if self._adjacent_vertices[i]._data == dst_data:
                     del self._adjacent_vertices[i]
@@ -55,9 +53,9 @@ class Graph(Generic[T]):
     def __iter__(self) -> Generator[Vertex, Any, None]:
         if not self.is_empty():
             if self._traversal == Graph.GraphTraversal.BREADTH_FIRST:
-                return self._breadth_first_iter()
+                yield from self._breadth_first_iter()
             elif self._traversal == Graph.GraphTraversal.DEPTH_FIRST:
-                return self._depth_first_iter()
+                yield from self._depth_first_iter()
 
     def __repr__(self) -> str:
         return ", ".join([str(vertex) for vertex in self])
@@ -77,7 +75,7 @@ class Graph(Generic[T]):
     def is_empty(self) -> bool:
         return self.size == 0
 
-    def insert_edge(self, src: T, dst: T) -> None:
+    def insert_edge(self, src: Any, dst: Any) -> None:
         src_vertex: Graph.Vertex | None = None
         dst_vertex: Graph.Vertex | None = None
 
@@ -99,14 +97,14 @@ class Graph(Generic[T]):
 
         src_vertex.insert_adjacent_vertex(dst_vertex)
 
-    def remove_edge(self, src: T, dst: T) -> T:
+    def remove_edge(self, src: Any, dst: Any) -> Any:
         for i in range(len(self._vertices)):
             if self._vertices[i].data == src:
                 return self._vertices[i].remove_adjacent_vertex(dst)
         raise RuntimeError("The edge is not exist")
 
     def _breadth_first_iter(self) -> Generator[Vertex, Any, None]:
-        visited: list[T] = []
+        visited: list = []
         for v in self._vertices:
             if v.data not in visited:
                 visited.append(v.data)
@@ -119,12 +117,12 @@ class Graph(Generic[T]):
 
     def _depth_first_iter(self) -> Generator[Vertex, Any, None]:
         if not self.is_empty():
-            visited: list[T] = []
+            visited: list = []
             for i in range(len(self._vertices)):
                 yield from self._depth_first_recursive_iter(self._vertices[i], visited)
 
     def _depth_first_recursive_iter(
-        self, v: Vertex, visited: list[T]
+        self, v: Vertex, visited: list
     ) -> Generator[Vertex, Any, None]:
         if v.data not in visited:
             visited.append(v.data)
@@ -137,7 +135,7 @@ class Graph(Generic[T]):
 
 class TestAdjacencyGraph(unittest.TestCase):
     def test_integer_graph(self):
-        graph: Graph[int] = Graph()
+        graph: Graph = Graph()
 
         self.assertTrue(graph.is_empty())
         self.assertEqual(graph.size, 0)

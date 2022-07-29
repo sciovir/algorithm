@@ -12,14 +12,12 @@ Each node of a singly linked list contains 2 parts:
 from __future__ import annotations
 
 import unittest
-from typing import TypeVar, Generic, Generator, Any
-
-T = TypeVar("T")
+from typing import Generator, Any
 
 
-class SinglyLinkedList(Generic[T]):
+class SinglyLinkedList:
     class Node:
-        def __init__(self, data: T, nxt: Node = None):
+        def __init__(self, data: Any, nxt: SinglyLinkedList.Node | None = None):
             self._data = data
             self._nxt = nxt
 
@@ -27,7 +25,7 @@ class SinglyLinkedList(Generic[T]):
             return f"[{self._data}]->[]" if self._nxt is None else f"[{self._data}]->"
 
         @property
-        def data(self) -> T:
+        def data(self) -> Any:
             return self._data
 
         @data.setter
@@ -35,14 +33,14 @@ class SinglyLinkedList(Generic[T]):
             self._data = data
 
         @property
-        def nxt(self) -> Node:
+        def nxt(self) -> SinglyLinkedList.Node | None:
             return self._nxt
 
         @nxt.setter
         def nxt(self, nxt):
             self._nxt = nxt
 
-    def __init__(self, head: Node = None, size: int = 0):
+    def __init__(self, head: Node | None = None, size: int = 0):
         self._head = head
         self._size = size
 
@@ -62,7 +60,7 @@ class SinglyLinkedList(Generic[T]):
     def is_empty(self) -> bool:
         return self._head is None
 
-    def search(self, data: T) -> bool:
+    def search(self, data: Any) -> bool:
         tmp = self._head
         while tmp:
             if tmp.data == data:
@@ -70,7 +68,7 @@ class SinglyLinkedList(Generic[T]):
             tmp = tmp.nxt
         return False
 
-    def insert(self, data: T):
+    def insert(self, data: Any):
         node = SinglyLinkedList.Node(data)
         if self.is_empty():
             self._head = node
@@ -81,11 +79,12 @@ class SinglyLinkedList(Generic[T]):
             tmp.nxt = node
         self._size += 1
 
-    def remove(self, data: T) -> T:
+    def remove(self, data: Any) -> Any:
         if self.is_empty():
             raise RuntimeError("List is empty, can not remove")
 
-        old, prev = self._head, None
+        old = self._head
+        prev: SinglyLinkedList.Node | None = None
         while old and old.data != data:
             prev = old
             old = old.nxt
@@ -105,7 +104,7 @@ class SinglyLinkedList(Generic[T]):
 
 class TestSinglyLinkedList(unittest.TestCase):
     def test_integer_linked_list(self):
-        linked_list: SinglyLinkedList[int] = SinglyLinkedList()
+        linked_list: SinglyLinkedList = SinglyLinkedList()
 
         self.assertTrue(linked_list.is_empty())
         self.assertEqual(linked_list.size, 0)

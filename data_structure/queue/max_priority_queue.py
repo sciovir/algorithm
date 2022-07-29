@@ -2,15 +2,13 @@
 Min Priority Queue
 """
 import unittest
-from typing import TypeVar, Generator, Any
+from typing import Generator, Any
 
 from data_structure.heap.max_heap import MaxHeap
 
-T = TypeVar("T")
 
-
-class MaxPriorityQueue(MaxHeap[T]):
-    def __init__(self, array: list[T], cap: int = 10):
+class MaxPriorityQueue(MaxHeap):
+    def __init__(self, array: list, cap: int = 10):
         super().__init__([], cap)
         if array:
             for i in range(len(array)):
@@ -18,7 +16,7 @@ class MaxPriorityQueue(MaxHeap[T]):
             self._cap = max(len(array), cap)
             self._size = len(array)
 
-    def __iter__(self) -> Generator[T, Any, None]:
+    def __iter__(self) -> Generator[Any, Any, None]:
         if not self.is_empty():
             for i in range(self._size):
                 yield self._data[i]
@@ -26,17 +24,17 @@ class MaxPriorityQueue(MaxHeap[T]):
     def __repr__(self) -> str:
         return ",".join([f"({v} [{i}])" for i, v in enumerate(self)])
 
-    def maximum(self) -> T:
+    def maximum(self) -> Any:
         if self.is_empty():
             raise RuntimeError("Priority queue underflow, can not get maximum")
         return self._data[0]
 
-    def extract_max(self) -> T:
+    def extract_max(self) -> Any:
         if self.is_empty():
             raise RuntimeError("Priority queue underflow, can not extract maximum")
         return self.remove(0)
 
-    def increase_key(self, index: int, key: T):
+    def increase_key(self, index: int, key: Any):
         if key < self._data[index]:
             raise RuntimeError("New key is smaller than current key")
 
@@ -45,7 +43,7 @@ class MaxPriorityQueue(MaxHeap[T]):
             self.swap(index, self._parent(index))
             index = self._parent(index)
 
-    def insert(self, value: T):
+    def insert(self, value: Any):
         if self.is_full():
             raise RuntimeError("Priority queue overflow, can not insert")
         self._data[self._size] = value
@@ -55,7 +53,7 @@ class MaxPriorityQueue(MaxHeap[T]):
 
 class TestMaxPriorityQueue(unittest.TestCase):
     def test_integer_min_priority_queue(self):
-        pri_q: MaxPriorityQueue[int] = MaxPriorityQueue(
+        pri_q: MaxPriorityQueue = MaxPriorityQueue(
             [6, 8, 10, 26, 9, 2, 40, 22, 5, 32, 3], 13
         )
 

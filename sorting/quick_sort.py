@@ -2,19 +2,16 @@
 Quick Sort
 """
 import unittest
-from typing import TypeVar
-
-T = TypeVar("T")
 
 
-def quick_sort(array: list[T], lo: int, hi: int):
+def quick_sort(array: list, lo: int, hi: int):
     if lo < hi:
         separator = partition(array, lo, hi)
         quick_sort(array, lo, separator - 1)
         quick_sort(array, separator + 1, hi)
 
 
-def partition(array: list[T], lo: int, hi: int) -> int:
+def partition(array: list, lo: int, hi: int) -> int:
     pivot = array[hi]
     i = lo - 1
 
@@ -27,7 +24,7 @@ def partition(array: list[T], lo: int, hi: int) -> int:
     return i + 1
 
 
-def hoare_partition(array: list[T], lo: int, hi: int) -> int:
+def hoare_partition(array: list, lo: int, hi: int) -> int:
     pivot = array[lo]
     i, j = lo, hi
 

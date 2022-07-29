@@ -2,18 +2,16 @@
 Heap
 """
 from abc import ABC, abstractmethod
-from typing import TypeVar, Generic, Generator, Any
-
-T = TypeVar("T")
+from typing import Generator, Any
 
 
-class AbstractHeap(ABC, Generic[T]):
+class AbstractHeap(ABC):
     def __init__(self, cap: int = 100):
-        self._data: list[T] = [None] * cap
+        self._data: list = [None] * cap
         self._cap = cap
         self._size = 0
 
-    def __iter__(self) -> Generator[T, Any, None]:
+    def __iter__(self) -> Generator[Any, Any, None]:
         if self._size == 1:
             yield self._data[0]
         elif not self.is_empty():
@@ -53,10 +51,10 @@ class AbstractHeap(ABC, Generic[T]):
         pass
 
     @abstractmethod
-    def insert(self, value: T):
+    def insert(self, value: Any):
         pass
 
-    def remove(self, index: int) -> T:
+    def remove(self, index: int) -> Any:
         if self.is_empty():
             raise RuntimeError("Heap underflow")
 

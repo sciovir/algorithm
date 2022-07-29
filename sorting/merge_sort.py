@@ -1,13 +1,11 @@
 """
 Merge Sort
 """
+from typing import Any
 import unittest
-from typing import TypeVar
-
-T = TypeVar("T")
 
 
-def merge_sort(array: list[T], lo: int, hi: int):
+def merge_sort(array: list, lo: int, hi: int):
     if lo < hi:
         mi: int = (lo + hi) // 2
         merge_sort(array, lo, mi)
@@ -15,9 +13,10 @@ def merge_sort(array: list[T], lo: int, hi: int):
         merge(array, lo, mi, hi)
 
 
-def merge(array: list[T], lo: int, mi: int, hi: int):
+def merge(array: list, lo: int, mi: int, hi: int):
     l_len, r_len = mi - lo + 1, hi - mi
-    l_arr, r_arr = [None] * l_len, [None] * r_len
+    l_arr: list[Any] = [None] * l_len
+    r_arr: list[Any] = [None] * r_len
 
     for i in range(l_len):
         l_arr[i] = array[lo + i]

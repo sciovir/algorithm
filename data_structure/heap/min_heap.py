@@ -1,16 +1,14 @@
 """
 Min Heap
 """
+from typing import Any
 import unittest
-from typing import TypeVar
 
 from data_structure.heap.abstract_heap import AbstractHeap
 
-T = TypeVar("T")
 
-
-class MinHeap(AbstractHeap[T]):
-    def __init__(self, array: list[T], cap: int = 10):
+class MinHeap(AbstractHeap):
+    def __init__(self, array: list, cap: int = 10):
         if array:
             super().__init__(max(len(array), cap))
             for i in range(len(array)):
@@ -35,7 +33,7 @@ class MinHeap(AbstractHeap[T]):
             self.swap(index, smallest)
             self.heapify(smallest)
 
-    def insert(self, value: T):
+    def insert(self, value: Any):
         if self.is_full():
             raise RuntimeError("Heap overflow")
 
@@ -50,7 +48,7 @@ class MinHeap(AbstractHeap[T]):
 
 class TestMinHeap(unittest.TestCase):
     def test_integer_heap(self):
-        heap: MinHeap[int] = MinHeap([6, 8, 10, 26, 9, 2, 40, 22, 5, 32, 3], 13)
+        heap: MinHeap = MinHeap([6, 8, 10, 26, 9, 2, 40, 22, 5, 32, 3], 13)
 
         self.assertFalse(heap.is_empty())
         self.assertEqual(heap.size, 11)
