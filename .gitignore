@@ -9,3 +9,8 @@ _trial_temp/
 
 # cache
 __pycache__/
+
+
+# Added by cargo
+
+/target
