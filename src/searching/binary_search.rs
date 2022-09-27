@@ -1,12 +1,12 @@
-pub fn search<T: PartialOrd>(sorted_array: &[T], key: T, lo: usize, hi: usize) -> isize {
+pub fn search<T: PartialOrd>(sorted_array: &[T], key: T, lo: isize, hi: isize) -> isize {
     if lo > hi {
         return -1;
     }
 
     let mi = (lo + hi) / 2;
-    if sorted_array[mi] == key {
-        return mi as isize;
-    } else if sorted_array[mi] > key {
+    if sorted_array[usize::try_from(mi).unwrap()] == key {
+        return mi;
+    } else if sorted_array[usize::try_from(mi).unwrap()] > key {
         return search(sorted_array, key, lo, mi - 1);
     }
 
