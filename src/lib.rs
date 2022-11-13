@@ -4,12 +4,16 @@ pub mod sorting {
 }
 
 pub mod searching {
-    pub mod linear_search;
     pub mod binary_search;
+    pub mod linear_search;
 }
 
 pub mod mathematics {
-    pub mod fibonacci;
-    pub mod factorial;
     pub mod catalan;
+    pub mod factorial;
+    pub mod fibonacci;
+}
+
+pub mod backtracking {
+    pub mod knight_tour;
 }
