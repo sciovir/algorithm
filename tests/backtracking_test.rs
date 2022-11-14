@@ -15,16 +15,14 @@ fn knight_start_from_top_left_should_be_solved_correctly() {
     ];
 
     let result = knight_tour::solve(0, 0);
-    match result {
-        Some(arr) => {
-            assert_eq!(arr.len(), answer.len());
-            for i in 0..arr.len() {
-                assert_eq!(arr[i].len(), answer[i].len());
-                for j in 0..arr[i].len() {
-                    assert_eq!(arr[i][j], answer[i][j]);
-                }
+    assert_eq!(result.is_some(), true);
+    if let Some(arr) = result {
+        assert_eq!(arr.len(), answer.len());
+        for i in 0..arr.len() {
+            assert_eq!(arr[i].len(), answer[i].len());
+            for j in 0..arr[i].len() {
+                assert_eq!(arr[i][j], answer[i][j]);
             }
         }
-        None => assert_eq!(0, 1),
     }
 }

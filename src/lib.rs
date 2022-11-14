@@ -17,3 +17,7 @@ pub mod mathematics {
 pub mod backtracking {
     pub mod knight_tour;
 }
+
+pub mod divide_conquer {
+    pub mod maximum_subarray;
+}
