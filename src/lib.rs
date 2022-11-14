@@ -28,3 +28,12 @@ pub mod dynamic_programming {
     pub mod ugly_number;
     pub mod zero_one_knapsack;
 }
+
+pub mod greedy {
+    pub mod fractional_knapsack;
+}
+
+pub mod pattern_searching {
+    pub mod kmp_pattern_searching;
+    pub mod naive_pattern_searching;
+}
