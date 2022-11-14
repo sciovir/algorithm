@@ -21,3 +21,10 @@ pub mod backtracking {
 pub mod divide_conquer {
     pub mod maximum_subarray;
 }
+
+pub mod dynamic_programming {
+    pub mod catalan;
+    pub mod fibonacci;
+    pub mod ugly_number;
+    pub mod zero_one_knapsack;
+}
