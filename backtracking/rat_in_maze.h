@@ -1,5 +1,4 @@
-#ifndef ALGORITHM_BACKTRACKING_RAT_IN_MAZE_H_
-#define ALGORITHM_BACKTRACKING_RAT_IN_MAZE_H_
+#pragma once
 
 namespace algorithm {
 namespace backtracking {
@@ -15,5 +14,3 @@ int** RatInMaze(int** board, unsigned int x, unsigned int y, unsigned int dx,
 
 }  // namespace backtracking
 }  // namespace algorithm
-
-#endif  // ALGORITHM_BACKTRACKING_RAT_IN_MAZE_H_

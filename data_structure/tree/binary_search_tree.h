@@ -1,7 +1,5 @@
+#pragma once
 #include "data_structure/tree/binary_tree.h"
-
-#ifndef ALGORITHM_DATA_STRUCTURE_TREE_BINARY_SEARCH_TREE_H_
-#define ALGORITHM_DATA_STRUCTURE_TREE_BINARY_SEARCH_TREE_H_
 
 namespace data_structure {
 namespace tree {
@@ -110,5 +108,3 @@ typename BinaryTree<T>::Node *BinarySearchTree<T>::Minimum(
 
 }  // namespace tree
 }  // namespace data_structure
-
-#endif  // ALGORITHM_DATA_STRUCTURE_TREE_BINARY_SEARCH_TREE_H_

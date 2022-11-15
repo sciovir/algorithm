@@ -1,5 +1,4 @@
-#ifndef ALGORITHM_SEARCHING_LINEAR_SEARCH_H_
-#define ALGORITHM_SEARCHING_LINEAR_SEARCH_H_
+#pragma once
 
 namespace algorithm {
 namespace searching {
@@ -11,5 +10,3 @@ int LinearSearch(T (&array)[N], T key);
 }  // namespace algorithm
 
 #include "linear_search.cc"
-
-#endif  // ALGORITHM_SEARCHING_LINEAR_SEARCH_H_

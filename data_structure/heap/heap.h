@@ -1,6 +1,4 @@
-#ifndef ALGORITHM_DATA_STRUCTURE_HEAP_HEAP_H_
-#define ALGORITHM_DATA_STRUCTURE_HEAP_HEAP_H_
-
+#pragma once
 #include <iostream>
 
 namespace data_structure {
@@ -73,5 +71,3 @@ void Heap<T>::Swap(int i, int j) {
 
 }  // namespace heap
 }  // namespace data_structure
-
-#endif  // ALGORITHM_DATA_STRUCTURE_HEAP_HEAP_H_

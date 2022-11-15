@@ -23,7 +23,7 @@ namespace sorting {
  *  - After all the loops, array is now sorted.
  */
 template <class T, size_t N>
-inline void BubbleSort(T (&array)[N]) {
+void BubbleSort(T (&array)[N]) {
   for (auto i = 0; i < N - 1; i++) {
     for (auto j = i + 1; j < N; j++) {
       if (array[i] > array[j]) {

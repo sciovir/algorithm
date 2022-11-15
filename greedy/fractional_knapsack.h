@@ -1,6 +1,4 @@
-#ifndef ALGORITHM_GREEDY_FRACTIONAL_KNAPSACK_H_
-#define ALGORITHM_GREEDY_FRACTIONAL_KNAPSACK_H_
-
+#pragma once
 #include <tuple>
 
 namespace algorithm {
@@ -18,5 +16,3 @@ unsigned int FractionalKnapsack(
 }  // namespace algorithm
 
 #include "fractional_knapsack.cc"
-
-#endif  // ALGORITHM_GREEDY_FRACTIONAL_KNAPSACK_H_

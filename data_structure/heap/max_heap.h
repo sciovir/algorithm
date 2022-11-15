@@ -1,7 +1,5 @@
+#pragma once
 #include "heap.h"
-
-#ifndef ALGORITHM_DATA_STRUCTURE_HEAP_MAX_HEAP_H_
-#define ALGORITHM_DATA_STRUCTURE_HEAP_MAX_HEAP_H_
 
 namespace data_structure {
 namespace heap {
@@ -48,10 +46,9 @@ void MaxHeap<T>::BuildHeap() {
 template <class T>
 void MaxHeap<T>::Heapify(int index) {
   int left = this->Left(index), right = this->Right(index), largest;
-  largest = (left < this->size_ && this->data_[left] > this->data_[index])
-                ? left
-                : index;
-  if (right < this->size_ && this->data_[right] > this->data_[largest])
+  largest =
+      (left<this->size_ &&this->data_[left]> this->data_[index]) ? left : index;
+  if (right<this->size_ &&this->data_[right]> this->data_[largest])
     largest = right;
   if (largest != index) {
     this->Swap(index, largest);
@@ -81,5 +78,3 @@ T MaxHeap<T>::Remove(int index) {
 
 }  // namespace heap
 }  // namespace data_structure
-
-#endif  // ALGORITHM_DATA_STRUCTURE_HEAP_MAX_HEAP_H_

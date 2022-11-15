@@ -1,6 +1,4 @@
-#ifndef ALGORITHM_DATA_STRUCTURE_HASHING_HASH_TABLE_SEPARATE_CHAINING_H_
-#define ALGORITHM_DATA_STRUCTURE_HASHING_HASH_TABLE_SEPARATE_CHAINING_H_
-
+#pragma once
 #include <algorithm>
 #include <iostream>
 #include <vector>
@@ -152,5 +150,3 @@ V HashTableSeparateChaining<K, V>::Remove(K key) {
 
 }  // namespace hashing
 }  // namespace data_structure
-
-#endif  // ALGORITHM_DATA_STRUCTURE_HASHING_HASH_TABLE_SEPARATE_CHAINING_H_

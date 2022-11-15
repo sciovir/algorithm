@@ -1,6 +1,4 @@
-#ifndef ALGORITHM_DATA_STRUCTURE_LINKED_LIST_DOUBLY_LINKED_LIST_H_
-#define ALGORITHM_DATA_STRUCTURE_LINKED_LIST_DOUBLY_LINKED_LIST_H_
-
+#pragma once
 #include <iostream>
 
 namespace data_structure {
@@ -113,5 +111,3 @@ T DoublyLinkedList<T>::Remove(const T &data) {
 
 }  // namespace linked_list
 }  // namespace data_structure
-
-#endif  // ALGORITHM_DATA_STRUCTURE_LINKED_LIST_DOUBLY_LINKED_LIST_H_

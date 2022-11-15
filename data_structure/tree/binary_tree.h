@@ -1,6 +1,4 @@
-#ifndef ALGORITHM_DATA_STRUCTURE_TREE_BINARY_TREE_H_
-#define ALGORITHM_DATA_STRUCTURE_TREE_BINARY_TREE_H_
-
+#pragma once
 #include <iostream>
 
 #include "data_structure/queue/queue.h"
@@ -302,5 +300,3 @@ void BinaryTree<T>::PrintLevel(std::ostream &out, BinaryTree::Node *node,
 
 }  // namespace tree
 }  // namespace data_structure
-
-#endif  // ALGORITHM_DATA_STRUCTURE_TREE_BINARY_TREE_H_

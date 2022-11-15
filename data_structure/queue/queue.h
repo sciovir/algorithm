@@ -1,6 +1,4 @@
-#ifndef ALGORITHM_DATA_STRUCTURE_QUEUE_QUEUE_H_
-#define ALGORITHM_DATA_STRUCTURE_QUEUE_QUEUE_H_
-
+#pragma once
 #include <iostream>
 
 namespace data_structure {
@@ -104,5 +102,3 @@ T Queue<T>::Dequeue() {
 
 }  // namespace queue
 }  // namespace data_structure
-
-#endif  // ALGORITHM_DATA_STRUCTURE_QUEUE_QUEUE_H_

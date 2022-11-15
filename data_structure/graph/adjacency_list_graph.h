@@ -1,5 +1,4 @@
-#ifndef ALGORITHM_DATA_STRUCTURE_ADJACENCY_LIST_GRAPH_H_
-#define ALGORITHM_DATA_STRUCTURE_ADJACENCY_LIST_GRAPH_H_
+#pragma once
 
 #include <algorithm>
 #include <iostream>
@@ -160,5 +159,3 @@ void AdjacencyListGraph<T>::DepthFirst(std::ostream &out) const {
 
 }  // namespace graph
 }  // namespace data_structure
-
-#endif  // ALGORITHM_DATA_STRUCTURE_ADJACENCY_LIST_GRAPH_H_

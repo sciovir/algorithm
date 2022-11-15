@@ -1,6 +1,4 @@
-#ifndef ALGORITHM_MATHEMATICS_FIBONACCI_H_
-#define ALGORITHM_MATHEMATICS_FIBONACCI_H_
-
+#pragma once
 #include <tuple>
 
 namespace algorithm {
@@ -12,5 +10,3 @@ std::tuple<unsigned int, unsigned int> LinearFibonacci(unsigned int n);
 
 }  // namespace mathematics
 }  // namespace algorithm
-
-#endif  // ALGORITHM_MATHEMATICS_FIBONACCI_H_

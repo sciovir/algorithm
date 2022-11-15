@@ -1,7 +1,5 @@
+#pragma once
 #include "data_structure/heap/max_heap.h"
-
-#ifndef ALGORITHM_DATA_STRUCTURE_QUEUE_MAX_PRIORITY_QUEUE_H_
-#define ALGORITHM_DATA_STRUCTURE_QUEUE_MAX_PRIORITY_QUEUE_H_
 
 namespace data_structure {
 namespace queue {
@@ -79,5 +77,3 @@ void MaxPriorityQueue<T>::Insert(const T &value) {
 
 }  // namespace queue
 }  // namespace data_structure
-
-#endif  // ALGORITHM_DATA_STRUCTURE_QUEUE_MAX_PRIORITY_QUEUE_H_

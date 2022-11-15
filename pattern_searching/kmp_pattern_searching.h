@@ -1,6 +1,4 @@
-#ifndef ALGORITHM_PATTERN_SEARCHING_KMP_H_
-#define ALGORITHM_PATTERN_SEARCHING_KMP_H_
-
+#pragma once
 #include <vector>
 
 namespace algorithm {
@@ -14,5 +12,3 @@ std::vector<int> KMPPatternSearching(const char (&text)[N],
 }  // namespace algorithm
 
 #include "kmp_pattern_searching.cc"
-
-#endif  // ALGORITHM_PATTERN_SEARCHING_KMP_H_

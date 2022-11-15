@@ -7,7 +7,7 @@ namespace sorting {
 
 template <class T, size_t N>
 void CountingSort(T (&array)[N], T key) {
-  if (!std::is_same<T, unsigned int>::value &&
+  if (!std::is_same<T, unsigned>::value &&
       !std::is_same<T, unsigned char>::value) {
     throw std::runtime_error(
         "Only accept non-negative integer or character array.");
@@ -16,7 +16,7 @@ void CountingSort(T (&array)[N], T key) {
   auto *output = new T[N];
   auto *auxiliary = new T[key + 1];
 
-  for (auto i = 0; i < (unsigned int)(key + 1); i++) {
+  for (auto i = 0; i < (unsigned)(key + 1); i++) {
     auxiliary[i] = 0;
   }
 
@@ -24,7 +24,7 @@ void CountingSort(T (&array)[N], T key) {
     auxiliary[element]++;
   }
 
-  for (auto i = 1; i < (unsigned int)(key + 1); i++) {
+  for (auto i = 1; i < (unsigned)(key + 1); i++) {
     auxiliary[i] += auxiliary[i - 1];
   }
 
@@ -33,7 +33,7 @@ void CountingSort(T (&array)[N], T key) {
     auxiliary[array[i]]--;
   }
 
-  for (unsigned int i = 0; i < N; i++) {
+  for (unsigned i = 0; i < N; i++) {
     array[i] = output[i];
   }
 

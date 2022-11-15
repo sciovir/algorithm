@@ -7,12 +7,14 @@ namespace sorting {
 template <class T, size_t N>
 void HeapSort(T (&array)[N]) {
   data_structure::heap::MaxHeap<T> max_heap(array);
-  for (int i = N - 1; i > 0; i--) {
+  for (auto i = N - 1; i > 0; i--) {
     max_heap.Swap(0, i);
     max_heap.SetSize(max_heap.GetSize() - 1);
     max_heap.Heapify(0);
   }
-  for (unsigned int i = 0; i < N; i++) array[i] = max_heap.GetData()[i];
+  for (auto i = 0; i < N; i++) {
+    array[i] = max_heap.GetData()[i];
+  }
 }
 
 }  // namespace sorting

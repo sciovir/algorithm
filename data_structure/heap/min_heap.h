@@ -1,7 +1,5 @@
+#pragma once
 #include "heap.h"
-
-#ifndef ALGORITHM_DATA_STRUCTURE_HEAP_MIN_HEAP_H_
-#define ALGORITHM_DATA_STRUCTURE_HEAP_MIN_HEAP_H_
 
 namespace data_structure {
 namespace heap {
@@ -81,5 +79,3 @@ T MinHeap<T>::Remove(int index) {
 
 }  // namespace heap
 }  // namespace data_structure
-
-#endif  // ALGORITHM_DATA_STRUCTURE_HEAP_MIN_HEAP_H_

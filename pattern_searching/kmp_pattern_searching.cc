@@ -10,18 +10,19 @@ std::vector<int> KMPPatternSearching(const char (&text)[N],
     return std::vector<int>();
   }
 
-  unsigned int lps[M];
-  unsigned int i = 1, j = 0;
+  unsigned lps[M];
+  unsigned i = 1, j = 0;
   std::vector<int> ret;
 
   lps[0] = 0;
   while (i < M - 1) {
-    if (pattern[i] == pattern[j])
+    if (pattern[i] == pattern[j]) {
       lps[i++] = ++j;
-    else if (j > 0)
+    } else if (j > 0) {
       j = lps[j - 1];
-    else
+    } else {
       lps[i++] = 0;
+    }
   }
 
   i = 0, j = 0;

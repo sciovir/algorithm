@@ -6,7 +6,7 @@ namespace sorting {
 template <class T, size_t N>
 void InsertionSort(T (&array)[N]) {
   for (auto j = 1; j < N; j++) {
-    T key = array[j];
+    auto key = array[j];
     int i = j - 1;
     while (i >= 0 && array[i] > key) {
       array[i + 1] = array[i];

@@ -1,5 +1,4 @@
-#ifndef ALGORITHM_BACKTRACKING_KNIGHT_TOUR_H_
-#define ALGORITHM_BACKTRACKING_KNIGHT_TOUR_H_
+#pragma once
 
 namespace algorithm {
 namespace backtracking {
@@ -15,5 +14,3 @@ int** KnightTour(unsigned int x, unsigned int y);
 
 }  // namespace backtracking
 }  // namespace algorithm
-
-#endif  // ALGORITHM_BACKTRACKING_KNIGHT_TOUR_H_

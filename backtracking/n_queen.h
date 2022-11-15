@@ -1,5 +1,4 @@
-#ifndef ALGORITHM_BACKTRACKING_N_QUEEN_H_
-#define ALGORITHM_BACKTRACKING_N_QUEEN_H_
+#pragma once
 
 namespace algorithm {
 namespace backtracking {
@@ -12,5 +11,3 @@ int** NQueen(unsigned int n);
 
 }  // namespace backtracking
 }  // namespace algorithm
-
-#endif  // ALGORITHM_BACKTRACKING_N_QUEEN_H_

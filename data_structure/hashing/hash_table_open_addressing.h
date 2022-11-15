@@ -1,6 +1,4 @@
-#ifndef ALGORITHM_DATA_STRUCTURE_HASHING_HASH_TABLE_OPEN_ADDRESSING_H_
-#define ALGORITHM_DATA_STRUCTURE_HASHING_HASH_TABLE_OPEN_ADDRESSING_H_
-
+#pragma once
 #include <algorithm>
 #include <iostream>
 #include <vector>
@@ -149,5 +147,3 @@ V HashTableOpenAddressing<K, V>::Remove(K key) {
 
 }  // namespace hashing
 }  // namespace data_structure
-
-#endif  // ALGORITHM_DATA_STRUCTURE_HASHING_HASH_TABLE_OPEN_ADDRESSING_H_

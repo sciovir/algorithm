@@ -1,6 +1,4 @@
-#ifndef ALGORITHM_DATA_STRUCTURE_STACK_STACK_H_
-#define ALGORITHM_DATA_STRUCTURE_STACK_STACK_H_
-
+#pragma once
 #include <iostream>
 
 namespace data_structure {
@@ -85,5 +83,3 @@ T Stack<T>::Pop() {
 
 }  // namespace stack
 }  // namespace data_structure
-
-#endif  // ALGORITHM_DATA_STRUCTURE_STACK_STACK_H_
