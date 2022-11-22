@@ -10,7 +10,7 @@ CMake is optional, it helps you build and run project easier, but you could manu
 
 Clone repository by `git clone` to your local computer:
 ```shell script
-$ git clone git@github.com:knasync/algorithm.git
+$ git clone git@github.com:khoarx/algorithm.git
 $ cd algorithm
 ```
 
@@ -48,7 +48,7 @@ $ ./[path_to_binary_file]
 ```
 For example:
 ```shell script
-$ clang++ -std=c++14 sorting/merge_sort.cc -o build/bin/merge_sort
+$ clang++ -std=c++20 sorting/merge_sort.cc -o build/bin/merge_sort
 $ ./build/bin/merge_sort
 ```
 
