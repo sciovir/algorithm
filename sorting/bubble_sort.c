@@ -1,4 +1,5 @@
 #include "sorting_util.h"
+#include <stdio.h>
 
 /**
  * Bubble Sort works by repeatedly swapping the elements if they are in wrong
@@ -37,6 +38,7 @@ void test() {
 }
 
 int main(int argc, const char *argv[]) {
+  printf("Running test for bubble sort\n");
   test();
   return 0;
 }

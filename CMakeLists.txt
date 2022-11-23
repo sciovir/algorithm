@@ -10,5 +10,9 @@ include_directories("${CMAKE_SOURCE_DIR}")
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/)
 
+# Data Structures
+# Singly linked list
+add_executable(singly_linked_list data_structure/linked_list/singly_linked_list.c)
+
 # Sorting
 add_executable(bubble_sort sorting/bubble_sort.c)
