@@ -16,3 +16,7 @@ add_executable(singly_linked_list data_structure/linked_list/singly_linked_list.
 
 # Sorting
 add_executable(bubble_sort sorting/bubble_sort.c)
+
+# Searching
+add_executable(linear_search searching/linear_search.c)
+add_executable(binary_search searching/binary_search.c)

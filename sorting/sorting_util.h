@@ -15,5 +15,4 @@ static inline void assert_array_int(int farr[], int fsz, int sarr[], int ssz) {
   for (int i = 0; i < fsz; i++) {
     assert(farr[i] == sarr[i]);
   }
-  printf("PASSED\n");
 }

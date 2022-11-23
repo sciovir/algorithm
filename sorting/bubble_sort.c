@@ -35,10 +35,11 @@ void test() {
   bubble_sort(integers, ARRSZ(integers));
   assert_array_int(integers, ARRSZ(integers),
                    (int[]){2, 3, 5, 6, 8, 9, 10, 22, 26, 32, 40}, 11);
+  printf("PASSED\n");
 }
 
 int main(int argc, const char *argv[]) {
-  printf("Running test for bubble sort\n");
+  printf("Testing bubble sort implementation...\n");
   test();
   return 0;
 }
