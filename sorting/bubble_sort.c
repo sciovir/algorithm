@@ -1,7 +1,5 @@
 #include "sorting_util.h"
-
-namespace algorithm {
-namespace sorting {
+#include <stdio.h>
 
 /**
  * Bubble Sort works by repeatedly swapping the elements if they are in wrong
@@ -22,38 +20,25 @@ namespace sorting {
  *  - Keep looping i to pre-last index and j from i + 1 to the last index.
  *  - After all the loops, array is now sorted.
  */
-template <class T, size_t N>
-void BubbleSort(T (&array)[N]) {
-  for (auto i = 0; i < N - 1; i++) {
-    for (auto j = i + 1; j < N; j++) {
+void bubble_sort(int array[], int size) {
+  for (int i = 0; i < size - 1; i++) {
+    for (int j = i + 1; j < size; j++) {
       if (array[i] > array[j]) {
-        std::swap(array[i], array[j]);
+        swap_int(&array[i], &array[j]);
       }
     }
   }
 }
 
-}  // namespace sorting
-}  // namespace algorithm
-
-int main() {
+void test() {
   int integers[11] = {6, 8, 10, 26, 9, 2, 40, 22, 5, 32, 3};
-  std::string strings[7] = {"c",  "java",  "cpp",        "python",
-                            "go", "swift", "objective-c"};
-  float floats[8] = {5.2f, 4.4f, 6.8f, 9.5f, 0.7f, 1.2f, 3.2f, 5.9f};
+  bubble_sort(integers, ARRSZ(integers));
+  assert_array_int(integers, ARRSZ(integers),
+                   (int[]){2, 3, 5, 6, 8, 9, 10, 22, 26, 32, 40}, 11);
+}
 
-  algorithm::sorting::BubbleSort(integers);
-  std::cout << "Sorted integer array: ";
-  algorithm::sorting::PrintArray(integers);  // 2 3 5 6 8 9 10 22 26 32 40
-
-  algorithm::sorting::BubbleSort(strings);
-  std::cout << "Sorted string array: ";
-  algorithm::sorting::PrintArray(
-      strings);  // c cpp go java objective-c python swift
-
-  algorithm::sorting::BubbleSort(floats);
-  std::cout << "Sorted float array: ";
-  algorithm::sorting::PrintArray(floats);  // 0.7 1.2 3.2 4.4 5.2 5.9 6.8 9.5
-
+int main(int argc, const char *argv[]) {
+  printf("Running test for bubble sort\n");
+  test();
   return 0;
 }

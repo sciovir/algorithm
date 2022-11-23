@@ -1,5 +1,5 @@
 # Data Structures and Algorithms
-This repository is a collection of personal implementation of a variety of algorithms using C++. You may find more than one implementation for these problems but using a different algorithm strategies, optimizations or even different programming languages.
+This repository is a collection of personal implementation of a variety of algorithms using C. You may find more than one implementation for these problems but using a different algorithm strategies, optimizations or even different programming languages.
 
 NOTE: All implementations assume that input always satisfies the requirement.
 
@@ -14,7 +14,7 @@ $ git clone git@github.com:khoarx/algorithm.git
 $ cd algorithm
 ```
 
-## Build and run C++
+## Build and run C
 Using CMake:
 1. Create __build__ directory at project root:
 ```shell script
@@ -36,11 +36,11 @@ MSBuild.exe .\algorithm.sln
 Using `clang` or `gcc` compiler:
 1. Compile your desired file by compiler:
 ```shell script
-$ clang++ -std=c++20 [path_to_source_file] -o [path_to_output_file]
+$ clang -std=c17 [path_to_source_file] -o [path_to_output_file]
 ```
 or
 ```shell script
-$ g++ -std=c++20 [path_to_source_file] -o [path_to_output_file]
+$ gcc -std=c17 [path_to_source_file] -o [path_to_output_file]
 ```
 2. Then run compiled binary file:
 ```shell script
@@ -48,7 +48,7 @@ $ ./[path_to_binary_file]
 ```
 For example:
 ```shell script
-$ clang++ -std=c++20 sorting/merge_sort.cc -o build/bin/merge_sort
+$ clang -std=c17 sorting/merge_sort.c -o build/bin/merge_sort
 $ ./build/bin/merge_sort
 ```
 
@@ -58,6 +58,4 @@ Add `-DCMAKE_BUILD_TYPE=Debug` or `-DCMAKE_BUILD_TYPE=Release` argument to `cmak
 TBA
 
 ## References
-[C++ Documentation](https://isocpp.org/) \
-[CMake](https://cmake.org/documentation/) \
-[GoogleTest](https://google.github.io/googletest/)
+[CMake](https://cmake.org/documentation/)

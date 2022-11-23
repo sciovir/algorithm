@@ -1,8 +1,6 @@
 #pragma once
-#include <iostream>
-
-namespace data_structure {
-namespace linked_list {
+#include <stdbool.h>
+#include <stdio.h>
 
 /**
  * Linked List is a linear data structure. Unlike arrays, linked list elements
@@ -16,107 +14,23 @@ namespace linked_list {
  *    [data1|-]->[data2|-]->[data3|-]->[data4|-]->[data5|-]->NULL
  * @tparam T node's class
  */
-template <class T>
-class SinglyLinkedList {
- public:
-  class Node {
-   public:
-    T data_;
-    Node *next_;
-    friend class SinglyLinkedList;
-    explicit Node(const T &data) : data_(data), next_(NULL) {}
-  };
+typedef struct Node {
+  void *data;
+  struct Node *next;
+} node_t;
 
- public:
-  SinglyLinkedList();
-  ~SinglyLinkedList();
-  int Size() const;
-  bool IsEmpty() const;
-  bool Search(const T &data) const;
-  void Insert(const T &data);
-  T Remove(const T &data);
+node_t *create_node(void *data);
 
-  friend std::ostream &operator<<(std::ostream &out,
-                                  const SinglyLinkedList &list) {
-    if (list.IsEmpty()) {
-      out << "Empty list";
-    } else {
-      typename SinglyLinkedList::Node *temp = list.head_;
-      out << "List: ";
-      while (temp != NULL) {
-        out << "[" << temp->data_ << "]->";
-        temp = temp->next_;
-      }
-    }
-    return out;
-  }
+typedef struct SinglyLinkedList {
+  node_t *head;
+  int size;
+} singly_linked_list_t;
 
- private:
-  Node *head_;
-  int size_;
-};
-
-template <class T>
-SinglyLinkedList<T>::SinglyLinkedList() : head_(NULL), size_(0) {}
-
-template <class T>
-SinglyLinkedList<T>::~SinglyLinkedList() {
-  while (!IsEmpty()) Remove(head_->data_);
-  delete head_;
-}
-
-template <class T>
-int SinglyLinkedList<T>::Size() const {
-  return size_;
-}
-
-template <class T>
-bool SinglyLinkedList<T>::IsEmpty() const {
-  return (head_ == NULL);
-}
-
-template <class T>
-bool SinglyLinkedList<T>::Search(const T &data) const {
-  Node *temp = head_;
-  while (temp != NULL) {
-    if (temp->data_ == data) return true;
-    temp = temp->next_;
-  }
-  return false;
-}
-
-template <class T>
-void SinglyLinkedList<T>::Insert(const T &data) {
-  Node *node = new Node(data);
-  if (IsEmpty())
-    head_ = node;
-  else {
-    Node *temp = head_;
-    while (temp->next_ != NULL) temp = temp->next_;
-    temp->next_ = node;
-  }
-  size_++;
-}
-
-template <class T>
-T SinglyLinkedList<T>::Remove(const T &data) {
-  if (IsEmpty()) throw std::runtime_error("List is empty, can not remove");
-  Node *old = head_, *prev;
-  while (old != NULL && old->data_ != data) {
-    prev = old;
-    old = old->next_;
-  }
-  if (old == NULL) throw std::runtime_error("Node is not exist in this list");
-  T removed = old->data_;
-  if (old == head_) {
-    head_ = head_->next_;
-  } else {
-    prev->next_ = old->next_;
-  }
-  delete old;
-  size_--;
-  return removed;
-}
-
-}  // namespace linked_list
-}  // namespace data_structure
+singly_linked_list_t *create_list();
+void delete_list(singly_linked_list_t *list);
+void print_list(singly_linked_list_t *list);
+int size(singly_linked_list_t *list);
+bool is_empty(singly_linked_list_t *list);
+void insert_node(singly_linked_list_t *list, void *data);
+bool remove_node(singly_linked_list_t *list, void *data);
+bool search_node(singly_linked_list_t *list, void *data);
