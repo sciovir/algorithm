@@ -9,3 +9,6 @@ set(CMAKE_BUILD_TYPE Debug)
 include_directories("${CMAKE_SOURCE_DIR}")
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/)
+
+# Sorting
+add_executable(bubble_sort sorting/bubble_sort.c)
