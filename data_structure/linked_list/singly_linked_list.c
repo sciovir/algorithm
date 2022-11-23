@@ -25,8 +25,9 @@ void delete_list(singly_linked_list_t *list) {
   }
 
   while (tmp) {
-    free(tmp);
+    node_t *del = tmp;
     tmp = tmp->next;
+    free(del);
   }
 
   free(list);
@@ -122,6 +123,7 @@ void test() {
   assert(remove_node(list, (void *)10));
   assert(remove_node(list, (void *)6));
 
+  delete_list(list);
   printf("PASSED\n");
 }
 
