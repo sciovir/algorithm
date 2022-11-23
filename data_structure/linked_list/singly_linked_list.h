@@ -12,7 +12,6 @@
  *  - Pointer to the next node (or reference)
  *       HEAD
  *    [data1|-]->[data2|-]->[data3|-]->[data4|-]->[data5|-]->NULL
- * @tparam T node's class
  */
 typedef struct Node {
   void *data;

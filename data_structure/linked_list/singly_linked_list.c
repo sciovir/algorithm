@@ -2,7 +2,9 @@
 #include <assert.h>
 #include <stdlib.h>
 
-// Implementation
+/**
+ * Singly linked list implementation
+ */
 node_t *create_node(void *data) {
   node_t *node = (node_t *)malloc(sizeof(node_t));
   node->data = data;
