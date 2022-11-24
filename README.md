@@ -1,61 +1,41 @@
 # Data Structures and Algorithms
-This repository is a collection of personal implementation of a variety of algorithms using C. You may find more than one implementation for these problems but using a different algorithm strategies, optimizations or even different programming languages.
+This repository is a collection of personal implementation of a variety of algorithms using Rust. You may find more than one implementation for these problems but using a different algorithm strategies, optimizations or even different programming languages.
 
 NOTE: All implementations assume that input always satisfies the requirement.
 
 ## Requirements
-In able to compile and run project, make sure `clang` or `gcc`, `make` (or `MSBuild` on Windows) and `cmake` are installed.
-
-CMake is optional, it helps you build and run project easier, but you could manual run each file separately.
+In able to compile and run project, make sure `rust 2021 edition` or above is installed.
+You might need to use `cargo` - the Rust package manager, it's already shipped when installing Rust or you can test each algorithm manually.
 
 Clone repository by `git clone` to your local computer:
 ```shell script
-$ git clone git@github.com:khoarx/algorithm.git
+$ git clone git@github.com:flufiotter/algorithm.git
 $ cd algorithm
 ```
 
-## Build and run C
-Using CMake:
-1. Create __build__ directory at project root:
+## Build and test
+Install all dependencies and build crate:
 ```shell script
-$ mkdir build
-$ cd build
+$ cargo build
 ```
-2. Build project with `cmake` and `make`, remember we are currently in __build__ folder:
+Test your desired module by `cargo`:
 ```shell script
-$ cmake ..
-$ make
+$ cargo test --test [module_name]
 ```
-If you are on Windows use `MSBuild` instead of `make`:
-```powershell
-cmake ..
-MSBuild.exe .\algorithm.sln
+or run all tests:
+```shell script
+$ cargo test
 ```
-3. All binary files are located inside __build/bin/__ directory.
+For logging, use `cargo test -- --nocapture`
 
-Using `clang` or `gcc` compiler:
-1. Compile your desired file by compiler:
-```shell script
-$ clang -std=c17 [path_to_source_file] -o [path_to_output_file]
-```
-or
-```shell script
-$ gcc -std=c17 [path_to_source_file] -o [path_to_output_file]
-```
-2. Then run compiled binary file:
-```shell script
-$ ./[path_to_binary_file]
-```
 For example:
 ```shell script
-$ clang -std=c17 sorting/merge_sort.c -o build/bin/merge_sort
-$ ./build/bin/merge_sort
+$ cargo test --test sorting_test
 ```
-
-Add `-DCMAKE_BUILD_TYPE=Debug` or `-DCMAKE_BUILD_TYPE=Release` argument to `cmake` command for `Debug`, `Release` respectively.
 
 ## Algorithms explanation
 TBA
 
 ## References
-[CMake](https://cmake.org/documentation/)
+[Rust Book](https://doc.rust-lang.org/book) \
+[Rust Testing](https://doc.rust-lang.org/rust-by-example/testing/unit_testing.html)

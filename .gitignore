@@ -1,13 +1,5 @@
 # OSX system
 .DS_Store
 
-# Visual Studio
-.vs/
-
 # Output dir
-build/
-out/
 target/
-
-# CTAGS
-tags
