@@ -2,6 +2,10 @@ pub mod data_structure {
     pub mod linked_list {
         pub mod slinked_list;
     }
+
+    pub mod stack {
+        pub mod stack;
+    }
 }
 
 pub mod sorting {
