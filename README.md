@@ -9,7 +9,7 @@ You might need to use `cargo` - the Rust package manager, it's already shipped w
 
 Clone repository by `git clone` to your local computer:
 ```shell script
-$ git clone git@github.com:flufiotter/algorithm.git
+$ git clone git@github.com:khoarx/algorithm.git
 $ cd algorithm
 ```
 
