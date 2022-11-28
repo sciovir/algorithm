@@ -1,4 +1,3 @@
-use std::io::{Error, ErrorKind};
 /// Linked List is a linear data structure. Unlike arrays, linked list elements
 /// are not stored at a contiguous location the elements are linked using
 /// pointers. Singly linked list is represented by a pointer to the first node
@@ -8,6 +7,7 @@ use std::io::{Error, ErrorKind};
 /// - Pointer to the next node (or reference)
 ///   HEAD
 /// [data1|-]->[data2|-]->[data3|-]->[data4|-]->[data5|-]->NULL
+use std::io::{Error, ErrorKind};
 use std::ptr;
 
 struct Node<T: PartialOrd> {
@@ -96,6 +96,8 @@ where
             } else {
                 (*prev).next = (*old).next;
             }
+
+            ptr::drop_in_place(old);
         }
 
         self.size -= 1;
@@ -114,5 +116,20 @@ where
             }
         }
         false
+    }
+}
+
+impl<T> Drop for SLinkedList<T>
+where
+    T: PartialOrd,
+{
+    fn drop(&mut self) {
+        let mut tmp = self.head;
+        unsafe {
+            while !tmp.is_null() {
+                ptr::drop_in_place(tmp);
+                tmp = (*tmp).next;
+            }
+        }
     }
 }
