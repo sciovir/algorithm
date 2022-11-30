@@ -25,12 +25,14 @@ fn stack_methods_should_handle_data_correctly() {
     assert!(stack.push(19).is_err());
 
     assert_eq!(*stack.top().unwrap(), 22);
-    assert!(stack.pop().is_ok());
-    assert_eq!(*stack.pop().unwrap(), 22);
+    let res = stack.pop();
+    assert!(res.is_ok());
+    assert_eq!(*res.unwrap(), 22);
 
     assert_eq!(*stack.top().unwrap(), 7);
-    assert!(stack.pop().is_ok());
-    assert_eq!(*stack.pop().unwrap(), 7);
+    let res = stack.pop();
+    assert!(res.is_ok());
+    assert_eq!(*res.unwrap(), 7);
 
     assert_eq!(stack.size(), 6);
 

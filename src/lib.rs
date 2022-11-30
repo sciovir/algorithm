@@ -6,6 +6,10 @@ pub mod data_structure {
     pub mod stack {
         pub mod stack;
     }
+
+    pub mod queue {
+        pub mod queue;
+    }
 }
 
 pub mod sorting {

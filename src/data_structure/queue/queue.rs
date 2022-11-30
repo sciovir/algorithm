@@ -1,48 +1,52 @@
-/// Stack
+/// Queue
 use std::io::{Error, ErrorKind};
 
 #[derive(PartialEq)]
-pub struct Stack<T> {
+pub struct Queue<T> {
     data: Vec<T>,
     capacity: usize,
-    top: isize,
+    size: usize,
+    front: usize,
+    rear: usize,
 }
 
-impl<T> Stack<T> {
+impl<T> Queue<T> {
     pub fn new(capacity: usize) -> Self {
         let mut data = Vec::with_capacity(capacity);
         unsafe {
             data.set_len(capacity);
         }
 
-        Stack {
+        Queue {
             data,
             capacity,
-            top: -1,
+            size: 0,
+            front: 0,
+            rear: capacity - 1,
         }
     }
 
     pub fn size(&self) -> usize {
-        (self.top + 1) as usize
+        self.size
     }
 
     pub fn is_empty(&self) -> bool {
-        self.top < 0
+        self.size == 0
     }
 
     pub fn is_full(&self) -> bool {
-        self.size() == self.capacity
+        self.size == self.capacity
     }
 
-    pub fn top(&self) -> Option<&T> {
+    pub fn front(&self) -> Option<&T> {
         if self.is_empty() {
             return None;
         }
 
-        Some(&self.data[self.top as usize])
+        Some(&self.data[self.front])
     }
 
-    pub fn push(&mut self, data: T) -> Result<(), Error> {
+    pub fn enqueue(&mut self, data: T) -> Result<(), Error> {
         if self.is_full() {
             return Err(Error::new(
                 ErrorKind::Other,
@@ -50,12 +54,13 @@ impl<T> Stack<T> {
             ));
         }
 
-        self.top += 1;
-        self.data[self.top as usize] = data;
+        self.rear = (self.rear + 1) % self.capacity;
+        self.data[self.rear] = data;
+        self.size += 1;
         Ok(())
     }
 
-    pub fn pop(&mut self) -> Result<&T, Error> {
+    pub fn dequeue(&mut self) -> Result<&T, Error> {
         if self.is_empty() {
             return Err(Error::new(
                 ErrorKind::Other,
@@ -63,8 +68,9 @@ impl<T> Stack<T> {
             ));
         }
 
-        let removed = &self.data[self.top as usize];
-        self.top -= 1;
+        let removed = &self.data[self.front];
+        self.front = (self.front + 1) % self.capacity;
+        self.size -= 1;
         Ok(removed)
     }
 }
