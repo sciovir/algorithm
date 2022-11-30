@@ -1,16 +1,19 @@
 # OSX system
 .DS_Store
 
-# log and test
-_trial_temp/
+# Visual Studio
+.vs/
+.vscode/
 
-# venv
-.venv/
+# Output dir
+build/
+out/
+target/
 
-# cache
-__pycache__/
+# GNU Global
+GPATH
+GRTAGS
+GTAGS
 
-
-# Added by cargo
-
-/target
+# CTAGS
+tags
