@@ -3,7 +3,7 @@
 namespace algorithm {
 namespace searching {
 
-template <class T, size_t N>
+template <class T, std::size_t N>
 int32_t BinarySearch(T (&array)[N], T key, int32_t lo, int32_t hi) {
   if (lo > hi) {
     return -1;

@@ -30,7 +30,7 @@ namespace sorting {
  *  - Keep looping i to pre-last index and j from i + 1 to the last index.
  *  - After all the loops, array is now sorted.
  */
-template <class T, size_t N>
+template <typename T, std::size_t N>
 void BubbleSort(T (&array)[N]) {
   for (auto i = 0; i < N - 1; i++) {
     for (auto j = i + 1; j < N; j++) {

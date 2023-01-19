@@ -3,7 +3,7 @@
 namespace algorithm {
 namespace searching {
 
-template <class T, size_t N>
+template <class T, std::size_t N>
 int32_t LinearSearch(T (&array)[N], T key) {
   for (auto i = 0; i < N; i++) {
     if (array[i] == key) {

@@ -36,11 +36,11 @@ MSBuild.exe .\algorithm.sln
 Using `clang` or `gcc` compiler:
 1. Compile your desired file by compiler:
 ```shell script
-$ clang++ -std=c++17 [path_to_source_file] -o [path_to_output_file]
+$ clang++ -std=c++20 [path_to_source_file] -o [path_to_output_file]
 ```
 or
 ```shell script
-$ g++ -std=c++17 [path_to_source_file] -o [path_to_output_file]
+$ g++ -std=c++20 [path_to_source_file] -o [path_to_output_file]
 ```
 2. Then run compiled binary file:
 ```shell script
@@ -48,7 +48,7 @@ $ ./[path_to_binary_file]
 ```
 For example:
 ```shell script
-$ clang++ -std=c++17 sorting/merge_sort.cc -o build/bin/merge_sort
+$ clang++ -std=c++20 sorting/merge_sort.cc -o build/bin/merge_sort
 $ ./build/bin/merge_sort
 ```
 

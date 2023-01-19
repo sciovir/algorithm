@@ -2,7 +2,7 @@
 #include <cassert>
 #include <vector>
 
-#include "sorting_util.h"
+#include "utils/test.h"
 
 namespace algorithm {
 namespace sorting {
@@ -38,46 +38,60 @@ namespace sorting {
  *    [[], [0.12, 0.18], [0.29], [], [0.4, 0.46], [0.52], [0.6], [], [0.86], []]
  *  - Concatenating all non-empty buckets, array is now sorted.
  */
-template <class T, size_t N>
+template <typename T>
+concept floating_point = std::is_same_v<T, float> || std::is_same_v<T, double>;
+
+template <floating_point T, std::size_t N>
 void BucketSort(T (&array)[N]) {
-  if (!std::is_same<T, float>::value && !std::is_same<T, double>::value)
-    throw std::runtime_error("Only accept floating point number array.");
-  for (T element : array)
-    if (element < 0 || element >= 1)
-      throw std::runtime_error(
-          "Only accept non-negative floating point number array in range [0, "
-          "1).");
-  constexpr unsigned int slots = 10;
+  bool in_range =
+      std::all_of(array, array + N, [](auto x) { return (0 <= x) && (x < 1); });
+  if (!in_range) {
+    throw std::out_of_range(
+        "Only accept non-negative floating point array in range [0, 1).");
+  }
+
+  constexpr uint32_t slots = 10;
   std::vector<T> buckets[slots];
-  for (unsigned int i = 0; i < N; i++) {
-    int bucket_index = slots * array[i];
+  for (auto i = 0; i < N; i++) {
+    uint32_t bucket_index = slots * array[i];
     buckets[bucket_index].push_back(array[i]);
   }
 
-  int index = 0;
-  for (unsigned int i = 0; i < slots; i++) {
+  uint32_t index = 0;
+  for (auto i = 0; i < slots; i++) {
     sort(buckets[i].begin(), buckets[i].end());
-    for (unsigned int j = 0; j < buckets[i].size(); j++)
+    for (auto j = 0; j < buckets[i].size(); j++) {
       array[index++] = buckets[i][j];
+    }
   }
 }
+
+namespace test {
+
+void BucketSort_TestHandlesFloatingPointArrayInput() {
+  float flts[8] = {0.52f, 0.44f, 0.68f, 0.95f, 0.1f, 0.12f, 0.32f, 0.59f};
+  double dbls[8] = {0.52, 0.44, 0.68, 0.95, 0.1, 0.12, 0.32, 0.59};
+
+  float sorted_flts[8] = {0.1f,  0.12f, 0.32f, 0.44f,
+                          0.52f, 0.59f, 0.68f, 0.95f};
+  double sorted_dbls[8] = {0.1, 0.12, 0.32, 0.44, 0.52, 0.59, 0.68, 0.95};
+
+  BucketSort(flts);
+  EXPECT_ARR_EQ(flts, sorted_flts);
+
+  BucketSort(dbls);
+  EXPECT_ARR_EQ(dbls, sorted_dbls);
+}
+
+void RunTests() { TEST(BucketSort_TestHandlesFloatingPointArrayInput); }
+
+}  // namespace test
 
 }  // namespace sorting
 }  // namespace algorithm
 
 int main() {
-  float floats[8] = {0.52f, 0.44f, 0.68f, 0.95f, 0.1f, 0.12f, 0.32f, 0.59f};
-  double doubles[8] = {0.52, 0.44, 0.68, 0.95, 0.1, 0.12, 0.32, 0.59};
-
-  algorithm::sorting::BucketSort(floats);
-  std::cout << "Sorted float array: ";
-  algorithm::sorting::PrintArray(
-      floats);  // 0.1 0.12 0.32 0.44 0.52 0.59 0.68 0.95
-
-  algorithm::sorting::BucketSort(doubles);
-  std::cout << "Sorted double array: ";
-  algorithm::sorting::PrintArray(
-      doubles);  // 0.1 0.12 0.32 0.44 0.52 0.59 0.68 0.95
-
+  std::cout << "-----Running bucket sort tests-----" << std::endl;
+  algorithm::sorting::test::RunTests();
   return 0;
 }
