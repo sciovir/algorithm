@@ -10,7 +10,7 @@ CMake is optional, it helps you build and run project easier, but you could manu
 
 Clone repository by `git clone` to your local computer:
 ```shell script
-$ git clone git@github.com:larrng/algorithm.git
+$ git clone git@github.com:khoarx/algorithm.git
 $ cd algorithm
 ```
 
@@ -36,11 +36,11 @@ MSBuild.exe .\algorithm.sln
 Using `clang` or `gcc` compiler:
 1. Compile your desired file by compiler:
 ```shell script
-$ clang++ -std=c++14 {path_to_source_file} -o {path_to_output_file}
+$ clang++ -std=c++17 {path_to_source_file} -o {path_to_output_file}
 ```
 or
 ```shell script
-$ g++ -std=c++14 {path_to_source_file} -o {path_to_output_file}
+$ g++ -std=c++17 {path_to_source_file} -o {path_to_output_file}
 ```
 2. Then run compiled binary file:
 ```shell script
@@ -48,7 +48,7 @@ $ ./{path_to_binary_file}
 ```
 For example:
 ```shell script
-$ clang++ -std=c++14 sorting/merge_sort.cc -o build/bin/merge_sort
+$ clang++ -std=c++17 sorting/merge_sort.cc -o build/bin/merge_sort
 $ ./build/bin/merge_sort
 ```
 

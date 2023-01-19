@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.25)
 project(algorithm CXX)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
 set(CMAKE_VERBOSE_MAKEFILE OFF)
 set(CMAKE_BUILD_TYPE Debug)
@@ -54,15 +54,7 @@ add_executable(radix_sort sorting/radix_sort.cc)
 add_executable(bucket_sort sorting/bucket_sort.cc)
 
 # Linear search
-add_executable(
-  linear_search_test
-  searching/linear_search_test.cc
-)
-target_link_libraries(
-  linear_search_test
-  gtest_main
-)
-gtest_discover_tests(linear_search_test)
+add_executable(linear_search_test searching/linear_search.cpp)
 # Binary search
 add_executable(
   binary_search_test
