@@ -16,12 +16,12 @@ $ cd algorithm
 
 ## Build and run C++
 Using CMake:
-1. Create __build__ directory at project root:
+1. Create _build_ directory at project root:
 ```shell script
 $ mkdir build
 $ cd build
 ```
-2. Build project with `cmake` and `make`, remember we are currently in __build__ folder:
+2. Build project with `cmake` and `make`, remember we are currently in _build_ folder:
 ```shell script
 $ cmake ..
 $ make
@@ -31,20 +31,20 @@ If you are on Windows use `MSBuild` instead of `make`:
 cmake ..
 MSBuild.exe .\algorithm.sln
 ```
-3. All binary files are located inside __build/bin/__ directory.
+3. All binary files are located inside _build/bin/_ directory.
 
 Using `clang` or `gcc` compiler:
 1. Compile your desired file by compiler:
 ```shell script
-$ clang++ -std=c++17 {path_to_source_file} -o {path_to_output_file}
+$ clang++ -std=c++17 <path_to_source_file> -o <path_to_output_file>
 ```
 or
 ```shell script
-$ g++ -std=c++17 {path_to_source_file} -o {path_to_output_file}
+$ g++ -std=c++17 <path_to_source_file> -o <path_to_output_file>
 ```
 2. Then run compiled binary file:
 ```shell script
-$ ./{path_to_binary_file}
+$ ./<path_to_binary_file>
 ```
 For example:
 ```shell script

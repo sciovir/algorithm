@@ -54,7 +54,7 @@ add_executable(radix_sort sorting/radix_sort.cc)
 add_executable(bucket_sort sorting/bucket_sort.cc)
 
 # Linear search
-add_executable(linear_search_test searching/linear_search.cpp)
+add_executable(linear_search_test searching/linear_search.cc)
 # Binary search
 add_executable(
   binary_search_test
