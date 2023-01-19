@@ -13,17 +13,17 @@ void CountingSort(T (&array)[N], T key) {
   auto *output = new T[N];
   auto *auxiliary = new T[key + 1];
 
-  for (auto i = 0; i < (key + 1); i++) {
+  for (auto i = 0; i < key + 1; i++) {
     auxiliary[i] = 0;
   }
   for (auto element : array) {
     auxiliary[element]++;
   }
 
-  for (auto i = 1; i < (key + 1); i++) {
+  for (auto i = 1; i < key + 1; i++) {
     auxiliary[i] += auxiliary[i - 1];
   }
-  for (auto i = N - 1; i >= 0; i--) {
+  for (int32_t i = N - 1; i >= 0; i--) {
     output[auxiliary[array[i]] - 1] = array[i];
     auxiliary[array[i]]--;
   }
@@ -39,10 +39,16 @@ namespace test {
 
 void CountingSort_TestHandlesUnsignedIntegralArrayInput() {
   uint32_t uints[11] = {6, 8, 10, 26, 9, 2, 40, 22, 5, 32, 3};
+  char8_t chrs[8] = {'d', 'g', 'a', 'b', 'j', 'y', 'h', 'k'};
+
   uint32_t sorted_uints[11] = {2, 3, 5, 6, 8, 9, 10, 22, 26, 32, 40};
+  char8_t sorted_chrs[8] = {'a', 'b', 'd', 'g', 'h', 'j', 'k', 'y'};
 
   CountingSort(uints, *(std::max_element(uints, uints + std::size(uints))));
   EXPECT_ARR_EQ(uints, sorted_uints);
+
+  CountingSort(chrs, *(std::max_element(chrs, chrs + std::size(chrs))));
+  EXPECT_ARR_EQ(chrs, sorted_chrs);
 }
 
 void RunTests() { TEST(CountingSort_TestHandlesUnsignedIntegralArrayInput); }

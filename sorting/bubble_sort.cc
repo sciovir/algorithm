@@ -44,7 +44,7 @@ void BubbleSort(T (&array)[N]) {
 namespace test {
 
 void BubbleSort_TestHandlesMultipleTypesOfArrayInput() {
-  int ints[11] = {6, 8, 10, 26, 9, 2, 40, 22, 5, 32, 3};
+  int32_t ints[11] = {6, 8, 10, 26, 9, 2, 40, 22, 5, 32, 3};
   std::string strs[7] = {"c", "java", "cpp", "python", "go", "sql", "swift"};
   float flts[8] = {5.2f, 4.4f, 6.8f, 9.5f, 0.7f, 1.2f, 3.2f, 5.9f};
 

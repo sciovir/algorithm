@@ -3,7 +3,7 @@
 namespace algorithm {
 namespace sorting {
 
-template <typename T, size_t N>
+template <typename T, std::size_t N>
 void InsertionSort(T (&array)[N]) {
   for (auto j = 1; j < N; j++) {
     T key = array[j];
@@ -19,7 +19,7 @@ void InsertionSort(T (&array)[N]) {
 namespace test {
 
 void InsertionSort_TestHandlesMultipleTypesOfArrayInput() {
-  int ints[11] = {6, 8, 10, 26, 9, 2, 40, 22, 5, 32, 3};
+  int32_t ints[11] = {6, 8, 10, 26, 9, 2, 40, 22, 5, 32, 3};
   std::string strs[7] = {"c", "java", "cpp", "python", "go", "sql", "swift"};
   float flts[8] = {5.2f, 4.4f, 6.8f, 9.5f, 0.7f, 1.2f, 3.2f, 5.9f};
 
