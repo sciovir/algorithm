@@ -21,5 +21,21 @@ namespace test {
     exit(1);                                                    \
   }
 
+#define EXPECT_ARR_EQ(expected, actual)                                     \
+  {                                                                         \
+    if ((std::size(expected)) != (std::size(actual))) {                     \
+      std::cout << "Assertion failed: " << #expected << " == " << #actual   \
+                << " ( arrays have different sizes )" << std::endl;         \
+      exit(1);                                                              \
+    }                                                                       \
+    for (int i = 0; i < std::size(expected); ++i)                           \
+      if (expected[i] != actual[i]) {                                       \
+        std::cout << "Assertion failed: " << #expected << " == " << #actual \
+                  << " ( " << expected[i] << " != " << actual[i] << " )"    \
+                  << std::endl;                                             \
+        exit(1);                                                            \
+      }                                                                     \
+  }
+
 }  // namespace test
 }  // namespace algorithm

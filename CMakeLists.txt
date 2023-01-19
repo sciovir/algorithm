@@ -45,7 +45,7 @@ add_executable(hash_table_open_addressing data_structure/hashing/hash_table_open
 add_executable(adjacency_list_graph data_structure/graph/adjacency_list_graph.cc)
 
 add_executable(insertion_sort sorting/insertion_sort.cc)
-# add_executable(bubble_sort sorting/bubble_sort.cc)
+add_executable(bubble_sort sorting/bubble_sort.cc)
 add_executable(merge_sort sorting/merge_sort.cc)
 add_executable(heap_sort sorting/heap_sort.cc)
 add_executable(quick_sort sorting/quick_sort.cc)
@@ -54,17 +54,9 @@ add_executable(radix_sort sorting/radix_sort.cc)
 add_executable(bucket_sort sorting/bucket_sort.cc)
 
 # Linear search
-add_executable(linear_search_test searching/linear_search.cc)
+add_executable(linear_search searching/linear_search.cc)
 # Binary search
-add_executable(
-  binary_search_test
-  searching/binary_search_test.cc
-)
-target_link_libraries(
-  binary_search_test
-  gtest_main
-)
-gtest_discover_tests(binary_search_test)
+add_executable(binary_search searching/binary_search.cc)
 
 # Factorial
 add_library(factorial mathematics/factorial.cc)
