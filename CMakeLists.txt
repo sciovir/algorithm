@@ -140,25 +140,9 @@ add_executable(catalan_numbers dynamic_programming/catalan_numbers.cc)
 add_executable(zero_one_knapsack dynamic_programming/zero_one_knapsack.cc)
 
 # Naive pattern searching
-add_executable(
-  naive_pattern_searching_test
-  pattern_searching/naive_pattern_searching_test.cc
-)
-target_link_libraries(
-  naive_pattern_searching_test
-  gtest_main
-)
-gtest_discover_tests(naive_pattern_searching_test)
+add_executable(naive_pattern_searching pattern_searching/naive_pattern_searching.cc)
 # KMP pattern searching
-add_executable(
-  kmp_pattern_searching_test
-  pattern_searching/kmp_pattern_searching_test.cc
-)
-target_link_libraries(
-  kmp_pattern_searching_test
-  gtest_main
-)
-gtest_discover_tests(kmp_pattern_searching_test)
+add_executable(kmp_pattern_searching pattern_searching/kmp_pattern_searching.cc)
 
 # Fractional knapsack
 add_executable(

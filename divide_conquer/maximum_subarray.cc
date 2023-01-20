@@ -1,17 +1,18 @@
-#include <climits>
-#include <cstdint>
-#include <iostream>
 #include <tuple>
+
+#include "utils/test.h"
 
 namespace algorithm {
 namespace divide_conquer {
 
-std::tuple<int, int, int> MaxCrossingSubarray(const int *array, int low,
-                                              int mid, int high) {
-  int l_sum = INT_MIN, r_sum = INT_MIN;
-  int sum = 0, l_max = mid, r_max = mid + 1;
+std::tuple<int32_t, int32_t, int32_t> MaxCrossingSubarray(const int32_t *array,
+                                                          int32_t lo,
+                                                          int32_t mi,
+                                                          int32_t hi) {
+  auto l_sum = INT_MIN, r_sum = INT_MIN;
+  auto sum = 0, l_max = mi, r_max = mi + 1;
 
-  for (int i = mid; i >= low; i--) {
+  for (auto i = mi; i >= lo; i--) {
     sum += array[i];
     if (sum > l_sum) {
       l_sum = sum;
@@ -20,7 +21,7 @@ std::tuple<int, int, int> MaxCrossingSubarray(const int *array, int low,
   }
 
   sum = 0;
-  for (int i = mid + 1; i <= high; i++) {
+  for (auto i = mi + 1; i <= hi; i++) {
     sum += array[i];
     if (sum > r_sum) {
       r_sum = sum;
@@ -29,45 +30,58 @@ std::tuple<int, int, int> MaxCrossingSubarray(const int *array, int low,
   }
 
   sum = l_sum + r_sum;
-  if (l_sum > r_sum && l_sum > sum)
-    return std::make_tuple(l_max, mid, l_sum);
-  else if (r_sum > l_sum && r_sum > sum)
-    return std::make_tuple(mid + 1, r_max, r_sum);
-  else
+  if (l_sum > r_sum && l_sum > sum) {
+    return std::make_tuple(l_max, mi, l_sum);
+  } else if (r_sum > l_sum && r_sum > sum) {
+    return std::make_tuple(mi + 1, r_max, r_sum);
+  } else {
     return std::make_tuple(l_max, r_max, sum);
+  }
 }
 
-std::tuple<int, int, int> MaximumSubarray(const int *array, int low, int high) {
-  if (low == high) return std::make_tuple(low, high, array[low]);
-  int mid = (low + high) / 2;
+std::tuple<int32_t, int32_t, int32_t> MaximumSubarray(const int32_t *array,
+                                                      int32_t lo, int32_t hi) {
+  if (lo == hi) {
+    return std::make_tuple(lo, hi, array[lo]);
+  }
 
-  std::tuple<int, int, int> l_tuple = MaximumSubarray(array, low, mid);
-  std::tuple<int, int, int> r_tuple = MaximumSubarray(array, mid + 1, high);
-  std::tuple<int, int, int> c_tuple =
-      MaxCrossingSubarray(array, low, mid, high);
+  auto mi = (lo + hi) / 2;
+  auto l_tuple = MaximumSubarray(array, lo, mi);
+  auto r_tuple = MaximumSubarray(array, mi + 1, hi);
+  auto c_tuple = MaxCrossingSubarray(array, lo, mi, hi);
 
   if (std::get<2>(l_tuple) > std::get<2>(r_tuple) &&
-      std::get<2>(l_tuple) > std::get<2>(c_tuple))
+      std::get<2>(l_tuple) > std::get<2>(c_tuple)) {
     return l_tuple;
+  }
   if (std::get<2>(r_tuple) > std::get<2>(l_tuple) &&
-      std::get<2>(r_tuple) > std::get<2>(c_tuple))
+      std::get<2>(r_tuple) > std::get<2>(c_tuple)) {
     return r_tuple;
-  else
-    return c_tuple;
+  }
+  return c_tuple;
 }
+
+namespace test {
+
+void MaximumSubarray_TestHandlesIntegerArrayInput() {
+  int32_t arr[16] = {12, -2, -23, 18, -1,  -14, -21, 16,
+                     19, -5, 10,  -3, -20, 13,  -4,  -7};
+  auto ret = MaximumSubarray(arr, 0, std::size(arr) - 1);
+
+  EXPECT_EQ(std::get<0>(ret), 7);
+  EXPECT_EQ(std::get<1>(ret), 10);
+  EXPECT_EQ(std::get<2>(ret), 40);
+}
+
+void RunTests() { TEST(MaximumSubarray_TestHandlesIntegerArrayInput); }
+
+}  // namespace test
 
 }  // namespace divide_conquer
 }  // namespace algorithm
 
 int main() {
-  int arr[16] = {12, -2, -23, 18, -1,  -14, -21, 16,
-                 19, -5, 10,  -3, -20, 13,  -4,  -7};
-  std::tuple<int, int, int> ret = algorithm::divide_conquer::MaximumSubarray(
-      arr, 0, sizeof(arr) / sizeof(*arr) - 1);
-
-  std::cout << "Start: " << std::get<0>(ret) << std::endl;  // 7
-  std::cout << "End: " << std::get<1>(ret) << std::endl;    // 10
-  std::cout << "Sum: " << std::get<2>(ret) << std::endl;    // 40
-
+  std::cout << "-----Running maximum subarray tests-----" << std::endl;
+  algorithm::divide_conquer::test::RunTests();
   return 0;
 }
