@@ -1,5 +1,4 @@
-#ifndef ALGORITHM_DATA_STRUCTURE_LINKED_LIST_SINGLY_LINKED_LIST_H_
-#define ALGORITHM_DATA_STRUCTURE_LINKED_LIST_SINGLY_LINKED_LIST_H_
+#pragma once
 
 #include <iostream>
 
@@ -18,7 +17,7 @@ namespace linked_list {
  *    [data1|-]->[data2|-]->[data3|-]->[data4|-]->[data5|-]->NULL
  * @tparam T node's class
  */
-template <class T>
+template <typename T>
 class SinglyLinkedList {
  public:
   class Node {
@@ -32,7 +31,7 @@ class SinglyLinkedList {
  public:
   SinglyLinkedList();
   ~SinglyLinkedList();
-  int Size() const;
+  std::size_t Size() const;
   bool IsEmpty() const;
   bool Search(const T &data) const;
   void Insert(const T &data);
@@ -55,72 +54,8 @@ class SinglyLinkedList {
 
  private:
   Node *head_;
-  int size_;
+  uint32_t size_;
 };
-
-template <class T>
-SinglyLinkedList<T>::SinglyLinkedList() : head_(NULL), size_(0) {}
-
-template <class T>
-SinglyLinkedList<T>::~SinglyLinkedList() {
-  while (!IsEmpty()) Remove(head_->data_);
-  delete head_;
-}
-
-template <class T>
-int SinglyLinkedList<T>::Size() const {
-  return size_;
-}
-
-template <class T>
-bool SinglyLinkedList<T>::IsEmpty() const {
-  return (head_ == NULL);
-}
-
-template <class T>
-bool SinglyLinkedList<T>::Search(const T &data) const {
-  Node *temp = head_;
-  while (temp != NULL) {
-    if (temp->data_ == data) return true;
-    temp = temp->next_;
-  }
-  return false;
-}
-
-template <class T>
-void SinglyLinkedList<T>::Insert(const T &data) {
-  Node *node = new Node(data);
-  if (IsEmpty())
-    head_ = node;
-  else {
-    Node *temp = head_;
-    while (temp->next_ != NULL) temp = temp->next_;
-    temp->next_ = node;
-  }
-  size_++;
-}
-
-template <class T>
-T SinglyLinkedList<T>::Remove(const T &data) {
-  if (IsEmpty()) throw std::runtime_error("List is empty, can not remove");
-  Node *old = head_, *prev;
-  while (old != NULL && old->data_ != data) {
-    prev = old;
-    old = old->next_;
-  }
-  if (old == NULL) throw std::runtime_error("Node is not exist in this list");
-  T removed = old->data_;
-  if (old == head_) {
-    head_ = head_->next_;
-  } else {
-    prev->next_ = old->next_;
-  }
-  delete old;
-  size_--;
-  return removed;
-}
 
 }  // namespace linked_list
 }  // namespace data_structure
-
-#endif  // ALGORITHM_DATA_STRUCTURE_LINKED_LIST_SINGLY_LINKED_LIST_H_
