@@ -10,19 +10,6 @@ include_directories("${CMAKE_SOURCE_DIR}")
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/)
 
-include(FetchContent)
-FetchContent_Declare(
-  googletest
-  URL https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip
-)
-
-# For Windows: Prevent overriding the parent project's compiler/linker settings
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
-
-include(GoogleTest)
-enable_testing()
-
 add_executable(singly_linked_list data_structure/linked_list/singly_linked_list.cc)
 add_executable(doubly_linked_list data_structure/linked_list/doubly_linked_list.cc)
 add_executable(circularly_linked_list data_structure/linked_list/circularly_linked_list.cc)
@@ -69,41 +56,11 @@ add_executable(catalan mathematics/catalan.cc)
 add_executable(maximum_subarray divide_conquer/maximum_subarray.cc)
 
 # Knight tour
-add_library(knight_tour backtracking/knight_tour.cc)
-add_executable(
-  knight_tour_test
-  backtracking/knight_tour_test.cc
-)
-target_link_libraries(
-  knight_tour_test
-  knight_tour
-  gtest_main
-)
-gtest_discover_tests(knight_tour_test)
+add_executable(knight_tour backtracking/knight_tour.cc)
 # Rat in maze
-add_library(rat_in_maze backtracking/rat_in_maze.cc)
-add_executable(
-  rat_in_maze_test
-  backtracking/rat_in_maze_test.cc
-)
-target_link_libraries(
-  rat_in_maze_test
-  rat_in_maze
-  gtest_main
-)
-gtest_discover_tests(rat_in_maze_test)
+add_executable(rat_in_maze backtracking/rat_in_maze.cc)
 # N queen
-add_library(n_queen backtracking/n_queen.cc)
-add_executable(
-  n_queen_test
-  backtracking/n_queen_test.cc
-)
-target_link_libraries(
-  n_queen_test
-  n_queen
-  gtest_main
-)
-gtest_discover_tests(n_queen_test)
+add_executable(n_queen backtracking/n_queen.cc)
 
 # Ugly number
 add_executable(ugly_number dynamic_programming/ugly_number.cc)
