@@ -1,6 +1,8 @@
 #pragma once
 
+#include <algorithm>
 #include <iostream>
+#include <iterator>
 
 namespace algorithm {
 namespace test {
@@ -10,7 +12,7 @@ namespace test {
     function();                                                             \
     std::cout << #function << ": PASSED" << std::endl;                      \
   } catch (const std::exception& e) {                                       \
-    std::cout << #function << ": FAILED (" << e.what() << ")" << std::endl; \
+    std::cerr << #function << ": FAILED (" << e.what() << ")" << std::endl; \
   }
 
 #define EXPECT_EQ(expected, actual)                             \
@@ -21,20 +23,14 @@ namespace test {
     exit(1);                                                    \
   }
 
-#define EXPECT_ARR_EQ(expected, actual)                                     \
-  {                                                                         \
-    if ((std::size(expected)) != (std::size(actual))) {                     \
-      std::cout << "Assertion failed: " << #expected << " == " << #actual   \
-                << " ( arrays have different sizes )" << std::endl;         \
-      exit(1);                                                              \
-    }                                                                       \
-    for (int i = 0; i < std::size(expected); ++i)                           \
-      if (expected[i] != actual[i]) {                                       \
-        std::cout << "Assertion failed: " << #expected << " == " << #actual \
-                  << " ( " << expected[i] << " != " << actual[i] << " )"    \
-                  << std::endl;                                             \
-        exit(1);                                                            \
-      }                                                                     \
+#define EXPECT_ARR_EQ(expected, actual)                                 \
+  if (!std::equal(std::begin(expected), std::end(expected),             \
+                  std::begin(actual), std::end(actual)) ||              \
+      std::distance(std::begin(expected), std::end(expected)) !=        \
+          std::distance(std::begin(actual), std::end(actual))) {        \
+    std::cerr << "Assertion failed: " << #expected << " != " << #actual \
+              << " ( arrays are not equal )" << std::endl;              \
+    exit(1);                                                            \
   }
 
 }  // namespace test

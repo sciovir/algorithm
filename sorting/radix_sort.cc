@@ -1,5 +1,3 @@
-#include <algorithm>
-
 #include "utils/test.h"
 
 namespace algorithm {

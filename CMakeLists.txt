@@ -59,42 +59,13 @@ add_executable(linear_search searching/linear_search.cc)
 add_executable(binary_search searching/binary_search.cc)
 
 # Factorial
-add_library(factorial mathematics/factorial.cc)
-add_executable(
-  factorial_test
-  mathematics/factorial_test.cc
-)
-target_link_libraries(
-  factorial_test
-  factorial
-  gtest_main
-)
-gtest_discover_tests(factorial_test)
+add_executable(factorial mathematics/factorial.cc )
 # Fibonacci
-add_library(fibonacci mathematics/fibonacci.cc)
-add_executable(
-  fibonacci_test
-  mathematics/fibonacci_test.cc
-)
-target_link_libraries(
-  fibonacci_test
-  fibonacci
-  gtest_main
-)
-gtest_discover_tests(fibonacci_test)
+add_executable(fibonacci mathematics/fibonacci.cc)
 # Catalan
-add_library(catalan mathematics/catalan.cc)
-add_executable(
-  catalan_test
-  mathematics/catalan_test.cc
-)
-target_link_libraries(
-  catalan_test
-  catalan
-  gtest_main
-)
-gtest_discover_tests(catalan_test)
+add_executable(catalan mathematics/catalan.cc)
 
+# Maximum Subarray
 add_executable(maximum_subarray divide_conquer/maximum_subarray.cc)
 
 # Knight tour
@@ -134,9 +105,13 @@ target_link_libraries(
 )
 gtest_discover_tests(n_queen_test)
 
-add_executable(ugly_numbers dynamic_programming/ugly_numbers.cc)
-add_executable(fibonacci_numbers dynamic_programming/fibonacci_numbers.cc)
-add_executable(catalan_numbers dynamic_programming/catalan_numbers.cc)
+# Ugly number
+add_executable(ugly_number dynamic_programming/ugly_number.cc)
+# Fibonacci dynamic programming
+add_executable(fibonacci_dp dynamic_programming/fibonacci_dp.cc)
+# Catalan dynamic programming
+add_executable(catalan_dp dynamic_programming/catalan_dp.cc)
+# Zero-One knapsack
 add_executable(zero_one_knapsack dynamic_programming/zero_one_knapsack.cc)
 
 # Naive pattern searching
@@ -145,12 +120,4 @@ add_executable(naive_pattern_searching pattern_searching/naive_pattern_searching
 add_executable(kmp_pattern_searching pattern_searching/kmp_pattern_searching.cc)
 
 # Fractional knapsack
-add_executable(
-  fractional_knapsack_test
-  greedy/fractional_knapsack_test.cc
-)
-target_link_libraries(
-  fractional_knapsack_test
-  gtest_main
-)
-gtest_discover_tests(fractional_knapsack_test)
+add_executable(fractional_knapsack greedy/fractional_knapsack.cc )
