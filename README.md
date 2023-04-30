@@ -1,12 +1,12 @@
 # Data Structures and Algorithms
-This repository is a collection of personal implementation of a variety of algorithms using C++. You may find more than one implementation for these problems but using a different algorithm strategies, optimizations or even different programming languages.
+This repository is a collection of personal implementation of a variety of algorithms using Rust. You may find more than one implementation for these problems but using a different algorithm strategies, optimizations or even different programming languages.
 
 NOTE: All implementations assume that input always satisfies the requirement.
 
 ## Requirements
-In able to compile and run project, make sure `clang` or `gcc`, `make` (or `MSBuild` on Windows) and `cmake` are installed.
+In able to compile and run project, make sure `rustc` and `cargo` are installed.
 
-CMake is optional, it helps you build and run project easier, but you could manual run each file separately.
+You might want to check out `[rustup](https://www.rust-lang.org/tools/install)`.
 
 Clone repository by `git clone` to your local computer:
 ```shell script
@@ -14,50 +14,22 @@ $ git clone git@github.com:khoantech/algorithm.git
 $ cd algorithm
 ```
 
-## Build and run C++
-Using CMake:
-1. Create _build_ directory at project root:
+## Build and test
+Using Cargo to build:
 ```shell script
-$ mkdir build
-$ cd build
-```
-2. Build project with `cmake` and `make`, remember we are currently in _build_ folder:
-```shell script
-$ cmake ..
-$ make
-```
-If you are on Windows use `MSBuild` instead of `make`:
-```powershell
-cmake ..
-MSBuild.exe .\algorithm.sln
-```
-3. All binary files are located inside _build/bin/_ directory.
-
-Using `clang` or `gcc` compiler:
-1. Compile your desired file by compiler:
-```shell script
-$ clang++ -std=c++20 [path_to_source_file] -o [path_to_output_file]
-```
-or
-```shell script
-$ g++ -std=c++20 [path_to_source_file] -o [path_to_output_file]
-```
-2. Then run compiled binary file:
-```shell script
-$ ./[path_to_binary_file]
-```
-For example:
-```shell script
-$ clang++ -std=c++20 sorting/merge_sort.cc -o build/bin/merge_sort
-$ ./build/bin/merge_sort
+$ cargo build
 ```
 
-Add `-DCMAKE_BUILD_TYPE=Debug` or `-DCMAKE_BUILD_TYPE=Release` argument to `cmake` command for `Debug`, `Release` respectively.
+To run all test simply run `cargo test`. If you want to run specific test just add desired function name after command.
+
+In able to debug you might want to see printed values, we can enable that using this option:
+```shell script
+$ cargo test -- --show-output
+```
 
 ## Algorithms explanation
 TBA
 
 ## References
-[C++ Documentation](https://isocpp.org/) \
-[CMake](https://cmake.org/documentation/) \
-[GoogleTest](https://google.github.io/googletest/)
+[Rust Book](https://doc.rust-lang.org/book/) \
+[Rust Testing](https://doc.rust-lang.org/rust-by-example/testing.html)
