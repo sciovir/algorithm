@@ -1,4 +1,5 @@
 pub mod heap;
+pub mod max_heap;
 pub mod min_heap;
 
 use std::{error::Error, fmt::Display};
