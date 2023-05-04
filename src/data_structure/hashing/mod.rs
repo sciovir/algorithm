@@ -13,15 +13,6 @@ impl Display for HashTableOverflowError {
 }
 
 #[derive(Debug)]
-pub struct HashTableKeyHashingError;
-impl Error for HashTableKeyHashingError {}
-impl Display for HashTableKeyHashingError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "Hash table key hashing error occurred.")
-    }
-}
-
-#[derive(Debug)]
 pub struct HashTableKeyNotExistError;
 impl Error for HashTableKeyNotExistError {}
 impl Display for HashTableKeyNotExistError {
@@ -41,7 +32,6 @@ impl Display for HashTableKeyAlreadyExistError {
 
 pub enum HashTableError {
     HashTableOverflowError,
-    HashTableKeyHashingError,
     HashTableKeyNotExistError,
     HashTableKeyAlreadyExistError,
 }

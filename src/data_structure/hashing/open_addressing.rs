@@ -1,14 +1,17 @@
-use std::fmt::Display;
+use std::{
+    collections::hash_map::DefaultHasher,
+    fmt::Display,
+    hash::{Hash, Hasher},
+};
 
 use super::HashTableError;
 
 pub struct HashTable<K, V>
 where
-    K: PartialOrd + Default + Copy + Display + TryFrom<K> + TryInto<isize>,
-    V: PartialOrd + Default + Copy + Display,
+    K: PartialOrd + Default + Display + Clone + Hash,
+    V: PartialOrd + Default + Display,
 {
-    keys: Vec<Option<K>>,
-    values: Vec<Option<V>>,
+    table: Vec<Option<(K, V)>>,
     sz: usize,
     cap: usize,
 }
@@ -17,13 +20,12 @@ const DEFAULT_CAP: usize = 10;
 
 impl<K, V> HashTable<K, V>
 where
-    K: PartialOrd + Default + Copy + Display + TryFrom<K> + TryInto<isize>,
-    V: PartialOrd + Default + Copy + Display,
+    K: PartialOrd + Default + Display + Clone + Hash,
+    V: PartialOrd + Default + Display + Clone,
 {
     pub fn new(cap: Option<usize>) -> Self {
         HashTable {
-            keys: vec![None; cap.unwrap_or(DEFAULT_CAP)],
-            values: vec![None; cap.unwrap_or(DEFAULT_CAP)],
+            table: vec![None; cap.unwrap_or(DEFAULT_CAP)],
             sz: 0,
             cap: cap.unwrap_or(DEFAULT_CAP),
         }
@@ -37,78 +39,96 @@ where
         self.sz == 0
     }
 
-    pub fn keys(&self) -> &Vec<Option<K>> {
-        &self.keys
-    }
+    pub fn keys(&self) -> Vec<K> {
+        let mut ret = Vec::new();
 
-    fn hashing(&self, key: K) -> Result<usize, HashTableError> {
-        let result: Result<isize, _> = key.try_into();
-        match result {
-            Ok(val) => {
-                let mut hash: isize = val % self.cap as isize;
-                if hash < 0 {
-                    hash += self.cap as isize;
-                }
-
-                return Ok(hash as usize);
-            }
-            Err(_) => {
-                return Err(HashTableError::HashTableKeyHashingError);
+        for i in 0..self.cap {
+            if let Some((key, _)) = self.table[i].as_ref() {
+                ret.push(key.clone())
             }
         }
+
+        ret
     }
 
-    fn rehashing(&self) -> Result<usize, HashTableError> {
+    fn hashing(&self, key: &K) -> usize {
+        let mut hasher = DefaultHasher::new();
+        key.hash(&mut hasher);
+        hasher.finish() as usize % self.cap
+    }
+
+    fn rehashing(&self, value: usize) -> Result<usize, HashTableError> {
         for i in 0..self.cap {
-            if self.keys[i].is_none() {
-                return Ok(i);
+            let index = (value + i) % self.cap;
+            if self.table[index].is_none() {
+                return Ok(index);
             }
         }
 
         Err(HashTableError::HashTableOverflowError)
     }
 
-    pub fn get(&self, key: K) -> Result<V, HashTableError> {
-        let mut index = 0;
-        for i in 0..self.cap {
-            if self.keys[i].is_some() && self.keys[i].unwrap() == key {
-                index = i;
-                break;
+    pub fn get(&self, key: &K) -> Result<&V, HashTableError> {
+        let hash = self.hashing(key);
+        match self.table[hash].as_ref() {
+            Some((_, value)) => Ok(value),
+            None => {
+                let mut index = self.cap;
+                for i in 0..self.cap {
+                    index = (hash + i) % self.cap;
+                    if let Some(tup) = self.table[index].as_ref() {
+                        if tup.0 == *key {
+                            break;
+                        }
+                    }
+                }
+
+                if index > self.cap - 1 {
+                    return Err(HashTableError::HashTableKeyNotExistError);
+                }
+
+                match self.table[index].as_ref() {
+                    Some((_, value)) => Ok(value),
+                    None => Err(HashTableError::HashTableKeyNotExistError),
+                }
             }
         }
-
-        if index > self.cap - 1 {
-            return Err(HashTableError::HashTableKeyNotExistError);
-        }
-
-        Ok(self.values[index].unwrap())
     }
 
     pub fn insert(&mut self, key: K, value: V) -> Result<(), HashTableError> {
-        for i in 0..self.cap {
-            if self.keys[i].is_some() && self.keys[i].unwrap() == key {
+        let mut hash = self.hashing(&key);
+        if let Some(tup) = self.table[hash].as_ref() {
+            if tup.0 == key {
                 return Err(HashTableError::HashTableKeyAlreadyExistError);
             }
         }
 
-        let mut hash = self.hashing(key)?;
-        if self.keys[hash].is_some() {
-            hash = self.rehashing()?;
+        for i in 0..self.cap {
+            if let Some(tup) = self.table[i].as_ref() {
+                if tup.0 == key {
+                    return Err(HashTableError::HashTableKeyAlreadyExistError);
+                }
+            }
         }
 
-        self.keys[hash] = Some(key);
-        self.values[hash] = Some(value);
+        if self.table[hash].is_some() {
+            hash = self.rehashing(hash)?;
+        }
 
+        self.table[hash] = Some((key, value));
         self.sz += 1;
+
         Ok(())
     }
 
-    pub fn remove(&mut self, key: K) -> Result<V, HashTableError> {
-        let mut index = 0;
+    pub fn remove(&mut self, key: K) -> Result<(K, V), HashTableError> {
+        let mut index = self.cap;
         for i in 0..self.cap {
-            if self.keys[i].is_some() && self.keys[i].unwrap() == key {
-                index = i;
-                break;
+            if let Some(tup) = self.table[i].as_ref() {
+                if tup.0 == key {
+                    index = i;
+                    break;
+                }
             }
         }
 
@@ -116,29 +136,28 @@ where
             return Err(HashTableError::HashTableKeyNotExistError);
         }
 
-        let removed = self.values[index].unwrap();
-        self.keys[index] = None;
-        self.values[index] = None;
-
+        let removed = self.table[index].clone().unwrap();
+        self.table[index] = None;
         self.sz -= 1;
+
         Ok(removed)
     }
 }
 
-impl<K, V> HashTable<K, V>
+impl<K, V> Default for HashTable<K, V>
 where
-    K: PartialOrd + Default + Copy + Display + TryFrom<K> + TryInto<isize>,
-    V: PartialOrd + Default + Copy + Display,
+    K: PartialOrd + Default + Display + Clone + Hash,
+    V: PartialOrd + Default + Display + Clone,
 {
     fn default() -> Self {
         Self::new(None)
     }
 }
 
-impl<K, V> HashTable<K, V>
+impl<K, V> Display for HashTable<K, V>
 where
-    K: PartialOrd + Default + Copy + Display + TryFrom<K> + TryInto<isize>,
-    V: PartialOrd + Default + Copy + Display,
+    K: PartialOrd + Default + Display + Clone + Hash,
+    V: PartialOrd + Default + Display + Clone,
 {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut out = String::new();
@@ -147,11 +166,8 @@ where
             out.push_str("Empty hash table");
         } else {
             for i in 0..self.cap {
-                if self.keys[i].is_some() {
-                    out.push_str(
-                        format!("({}: {}) ", self.keys[i].unwrap(), self.values[i].unwrap())
-                            .as_str(),
-                    )
+                if let Some((key, value)) = self.table[i].as_ref() {
+                    out.push_str(format!("({}: {}) ", key, value).as_str())
                 }
             }
         }
