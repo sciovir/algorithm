@@ -51,47 +51,21 @@ where
         ret
     }
 
-    fn hashing(&self, key: &K) -> usize {
-        let mut hasher = DefaultHasher::new();
-        key.hash(&mut hasher);
-        hasher.finish() as usize % self.cap
-    }
-
-    fn rehashing(&self, value: usize) -> Result<usize, HashTableError> {
-        for i in 0..self.cap {
-            let index = (value + i) % self.cap;
-            if self.table[index].is_none() {
-                return Ok(index);
-            }
-        }
-
-        Err(HashTableError::HashTableOverflowError)
-    }
-
     pub fn get(&self, key: &K) -> Result<&V, HashTableError> {
         let hash = self.hashing(key);
         match self.table[hash].as_ref() {
-            Some((_, value)) => Ok(value),
-            None => {
-                let mut index = self.cap;
-                for i in 0..self.cap {
-                    index = (hash + i) % self.cap;
-                    if let Some(tup) = self.table[index].as_ref() {
-                        if tup.0 == *key {
-                            break;
-                        }
-                    }
-                }
-
-                if index > self.cap - 1 {
-                    return Err(HashTableError::HashTableKeyNotExistError);
-                }
-
-                match self.table[index].as_ref() {
-                    Some((_, value)) => Ok(value),
-                    None => Err(HashTableError::HashTableKeyNotExistError),
+            Some(tup) => {
+                if tup.0 == *key {
+                    return Ok(&tup.1);
                 }
             }
+            None => {}
+        }
+
+        let index = self.find_key_index(key)?;
+        match self.table[index].as_ref() {
+            Some((_, value)) => Ok(value),
+            None => Err(HashTableError::HashTableKeyNotExistError),
         }
     }
 
@@ -122,25 +96,49 @@ where
     }
 
     pub fn remove(&mut self, key: K) -> Result<(K, V), HashTableError> {
-        let mut index = self.cap;
-        for i in 0..self.cap {
-            if let Some(tup) = self.table[i].as_ref() {
-                if tup.0 == key {
-                    index = i;
-                    break;
-                }
-            }
-        }
-
-        if index > self.cap - 1 {
-            return Err(HashTableError::HashTableKeyNotExistError);
-        }
+        let index = self.find_key_index(&key)?;
 
         let removed = self.table[index].clone().unwrap();
         self.table[index] = None;
         self.sz -= 1;
 
         Ok(removed)
+    }
+
+    fn hashing(&self, key: &K) -> usize {
+        let mut hasher = DefaultHasher::new();
+        key.hash(&mut hasher);
+        let ret = hasher.finish() as usize;
+        ret % self.cap
+    }
+
+    fn rehashing(&self, value: usize) -> Result<usize, HashTableError> {
+        for i in 0..self.cap {
+            let index = (value + i) % self.cap;
+            if self.table[index].is_none() {
+                return Ok(index);
+            }
+        }
+
+        Err(HashTableError::HashTableOverflowError)
+    }
+
+    fn find_key_index(&self, key: &K) -> Result<usize, HashTableError> {
+        let mut index = self.cap;
+        for i in 0..self.cap {
+            if let Some(tup) = self.table[i].as_ref() {
+                if tup.0 == *key {
+                    index = i;
+                    break;
+                }
+            }
+        }
+
+        if index == self.cap {
+            return Err(HashTableError::HashTableKeyNotExistError);
+        }
+
+        Ok(index)
     }
 }
 
