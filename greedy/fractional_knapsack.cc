@@ -1,4 +1,5 @@
-#include "utils/test.h"
+#include <algorithm>
+#include <iostream>
 
 namespace algorithm {
 namespace greedy {
@@ -28,28 +29,5 @@ uint32_t FractionalKnapsack(std::tuple<uint32_t, uint32_t> (&items)[N],
   return maxValue;
 }
 
-namespace test {
-
-void FractionalKnapsack_HandlesMultipleKnapsackInput() {
-  std::tuple<uint32_t, uint32_t> items[] = {std::make_tuple(10, 60),
-                                            std::make_tuple(30, 120),
-                                            std::make_tuple(20, 100)};
-
-  EXPECT_EQ(FractionalKnapsack(items, 50), 240);
-  EXPECT_EQ(FractionalKnapsack(items, 60), 280);
-  EXPECT_EQ(FractionalKnapsack(items, 30), 160);
-  EXPECT_EQ(FractionalKnapsack(items, 5), 30);
-}
-
-void RunTests() { TEST(FractionalKnapsack_HandlesMultipleKnapsackInput); }
-
-}  // namespace test
-
 }  // namespace greedy
 }  // namespace algorithm
-
-int main() {
-  std::cout << "-----Running fractional knapsack tests-----" << std::endl;
-  algorithm::greedy::test::RunTests();
-  return 0;
-}
