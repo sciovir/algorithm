@@ -10,7 +10,7 @@ You might want to check out `[rustup](https://www.rust-lang.org/tools/install)`.
 
 Clone repository by `git clone` to your local computer:
 ```shell script
-$ git clone git@github.com:khoantech/algorithm.git
+$ git clone git@github.com:khoaji/algorithm.git
 $ cd algorithm
 ```
 
