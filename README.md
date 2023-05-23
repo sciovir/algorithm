@@ -22,6 +22,8 @@ $ cargo build
 
 To run all test simply run `cargo test`. If you want to run specific test just add desired function name after command.
 
+You can also run specific group of tests using `cargo test --test [test_file_name]`.
+
 In able to debug you might want to see printed values, we can enable that using this option:
 ```shell script
 $ cargo test -- --show-output
