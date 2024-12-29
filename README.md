@@ -10,7 +10,7 @@ CMake is optional, it helps you build and run project easier, but you could manu
 
 Clone repository by `git clone` to your local computer:
 ```shell script
-$ git clone git@github.com:khoanduy/algorithm.git
+$ git clone git@github.com:sciovir/algorithm.git
 $ cd algorithm
 ```
 
